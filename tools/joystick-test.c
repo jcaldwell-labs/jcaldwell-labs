@@ -1,6 +1,6 @@
 /*
- * Visual Joystick Test Utility
- * Tests joystick connectivity using Linux evdev interface with ASCII art display
+ * Enhanced Visual Joystick Test Utility
+ * Features: /usr/bin/boxes borders, radial direction line, Hyperkin layout
  */
 
 #define _POSIX_C_SOURCE 200809L
@@ -17,161 +17,282 @@
 
 #define MAX_AXES 8
 #define MAX_BUTTONS 16
+#define GRID_WIDTH 41
+#define GRID_HEIGHT 21
 
-/* Clear screen and move cursor to top */
-void clear_screen() {
-    printf("\033[2J\033[H");
+/* ANSI escape codes */
+#define CLEAR_SCREEN "\033[2J\033[H"
+#define BOLD "\033[1m"
+#define GREEN "\033[32m"
+#define CYAN "\033[36m"
+#define MAGENTA "\033[35m"
+#define YELLOW "\033[33m"
+#define RESET "\033[0m"
+
+/* Draw a line from center to stick position (radial indicator) */
+void draw_radial_line(char grid[GRID_HEIGHT][GRID_WIDTH],
+                      int center_x, int center_y,
+                      int stick_x, int stick_y) {
+    /* Bresenham's line algorithm */
+    int dx = abs(stick_x - center_x);
+    int dy = abs(stick_y - center_y);
+    int sx = (center_x < stick_x) ? 1 : -1;
+    int sy = (center_y < stick_y) ? 1 : -1;
+    int err = dx - dy;
+
+    int x = center_x;
+    int y = center_y;
+
+    while (1) {
+        /* Don't overwrite center or stick position */
+        if ((x != center_x || y != center_y) && (x != stick_x || y != stick_y)) {
+            if (x >= 0 && x < GRID_WIDTH && y >= 0 && y < GRID_HEIGHT) {
+                /* Use different characters for line direction */
+                if (abs(dx) > abs(dy) * 2) {
+                    grid[y][x] = '-';  /* Mostly horizontal */
+                } else if (abs(dy) > abs(dx) * 2) {
+                    grid[y][x] = '|';  /* Mostly vertical */
+                } else {
+                    grid[y][x] = '/';  /* Diagonal */
+                }
+            }
+        }
+
+        if (x == stick_x && y == stick_y) break;
+
+        int e2 = 2 * err;
+        if (e2 > -dy) {
+            err -= dy;
+            x += sx;
+        }
+        if (e2 < dx) {
+            err += dx;
+            y += sy;
+        }
+    }
 }
 
-/* Move cursor to position */
-void move_cursor(int row, int col) {
-    printf("\033[%d;%dH", row, col);
-}
-
-/* Render ASCII art joystick visualization */
+/* Render enhanced ASCII art joystick visualization */
 void render_joystick_visual(int axis_x, int axis_y, const int *buttons) {
-    /* Normalize axes to -1.0 to 1.0 range */
+    /* Normalize axes */
     double norm_x = axis_x / 32768.0;
     double norm_y = axis_y / 32768.0;
 
-    /* Apply deadzone (15%) */
-    if (fabs(norm_x) < 0.15) norm_x = 0.0;
-    if (fabs(norm_y) < 0.15) norm_y = 0.0;
+    /* Apply deadzone */
+    double deadzone_x = norm_x;
+    double deadzone_y = norm_y;
+    if (fabs(norm_x) < 0.15) deadzone_x = 0.0;
+    if (fabs(norm_y) < 0.15) deadzone_y = 0.0;
 
-    /* Calculate position on 21x11 grid (10 units from center each direction) */
-    int grid_width = 21;
-    int grid_height = 11;
-    int center_x = grid_width / 2;
-    int center_y = grid_height / 2;
+    /* Calculate stick position */
+    int center_x = GRID_WIDTH / 2;
+    int center_y = GRID_HEIGHT / 2;
+    int stick_x = center_x + (int)(deadzone_x * (GRID_WIDTH / 2 - 1));
+    int stick_y = center_y + (int)(deadzone_y * (GRID_HEIGHT / 2 - 1));
 
-    int stick_x = center_x + (int)(norm_x * center_x);
-    int stick_y = center_y + (int)(norm_y * center_y);
-
-    /* Clamp to grid bounds */
+    /* Clamp */
     if (stick_x < 0) stick_x = 0;
-    if (stick_x >= grid_width) stick_x = grid_width - 1;
+    if (stick_x >= GRID_WIDTH) stick_x = GRID_WIDTH - 1;
     if (stick_y < 0) stick_y = 0;
-    if (stick_y >= grid_height) stick_y = grid_height - 1;
+    if (stick_y >= GRID_HEIGHT) stick_y = GRID_HEIGHT - 1;
 
-    clear_screen();
+    printf(CLEAR_SCREEN);
 
-    printf("╔════════════════════════════════════════════════════════════╗\n");
-    printf("║           JOYSTICK TEST UTILITY (Press Ctrl+C to quit)   ║\n");
-    printf("╚════════════════════════════════════════════════════════════╝\n");
-    printf("\n");
+    /* Title */
+    printf(BOLD CYAN);
+    printf("╔════════════════════════════════════════════════════════════════════╗\n");
+    printf("║     JOYSTICK TEST - Hyperkin Trooper V2 (Press Ctrl+C to quit)   ║\n");
+    printf("╚════════════════════════════════════════════════════════════════════╝\n");
+    printf(RESET "\n");
 
-    /* Draw joystick surface area */
-    printf("  LEFT STICK POSITION:\n");
-    printf("  ┌─────────────────────┐\n");
+    /* Create grid for drawing */
+    char grid[GRID_HEIGHT][GRID_WIDTH];
 
-    for (int y = 0; y < grid_height; y++) {
-        printf("  │");
-        for (int x = 0; x < grid_width; x++) {
-            if (x == stick_x && y == stick_y) {
-                /* Stick position */
-                printf("◉");
-            } else if (x == center_x && y == center_y) {
-                /* Center point */
-                printf("┼");
+    /* Initialize grid with axes and background */
+    for (int y = 0; y < GRID_HEIGHT; y++) {
+        for (int x = 0; x < GRID_WIDTH; x++) {
+            if (x == center_x && y == center_y) {
+                grid[y][x] = '+';  /* Center */
             } else if (x == center_x) {
-                /* Vertical axis */
-                printf("│");
+                grid[y][x] = '|';  /* Y-axis */
             } else if (y == center_y) {
-                /* Horizontal axis */
-                printf("─");
+                grid[y][x] = '-';  /* X-axis */
             } else {
-                /* Empty space */
-                printf(" ");
+                grid[y][x] = ' ';  /* Empty */
             }
         }
-        printf("│");
-
-        /* Add axis values on the side */
-        if (y == 2) {
-            printf("   X-Axis: %6d (%.2f)", axis_x, norm_x);
-        } else if (y == 3) {
-            printf("   Y-Axis: %6d (%.2f)", axis_y, norm_y);
-        } else if (y == 5) {
-            if (fabs(norm_x) < 0.15 && fabs(norm_y) < 0.15) {
-                printf("   Status: CENTERED");
-            } else {
-                printf("   Status: MOVED");
-            }
-        }
-
-        printf("\n");
     }
 
-    printf("  └─────────────────────┘\n");
-    printf("       ◉ = Stick position, ┼ = Center (deadzone: 15%%)\n");
+    /* Draw radial line from center to stick (if moved) */
+    if (fabs(deadzone_x) > 0.0 || fabs(deadzone_y) > 0.0) {
+        draw_radial_line(grid, center_x, center_y, stick_x, stick_y);
+    }
+
+    /* Place stick position marker (overwrites radial line endpoint) */
+    grid[stick_y][stick_x] = '@';
+
+    /* Draw the grid with boxes border */
+    printf("  " BOLD "LEFT STICK POSITION:" RESET "\n");
+
+    /* Create content for /usr/bin/boxes */
+    FILE *boxes_pipe = popen("boxes -d stone", "w");
+    if (boxes_pipe) {
+        for (int y = 0; y < GRID_HEIGHT; y++) {
+            for (int x = 0; x < GRID_WIDTH; x++) {
+                if (grid[y][x] == '@') {
+                    fprintf(boxes_pipe, MAGENTA BOLD "@" RESET);
+                } else if (grid[y][x] == '+') {
+                    fprintf(boxes_pipe, YELLOW "+" RESET);
+                } else if (grid[y][x] == '|' || grid[y][x] == '-') {
+                    fprintf(boxes_pipe, CYAN "%c" RESET, grid[y][x]);
+                } else if (grid[y][x] == '/') {
+                    fprintf(boxes_pipe, GREEN "·" RESET);  /* Radial line */
+                } else {
+                    fprintf(boxes_pipe, "%c", grid[y][x]);
+                }
+            }
+            fprintf(boxes_pipe, "\n");
+        }
+        pclose(boxes_pipe);
+    } else {
+        /* Fallback if boxes not available */
+        printf("  ┌");
+        for (int i = 0; i < GRID_WIDTH; i++) printf("─");
+        printf("┐\n");
+
+        for (int y = 0; y < GRID_HEIGHT; y++) {
+            printf("  │");
+            for (int x = 0; x < GRID_WIDTH; x++) {
+                char ch = grid[y][x];
+                if (ch == '@') {
+                    printf(MAGENTA BOLD "@" RESET);
+                } else if (ch == '+') {
+                    printf(YELLOW "+" RESET);
+                } else if (ch == '|' || ch == '-') {
+                    printf(CYAN "%c" RESET, ch);
+                } else if (ch == '/') {
+                    printf(GREEN "·" RESET);
+                } else {
+                    printf("%c", ch);
+                }
+            }
+            printf("│\n");
+        }
+
+        printf("  └");
+        for (int i = 0; i < GRID_WIDTH; i++) printf("─");
+        printf("┘\n");
+    }
+
+    printf("       " MAGENTA "@" RESET " = Stick  " YELLOW "+" RESET " = Center  "
+           GREEN "·" RESET " = Direction  " CYAN "|─" RESET " = Axes\n\n");
+
+    /* Axis values */
+    printf("  " BOLD "AXIS VALUES:" RESET "\n");
+    printf("    X-Axis: %6d  Normalized: % .2f  ", axis_x, norm_x);
+    if (fabs(deadzone_x) > 0.0) {
+        printf(GREEN "ACTIVE" RESET);
+    } else {
+        printf("(deadzone)");
+    }
     printf("\n");
 
-    /* Draw direction indicator */
-    printf("  DIRECTION: ");
-    if (fabs(norm_x) < 0.15 && fabs(norm_y) < 0.15) {
+    printf("    Y-Axis: %6d  Normalized: % .2f  ", axis_y, norm_y);
+    if (fabs(deadzone_y) > 0.0) {
+        printf(GREEN "ACTIVE" RESET);
+    } else {
+        printf("(deadzone)");
+    }
+    printf("\n\n");
+
+    /* Direction with 8-way support */
+    printf("  " BOLD "DIRECTION: " RESET);
+    if (fabs(deadzone_x) < 0.15 && fabs(deadzone_y) < 0.15) {
         printf("CENTER\n");
     } else {
-        if (norm_y < -0.5) printf("UP ");
-        if (norm_y > 0.5) printf("DOWN ");
-        if (norm_x < -0.5) printf("LEFT ");
-        if (norm_x > 0.5) printf("RIGHT ");
+        /* 8-way direction */
+        if (deadzone_y < -0.3) {
+            if (deadzone_x < -0.3) printf(BOLD "UP-LEFT" RESET);
+            else if (deadzone_x > 0.3) printf(BOLD "UP-RIGHT" RESET);
+            else printf(BOLD "UP" RESET);
+        } else if (deadzone_y > 0.3) {
+            if (deadzone_x < -0.3) printf(BOLD "DOWN-LEFT" RESET);
+            else if (deadzone_x > 0.3) printf(BOLD "DOWN-RIGHT" RESET);
+            else printf(BOLD "DOWN" RESET);
+        } else {
+            if (deadzone_x < -0.3) printf(BOLD "LEFT" RESET);
+            else if (deadzone_x > 0.3) printf(BOLD "RIGHT" RESET);
+        }
         printf("\n");
     }
     printf("\n");
 
-    /* Draw buttons as shapes */
-    printf("  BUTTONS:\n");
-    printf("  ┌─────────────────────────────────────────┐\n");
-    printf("  │                                         │\n");
+    /* Hyperkin Trooper V2 specific layout */
+    printf("  " BOLD "HYPERKIN TROOPER V2 CONTROLS:" RESET "\n");
+    printf("  ┌─────────────────────────────────────────────────────────────┐\n");
+    printf("  │                                                             │\n");
 
-    /* Button layout: two rows of 4 buttons each */
-    printf("  │  ");
-    for (int b = 0; b < 8; b++) {
-        if (buttons[b]) {
-            printf("[●]");  /* Pressed - filled circle */
-        } else {
-            printf("[○]");  /* Released - empty circle */
-        }
-        printf(" ");
-
-        if (b == 3) {
-            printf(" │\n  │  ");
-        }
-    }
-    printf(" │\n");
-
-    printf("  │                                         │\n");
-
-    /* Special buttons (Start, Select) */
-    printf("  │  Start: ");
-    if (buttons[9]) {
-        printf("[●]");
+    /* Top surface - Fire buttons (L/R triggers as prominent buttons) */
+    printf("  │  TOP SURFACE (Fire Buttons):                                │\n");
+    printf("  │    Left Fire:  ");
+    if (buttons[4] || buttons[6]) {  /* L1 or L2 */
+        printf(BOLD GREEN "[●]" RESET);
     } else {
         printf("[○]");
     }
-    printf("  Select: ");
-    if (buttons[8]) {
-        printf("[●]");
+    printf("     Right Fire: ");
+    if (buttons[5] || buttons[7]) {  /* R1 or R2 */
+        printf(BOLD GREEN "[●]" RESET);
     } else {
         printf("[○]");
     }
-    printf("              │\n");
+    printf("                      │\n");
+    printf("  │                                                             │\n");
 
-    printf("  │                                         │\n");
-    printf("  └─────────────────────────────────────────┘\n");
-    printf("   [○] = Released   [●] = Pressed\n");
+    /* Face buttons (bottom of controller) */
+    printf("  │  FACE BUTTONS (Bottom):                                     │\n");
+    printf("  │         ");
+    if (buttons[2]) printf(BOLD GREEN "[●]Y" RESET); else printf("[○]Y");  /* Top */
+    printf("                                                 │\n");
+
+    printf("  │     ");
+    if (buttons[3]) printf(BOLD GREEN "[●]X" RESET); else printf("[○]X");  /* Left */
+    printf("    ");
+    if (buttons[0]) printf(BOLD GREEN "[●]A" RESET); else printf("[○]A");  /* Center/Right */
+    printf("    ");
+    if (buttons[1]) printf(BOLD GREEN "[●]B" RESET); else printf("[○]B");  /* Right/Bottom */
+    printf("                                      │\n");
+
+    printf("  │                                                             │\n");
+
+    /* System buttons (forward/aft) */
+    printf("  │  SYSTEM (Forward/Aft):                                      │\n");
+    printf("  │    Select: ");
+    if (buttons[8]) printf(BOLD GREEN "[●]" RESET); else printf("[○]");
+    printf("     Start: ");
+    if (buttons[9]) printf(BOLD GREEN "[●]" RESET); else printf("[○]");
+    printf("                                   │\n");
+
+    printf("  │                                                             │\n");
+    printf("  └─────────────────────────────────────────────────────────────┘\n");
+    printf("     " GREEN "[●]" RESET " = Pressed   [○] = Released\n\n");
+
+    /* Button function mapping */
+    printf("  " BOLD "SUGGESTED MAPPING FOR boxes-live:" RESET "\n");
+    printf("    " CYAN "Navigation Mode:" RESET "\n");
+    printf("      Left Fire (L):   Secondary action / Cycle selection\n");
+    printf("      Right Fire (R):  Primary action / Create box\n");
+    printf("      A (right face):  Zoom in\n");
+    printf("      B (bottom face): Zoom out\n");
+    printf("      Select:          Load canvas\n");
+    printf("      Start:           Save canvas\n");
     printf("\n");
-
-    /* Button legend */
-    printf("  BUTTON MAPPING:\n");
-    printf("    0=A(Right)  1=B(Bottom)  2=X(Top)  3=Y(Left)\n");
-    printf("    4=L1  5=R1  6=L2  7=R2  8=Select  9=Start\n");
+    printf("    " CYAN "Edit Mode:" RESET "\n");
+    printf("      Left Fire:   Delete box\n");
+    printf("      Right Fire:  Confirm / Enter parameter mode\n");
+    printf("      A:           Cycle color\n");
+    printf("      B:           Return to navigation\n");
     printf("\n");
-
-    /* Raw values for debugging */
-    printf("  RAW VALUES:\n");
-    printf("    Axis X (0): %-6d  |  Axis Y (1): %-6d\n", axis_x, axis_y);
-    printf("    Deadzone: 15%% (±4915)  |  Range: -32768 to +32767\n");
 }
 
 int main(int argc, char *argv[]) {
@@ -186,26 +307,13 @@ int main(int argc, char *argv[]) {
     if (fd < 0) {
         fprintf(stderr, "ERROR: Cannot open %s\n", device_path);
         fprintf(stderr, "Reason: %s\n\n", strerror(errno));
-        fprintf(stderr, "Troubleshooting:\n");
-        fprintf(stderr, "  1. Check device exists: ls -la /dev/input/\n");
-        fprintf(stderr, "  2. Check permissions: ls -la %s\n", device_path);
-        fprintf(stderr, "  3. Add to input group: sudo usermod -a -G input $USER\n");
-        fprintf(stderr, "  4. Run diagnostic: ./scripts/joystick-diagnostic.sh\n");
+        fprintf(stderr, "Run diagnostic: cd ~/projects/jcaldwell-labs && ./scripts/joystick-diagnostic.sh\n");
         return 1;
     }
 
     /* Get device name */
     char name[256] = "Unknown";
     ioctl(fd, EVIOCGNAME(sizeof(name)), name);
-
-    /* Initial display */
-    clear_screen();
-    printf("Connecting to: %s\n", device_path);
-    printf("Device: %s\n", name);
-    printf("Initializing...\n");
-
-    struct timespec ts = {0, 500000000};  /* 0.5 second */
-    nanosleep(&ts, NULL);
 
     /* Track state */
     int axis_values[MAX_AXES] = {0};
@@ -220,39 +328,34 @@ int main(int argc, char *argv[]) {
 
         if (bytes < 0) {
             if (errno == EAGAIN || errno == EWOULDBLOCK) {
-                /* No data available */
-
-                /* Redraw every ~60ms (16.67ms * 4) even without input to show steady display */
+                /* Redraw periodically even without input */
                 if (updates % 4 == 0) {
                     render_joystick_visual(axis_values[0], axis_values[1], button_states);
                 }
 
-                struct timespec sleep_ts = {0, 16666667};  /* ~60 FPS (16.667ms) */
+                struct timespec sleep_ts = {0, 16666667};  /* ~60 FPS */
                 nanosleep(&sleep_ts, NULL);
                 updates++;
                 continue;
             } else {
-                clear_screen();
-                fprintf(stderr, "ERROR: Read failed: %s\n", strerror(errno));
-                fprintf(stderr, "\nJoystick may have disconnected.\n");
-                fprintf(stderr, "Check: ls -la /dev/input/event0\n");
+                printf(CLEAR_SCREEN);
+                fprintf(stderr, "ERROR: Joystick disconnected\n");
                 break;
             }
         }
 
-        if (bytes != sizeof(ev)) {
-            continue;
-        }
+        if (bytes != sizeof(ev)) continue;
 
-        /* Process event */
+        /* Process events */
         if (ev.type == EV_ABS) {
-            /* Absolute axis (joystick axes) */
-            if (ev.code < MAX_AXES) {
-                axis_values[ev.code] = ev.value;
+            if (ev.code == ABS_X) {
+                axis_values[0] = ev.value;
+                render_joystick_visual(axis_values[0], axis_values[1], button_states);
+            } else if (ev.code == ABS_Y) {
+                axis_values[1] = ev.value;
                 render_joystick_visual(axis_values[0], axis_values[1], button_states);
             }
         } else if (ev.type == EV_KEY) {
-            /* Button event */
             int button = -1;
 
             if (ev.code >= BTN_JOYSTICK && ev.code < BTN_JOYSTICK + MAX_BUTTONS) {
@@ -269,7 +372,6 @@ int main(int argc, char *argv[]) {
     }
 
     close(fd);
-    clear_screen();
-    printf("Test complete.\n");
+    printf(CLEAR_SCREEN "Test complete.\n");
     return 0;
 }
