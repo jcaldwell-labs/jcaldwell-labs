@@ -1,170 +1,298 @@
-# jcaldwell-labs Organization Hub
+# jcaldwell-labs Coordination Workspace
 
-Central coordination workspace for the [jcaldwell-labs](https://github.com/jcaldwell-labs) GitHub organization.
+**Purpose**: Central coordination hub for managing 9 terminal-based open source projects
 
-## Purpose
+**Organization**: [github.com/jcaldwell-labs](https://github.com/jcaldwell-labs)
 
-This workspace provides:
-- **Quick health checks** for all organization repositories
-- **PR monitoring** across all projects
-- **Action dashboards** for local, local-claude, and remote-claude work
-- **Central documentation** for organization-level processes
-
-This is NOT a code repository - it's a coordination hub for managing multiple terminal-based open source projects.
+---
 
 ## Quick Start
 
-### Check what needs attention right now
+### First Time Here?
 
+1. **Read the roadmap**: [`ROADMAP-2025.md`](ROADMAP-2025.md) - Complete improvement plan
+2. **Check current status**: Run `./scripts/action-dashboard.sh`
+3. **See what needs attention**: Review [`ORGANIZATION-STATUS.md`](ORGANIZATION-STATUS.md)
+
+### Starting Work?
+
+1. **Check which phase we're in**: See [Phases](#phases) below
+2. **Follow phase-specific instructions**: See roadmap for current phase
+3. **Use coordination tools**: Scripts in `./scripts/`
+
+---
+
+## Projects Under Management
+
+| Repository | Language | Status | Description |
+|-----------|----------|--------|-------------|
+| [fintrack](https://github.com/jcaldwell-labs/fintrack) | Go | Active | Financial tracking CLI |
+| [boxes-live](https://github.com/jcaldwell-labs/boxes-live) | C | Active | Terminal canvas (Miro alternative) |
+| [terminal-stars](https://github.com/jcaldwell-labs/terminal-stars) | C | Active | Starfield visualization |
+| [my-context](https://github.com/jcaldwell-labs/my-context) | Go | Production | Agent journal and context management |
+| [tario](https://github.com/jcaldwell-labs/tario) | C | Active | ASCII platformer game |
+| [adventure-engine-v2](https://github.com/jcaldwell-labs/adventure-engine-v2) | C | Active | Text adventure engine |
+| [smartterm-prototype](https://github.com/jcaldwell-labs/smartterm-prototype) | C | Active | Terminal UI library |
+| [atari-style](https://github.com/jcaldwell-labs/atari-style) | Python | Active | Terminal arcade games |
+| [.github](https://github.com/jcaldwell-labs/.github) | Markdown | Active | Organization profile |
+
+**Total**: 9 repositories (5 C, 2 Go, 1 Python, 1 Markdown)
+
+---
+
+## Phases
+
+### ✅ Phase 0: Pre-Work (Complete)
+
+**Status**: Complete
+**Deliverables**: Roadmap, coordination framework, validation system
+
+**Key Documents**:
+- [`ROADMAP-2025.md`](ROADMAP-2025.md) - Complete 4-phase improvement plan
+- [`PARALLEL-SESSION-GUIDE.md`](PARALLEL-SESSION-GUIDE.md) - Session coordination
+- [`VALIDATION-CHECKLIST.md`](VALIDATION-CHECKLIST.md) - Quality gates
+- [`PHASE0-COMPLETION-SUMMARY.md`](PHASE0-COMPLETION-SUMMARY.md) - What we accomplished
+
+### 🔄 Phase 1: Foundation (Current)
+
+**Status**: Ready to start
+**Duration**: 1-2 sessions (8 hours estimated)
+
+**Objectives**:
+1. System reboot (clear stuck process PID 1284)
+2. Review and merge 7 ready PRs
+3. Sync all repositories
+4. Clone missing repos
+5. Baseline health check
+
+**Start Here**: See [`ROADMAP-2025.md`](ROADMAP-2025.md) → Phase 1
+
+### ⏸️ Phase 2: Repository Improvements (Pending)
+
+**Status**: Waiting for Phase 1 completion
+**Duration**: 1-2 weeks with parallel sessions
+
+**Objectives**: Improve all 9 repos with standard quality enhancements
+
+**Strategy**: Deploy 5-7 parallel Claude Code sessions
+
+**Coordination**: Via [`PARALLEL-SESSION-MANIFEST.md`](PARALLEL-SESSION-MANIFEST.md)
+
+### ⏸️ Phase 3: Cross-Project Integration (Pending)
+
+**Status**: Waiting for Phase 2 completion
+**Duration**: 1-2 weeks
+
+**Objectives**: Unified build system, integrations, organization infrastructure
+
+### ⏸️ Phase 4: Continuous Audit (Pending)
+
+**Status**: Waiting for Phase 3 completion
+**Duration**: Ongoing
+
+**Objectives**: Automated health monitoring, regular reviews
+
+---
+
+## Coordination Tools
+
+### Management Scripts
+
+Located in `./scripts/`:
+
+| Script | Purpose | When to Use |
+|--------|---------|-------------|
+| `action-dashboard.sh` | Comprehensive action overview | Start of every session |
+| `check-prs.sh` | PR status across all repos | Quick PR check |
+| `repo-health.sh` | Local and remote repo status | Before starting work |
+| `phase2-rollup.sh` | Validate Phase 2 completion | After all sessions complete |
+| `generate-phase2-summary.sh` | Generate executive summary | Phase 2 sign-off |
+
+**Run any script**:
 ```bash
 ./scripts/action-dashboard.sh
 ```
 
-This shows:
-- Open PRs requiring review
-- Local repos with uncommitted changes or sync issues
-- Suggested actions (manual, local Claude, or remote Claude)
-- Quick commands for common tasks
+### Tracking Files
 
-### Monitor open PRs
+| File | Purpose |
+|------|---------|
+| [`ORGANIZATION-STATUS.md`](ORGANIZATION-STATUS.md) | Current state snapshot |
+| [`PARALLEL-SESSION-MANIFEST.md`](PARALLEL-SESSION-MANIFEST.md) | Live session tracking |
+| [`VALIDATION-CHECKLIST.md`](VALIDATION-CHECKLIST.md) | Phase validation criteria |
 
-```bash
-./scripts/check-prs.sh
-```
+### Templates
 
-### Check repository health
+| Template | Purpose |
+|----------|---------|
+| `templates/IMPROVEMENT-REPORT-TEMPLATE.md` | Standard session report format |
 
-```bash
-./scripts/repo-health.sh
-```
+---
 
 ## Directory Structure
 
 ```
 jcaldwell-labs/
-├── scripts/              # Health monitoring and dashboard scripts
+├── README.md                           # This file - start here
+├── ROADMAP-2025.md                     # Complete 4-phase plan
+├── PARALLEL-SESSION-GUIDE.md           # Parallel session instructions
+├── PARALLEL-SESSION-MANIFEST.md        # Live session tracking
+├── VALIDATION-CHECKLIST.md             # Quality gates for each phase
+├── ORGANIZATION-STATUS.md              # Current state snapshot
+├── USB-STUCK-PROCESS-DIAGNOSTIC.md     # Critical atari-style fix
+├── PHASE0-COMPLETION-SUMMARY.md        # Phase 0 summary
+│
+├── scripts/                            # Management and validation scripts
 │   ├── action-dashboard.sh
 │   ├── check-prs.sh
-│   └── repo-health.sh
-├── repos/                # Local clones of organization repositories
-│   ├── fintrack/
-│   ├── boxes-live/
-│   ├── adventure-engine-v2/
-│   └── ...
-├── archive/              # Archived session files and old documentation
-│   └── 2025-11-18/
-├── CLAUDE.md            # Instructions for Claude Code
-└── README.md            # This file
+│   ├── repo-health.sh
+│   ├── phase2-rollup.sh
+│   └── generate-phase2-summary.sh
+│
+├── templates/                          # Standard templates
+│   └── IMPROVEMENT-REPORT-TEMPLATE.md
+│
+├── reports/                            # Session improvement reports (Phase 2+)
+├── sessions/                           # my-context exports
+├── repos/                              # Local clones (gitignored)
+└── archive/                            # Historical files
 ```
 
-## Organization Projects
-
-| Repository | Language | Status | Description |
-|-----------|----------|--------|-------------|
-| [fintrack](https://github.com/jcaldwell-labs/fintrack) | Go | Active | Financial tracking and analysis |
-| [terminal-stars](https://github.com/jcaldwell-labs/terminal-stars) | C | Active | Starfield visualization |
-| [adventure-engine-v2](https://github.com/jcaldwell-labs/adventure-engine-v2) | C | Active | Text adventure engine |
-| [boxes-live](https://github.com/jcaldwell-labs/boxes-live) | Shell | Active | Terminal canvas (Miro alternative) |
-| [smartterm-prototype](https://github.com/jcaldwell-labs/smartterm-prototype) | C | Active | Terminal UI library |
-| [atari-style](https://github.com/jcaldwell-labs/atari-style) | Python | Active | Atari-style game framework |
-| [my-context](https://github.com/jcaldwell-labs/my-context) | Go | Production | Agent journal and context management |
-| [tario](https://github.com/jcaldwell-labs/tario) | C | Active | ASCII platformer game |
-| [.github](https://github.com/jcaldwell-labs/.github) | Markdown | Active | Organization profile |
-
-## Current Open PRs (as of 2025-11-20)
-
-Run `./scripts/check-prs.sh` for current status.
-
-Recent snapshot shows PRs in:
-- **fintrack**: PRs #4 (transaction management), #3 (CLAUDE.md)
-- **terminal-stars**: PRs #7 (encoding fix), #6 (space combat mode)
-- **smartterm-prototype**: PR #2 (CLAUDE.md)
-- **my-context**: PR #3 (Sprint 3 features)
-- **tario**: PR #1 (platformer physics)
-- **.github**: PR #1 (session persistence)
+---
 
 ## Common Workflows
 
-### Clone a repository for local work
+### Check What Needs Attention
 
 ```bash
-gh repo clone jcaldwell-labs/<repo-name> repos/<repo-name>
-cd repos/<repo-name>
+# See everything that needs action
+./scripts/action-dashboard.sh
+
+# Just check PRs
+./scripts/check-prs.sh
+
+# Just check repo health
+./scripts/repo-health.sh
 ```
 
-### Review a PR locally
+### Review a Pull Request
 
 ```bash
 cd repos/<repo-name>
 gh pr checkout <pr-number>
-# Make changes, run tests, etc.
-gh pr review --approve  # or --comment or --request-changes
+# Review, test, comment
+gh pr review <pr-number> --approve
+gh pr merge <pr-number>
 ```
 
-### Check all local repos for issues
+### Sync All Repositories
 
 ```bash
-./scripts/repo-health.sh
+cd repos/<repo-name>
+git pull origin main
 ```
 
-### Identify next actions
+### Clone Missing Repository
 
 ```bash
-./scripts/action-dashboard.sh
+gh repo clone jcaldwell-labs/<repo-name> repos/<repo-name>
 ```
 
-## Work Categories
-
-### 🖥️ Manual Actions (local terminal)
-- Merge approved PRs on GitHub
-- Create releases
-- Manage organization settings
-- Update repository descriptions
-
-### 🤖 Claude Local Actions (this session)
-- Code reviews for open PRs
-- Fix issues in cloned repos
-- Write tests or documentation
-- Small refactoring tasks
-- Answer questions about code
-
-### ☁️ Claude Remote Actions (github.com/claude-code)
-- Create new features from scratch
-- Large refactoring projects
-- Multi-file changes across repositories
-- Complex migrations
-
-## Context Tracking
-
-All coordination work uses my-context database mode:
+### Start Coordination Session
 
 ```bash
 export MY_CONTEXT_HOME=db:jcaldwell_labs
-my-context start "task-$(date +%Y-%m-%d)"
-my-context note "your note here"
-my-context export > summary.md
+my-context start "coordination-$(date +%Y-%m-%d)"
+my-context note "Your note here"
+my-context export > sessions/session-summary.md
 ```
-
-Project-specific work should use project-specific partitions:
-- `db:fintrack_dev`
-- `db:boxes_live_dev`
-- etc.
-
-## Philosophy
-
-All projects follow Unix philosophy:
-- Do one thing well
-- Work together via composition
-- Terminal-first (no GUI dependencies)
-- SSH-friendly (works over remote connections)
-
-## Links
-
-- **Organization**: https://github.com/jcaldwell-labs
-- **Profile README**: https://github.com/jcaldwell-labs/.github
-- **CLAUDE.md**: Instructions for Claude Code sessions
 
 ---
 
-**Last Updated**: 2025-11-20
-**Maintained By**: @jcaldwell1066
+## Key Documents
+
+### Strategic Planning
+- **[ROADMAP-2025.md](ROADMAP-2025.md)**: Complete improvement plan (376 lines)
+- **[ORGANIZATION-STATUS.md](ORGANIZATION-STATUS.md)**: Current state and immediate actions
+
+### Execution Guides
+- **[PARALLEL-SESSION-GUIDE.md](PARALLEL-SESSION-GUIDE.md)**: How to run parallel sessions (681 lines)
+- **[VALIDATION-CHECKLIST.md](VALIDATION-CHECKLIST.md)**: Quality gates for each phase (339 lines)
+
+### Reference
+- **[USB-STUCK-PROCESS-DIAGNOSTIC.md](USB-STUCK-PROCESS-DIAGNOSTIC.md)**: Critical fix documentation
+- **[PHASE0-COMPLETION-SUMMARY.md](PHASE0-COMPLETION-SUMMARY.md)**: What Phase 0 accomplished
+
+---
+
+## Success Metrics
+
+### Current State (as of Phase 0 completion)
+
+- **Repositories**: 9 total
+- **Open PRs**: 8 (7 ready, 1 draft)
+- **Cloned Locally**: 4/9
+- **Behind Remote**: 2 repos
+- **Stuck Processes**: 1 (PID 1284, requires reboot)
+
+### Target State (after all phases)
+
+- **Quality Standards**: All 9 repos meet standards
+- **Documentation**: 100% have CLAUDE.md
+- **Testing**: All test suites passing
+- **Integration**: Unified build system working
+- **Automation**: Health monitoring operational
+- **Community**: Engagement infrastructure in place
+
+---
+
+## Timeline
+
+| Phase | Duration | Status |
+|-------|----------|--------|
+| Phase 0: Pre-Work | 1 session (4h) | ✅ Complete |
+| Phase 1: Foundation | 1-2 sessions (8h) | 🔄 Ready to start |
+| Phase 2: Repository Improvements | 1-2 weeks (parallel) | ⏸️ Pending Phase 1 |
+| Phase 3: Cross-Project Integration | 1-2 weeks | ⏸️ Pending Phase 2 |
+| Phase 4: Continuous Audit | Ongoing | ⏸️ Pending Phase 3 |
+| **Total** | **3-4 weeks** | In progress |
+
+---
+
+## Philosophy
+
+This workspace follows the Unix philosophy of the projects it manages:
+
+- **Do one thing well**: Coordinate improvements, don't implement them
+- **Work together**: Multiple parallel sessions compose together
+- **Handle streams**: Track progress via git, manifest files, reports
+- **Scriptable**: Everything automated via bash scripts
+
+---
+
+## Quick Links
+
+- **Organization**: https://github.com/jcaldwell-labs
+- **Organization Profile**: https://github.com/jcaldwell-labs/.github
+- **Current Phase**: Phase 1 - Foundation
+- **Next Action**: Run `./scripts/action-dashboard.sh`
+
+---
+
+## For AI Agents
+
+**Starting a new session?**
+
+1. Read [`ROADMAP-2025.md`](ROADMAP-2025.md) to understand the overall plan
+2. Check current phase in this README
+3. Run `./scripts/action-dashboard.sh` to see what needs attention
+4. Follow phase-specific instructions in roadmap
+5. Use [`PARALLEL-SESSION-GUIDE.md`](PARALLEL-SESSION-GUIDE.md) for Phase 2 parallel work
+
+**Claude Code specific**: See [`CLAUDE.md`](CLAUDE.md) for project-specific guidance
+
+---
+
+**Last Updated**: 2025-11-22
+**Current Phase**: Phase 1 (Foundation)
+**Status**: Phase 0 complete, ready for Phase 1
