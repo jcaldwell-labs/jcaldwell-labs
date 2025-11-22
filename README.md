@@ -1,186 +1,170 @@
-# JCaldwell Labs - Coordination Workspace
+# jcaldwell-labs Organization Hub
 
-**Organization:** https://github.com/jcaldwell-labs
-**Purpose:** Central coordination hub for managing Unix philosophy-inspired terminal tools
+Central coordination workspace for the [jcaldwell-labs](https://github.com/jcaldwell-labs) GitHub organization.
 
----
+## Purpose
 
-## Quick Links
+This workspace provides:
+- **Quick health checks** for all organization repositories
+- **PR monitoring** across all projects
+- **Action dashboards** for local, local-claude, and remote-claude work
+- **Central documentation** for organization-level processes
 
-- 📊 **[DASHBOARD.md](./DASHBOARD.md)** - Current status of all projects, open PRs, and next actions
-- 📋 **[NEXT-STEPS.md](./NEXT-STEPS.md)** - Detailed follow-up prompts and parallel work opportunities
-- 📖 **[CLAUDE.md](./CLAUDE.md)** - Guidance for AI agents working in this workspace
+This is NOT a code repository - it's a coordination hub for managing multiple terminal-based open source projects.
 
----
+## Quick Start
 
-## Projects Overview
+### Check what needs attention right now
 
-| Project | Description | Status |
-|---------|-------------|--------|
-| **[my-context](https://github.com/jcaldwell-labs/my-context)** | Agent journal CLI (like Jira for terminal) | Production |
-| **[boxes-live](https://github.com/jcaldwell-labs/boxes-live)** | Interactive canvas (like Miro for terminal) | MVP Complete |
-| **[fintrack](https://github.com/jcaldwell-labs/fintrack)** | Financial tracking and analysis | Phase 1 MVP |
-| **[terminal-stars](https://github.com/jcaldwell-labs/terminal-stars)** | Starfield visualization and games | Active Dev |
-| **[tario](https://github.com/jcaldwell-labs/tario)** | ASCII side-scrolling platformer | Active Dev |
-| **[adventure-engine-v2](https://github.com/jcaldwell-labs/adventure-engine-v2)** | Text adventure engine | DSL Design |
-| **[smartterm-prototype](https://github.com/jcaldwell-labs/smartterm-prototype)** | Terminal UI library POC | Decision Point |
+```bash
+./scripts/action-dashboard.sh
+```
 
----
+This shows:
+- Open PRs requiring review
+- Local repos with uncommitted changes or sync issues
+- Suggested actions (manual, local Claude, or remote Claude)
+- Quick commands for common tasks
 
-## Current Status (2025-11-18)
+### Monitor open PRs
 
-### Open PRs Requiring Review: 4
+```bash
+./scripts/check-prs.sh
+```
 
-1. **terminal-stars PR #5** - Skeet shooting game mode
-2. **fintrack PR #3** - CLAUDE.md documentation
-3. **smartterm-prototype PR #2** - CLAUDE.md documentation
-4. **.github PR #1** - Session persistence improvements
+### Check repository health
 
-**See [DASHBOARD.md](./DASHBOARD.md) for detailed PR information and review instructions.**
+```bash
+./scripts/repo-health.sh
+```
 
----
+## Directory Structure
 
-## Vision
+```
+jcaldwell-labs/
+├── scripts/              # Health monitoring and dashboard scripts
+│   ├── action-dashboard.sh
+│   ├── check-prs.sh
+│   └── repo-health.sh
+├── repos/                # Local clones of organization repositories
+│   ├── fintrack/
+│   ├── boxes-live/
+│   ├── adventure-engine-v2/
+│   └── ...
+├── archive/              # Archived session files and old documentation
+│   └── 2025-11-18/
+├── CLAUDE.md            # Instructions for Claude Code
+└── README.md            # This file
+```
 
-Build a suite of Unix philosophy terminal tools that compete with modern enterprise software:
+## Organization Projects
 
-| Enterprise Tool | Terminal Alternative | Progress |
-|----------------|---------------------|----------|
-| Miro | boxes-live | MVP ✓ |
-| Jira | my-context | Production ✓ |
-| Excel | fintrack | Phase 1 |
-| Arcade Games | tario, terminal-stars | Active |
-| Interactive Fiction | adventure-engine-v2 | Design |
+| Repository | Language | Status | Description |
+|-----------|----------|--------|-------------|
+| [fintrack](https://github.com/jcaldwell-labs/fintrack) | Go | Active | Financial tracking and analysis |
+| [terminal-stars](https://github.com/jcaldwell-labs/terminal-stars) | C | Active | Starfield visualization |
+| [adventure-engine-v2](https://github.com/jcaldwell-labs/adventure-engine-v2) | C | Active | Text adventure engine |
+| [boxes-live](https://github.com/jcaldwell-labs/boxes-live) | Shell | Active | Terminal canvas (Miro alternative) |
+| [smartterm-prototype](https://github.com/jcaldwell-labs/smartterm-prototype) | C | Active | Terminal UI library |
+| [atari-style](https://github.com/jcaldwell-labs/atari-style) | Python | Active | Atari-style game framework |
+| [my-context](https://github.com/jcaldwell-labs/my-context) | Go | Production | Agent journal and context management |
+| [tario](https://github.com/jcaldwell-labs/tario) | C | Active | ASCII platformer game |
+| [.github](https://github.com/jcaldwell-labs/.github) | Markdown | Active | Organization profile |
 
-**Philosophy:**
-- Do one thing well
-- Work together via composition
-- Handle text/data streams
-- Provide scriptable interfaces
-- SSH-friendly (no GUI dependencies)
+## Current Open PRs (as of 2025-11-20)
 
----
+Run `./scripts/check-prs.sh` for current status.
 
-## Getting Started
+Recent snapshot shows PRs in:
+- **fintrack**: PRs #4 (transaction management), #3 (CLAUDE.md)
+- **terminal-stars**: PRs #7 (encoding fix), #6 (space combat mode)
+- **smartterm-prototype**: PR #2 (CLAUDE.md)
+- **my-context**: PR #3 (Sprint 3 features)
+- **tario**: PR #1 (platformer physics)
+- **.github**: PR #1 (session persistence)
 
-### For AI Agents
+## Common Workflows
 
-Start a coordination session:
+### Clone a repository for local work
+
+```bash
+gh repo clone jcaldwell-labs/<repo-name> repos/<repo-name>
+cd repos/<repo-name>
+```
+
+### Review a PR locally
+
+```bash
+cd repos/<repo-name>
+gh pr checkout <pr-number>
+# Make changes, run tests, etc.
+gh pr review --approve  # or --comment or --request-changes
+```
+
+### Check all local repos for issues
+
+```bash
+./scripts/repo-health.sh
+```
+
+### Identify next actions
+
+```bash
+./scripts/action-dashboard.sh
+```
+
+## Work Categories
+
+### 🖥️ Manual Actions (local terminal)
+- Merge approved PRs on GitHub
+- Create releases
+- Manage organization settings
+- Update repository descriptions
+
+### 🤖 Claude Local Actions (this session)
+- Code reviews for open PRs
+- Fix issues in cloned repos
+- Write tests or documentation
+- Small refactoring tasks
+- Answer questions about code
+
+### ☁️ Claude Remote Actions (github.com/claude-code)
+- Create new features from scratch
+- Large refactoring projects
+- Multi-file changes across repositories
+- Complex migrations
+
+## Context Tracking
+
+All coordination work uses my-context database mode:
+
 ```bash
 export MY_CONTEXT_HOME=db:jcaldwell_labs
 my-context start "task-$(date +%Y-%m-%d)"
+my-context note "your note here"
+my-context export > summary.md
 ```
 
-Read the guidance:
-```bash
-cat CLAUDE.md      # Agent guidance
-cat DASHBOARD.md   # Current status
-cat NEXT-STEPS.md  # Available work
-```
+Project-specific work should use project-specific partitions:
+- `db:fintrack_dev`
+- `db:boxes_live_dev`
+- etc.
 
-### For Developers
+## Philosophy
 
-Check project health:
-```bash
-# See all open PRs
-/tmp/check-prs.sh
+All projects follow Unix philosophy:
+- Do one thing well
+- Work together via composition
+- Terminal-first (no GUI dependencies)
+- SSH-friendly (works over remote connections)
 
-# Clone a project
-gh repo clone jcaldwell-labs/<project-name>
+## Links
 
-# Work on a project with context tracking
-export MY_CONTEXT_HOME=db:<project>_dev
-my-context start "feature-<name>"
-```
+- **Organization**: https://github.com/jcaldwell-labs
+- **Profile README**: https://github.com/jcaldwell-labs/.github
+- **CLAUDE.md**: Instructions for Claude Code sessions
 
 ---
 
-## Coordination Strategy
-
-### Multi-Agent Approach
-
-**Objective:** Maximize parallel development across projects while maintaining quality
-
-**Method:**
-1. Identify features that can be developed independently ✓ (see NEXT-STEPS.md)
-2. Create clear specifications and prompts for each ✓ (18+ prompts ready)
-3. Launch multiple autonomous agent sessions in parallel
-4. Track all work in my-context database partitions ✓ (db:jcaldwell_labs + project-specific)
-5. Review and integrate completed work
-
-**Current Focus:**
-- High-value features (my-context queries, boxes-live persistence, fintrack transactions)
-- Documentation completion (CLAUDE.md for all projects)
-- PR reviews (4 pending)
-
----
-
-## Active Work Sessions
-
-Track coordination work in the dedicated partition:
-
-```bash
-export MY_CONTEXT_HOME=db:jcaldwell_labs
-
-# List recent coordination sessions
-my-context list --search "jcaldwell"
-
-# View current audit session
-my-context show jcaldwell-labs-audit-2025-11-18
-```
-
-Track project-specific work in project partitions:
-
-```bash
-# Examples
-export MY_CONTEXT_HOME=db:fintrack_dev
-export MY_CONTEXT_HOME=db:boxes_live_dev
-export MY_CONTEXT_HOME=db:terminal_stars_dev
-```
-
----
-
-## Next Actions
-
-### Priority 1 (Today)
-1. Review and merge 4 open PRs (see DASHBOARD.md)
-2. Implement fintrack transaction management
-3. Add boxes-live canvas persistence
-
-### Priority 2 (This Week)
-4. Complete CLAUDE.md for all 8 projects
-5. Implement my-context advanced queries
-6. Add tario enemy AI
-7. Design adventure-engine DSL
-
-### Priority 3 (This Month)
-8. Launch parallel agent sessions for 6+ features
-9. Achieve 10+ GitHub stars across projects
-10. Complete comprehensive test coverage
-
-**See [NEXT-STEPS.md](./NEXT-STEPS.md) for detailed prompts and implementation guidance.**
-
----
-
-## Files in This Workspace
-
-| File | Purpose |
-|------|---------|
-| `README.md` | This file - quick reference and strategic overview |
-| `DASHBOARD.md` | Live status dashboard - projects, PRs, health metrics |
-| `NEXT-STEPS.md` | Detailed work opportunities with ready-to-use prompts |
-| `CLAUDE.md` | Comprehensive AI agent guidance for coordination |
-| `db:jcaldwell_labs/` | my-context database partition for coordination sessions |
-
----
-
-## Resources
-
-- **Organization:** https://github.com/jcaldwell-labs
-- **Skills:** `~/.claude/skills/my-context-workflow` (context management patterns)
-- **Support:** Create issues in individual project repositories
-
----
-
-**Last Updated:** 2025-11-18 by jcaldwell-labs-audit session
-**Next Review:** Daily (automated dashboard updates planned)
+**Last Updated**: 2025-11-20
+**Maintained By**: @jcaldwell1066
