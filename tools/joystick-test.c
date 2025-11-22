@@ -19,7 +19,7 @@
 #define MAX_BUTTONS 16
 #define GRID_SIZE 21
 
-/* Simple radial line drawing */
+/* Draw stick grid with radial line using Bresenham's algorithm */
 void draw_stick_grid(int axis_x, int axis_y, const int *buttons) {
     /* Normalize to -1.0 to 1.0 */
     double nx = axis_x / 32768.0;
@@ -29,64 +29,67 @@ void draw_stick_grid(int axis_x, int axis_y, const int *buttons) {
     if (fabs(nx) < 0.15) nx = 0.0;
     if (fabs(ny) < 0.15) ny = 0.0;
 
-    /* Map to grid (0 to GRID_SIZE-1) */
+    /* Calculate positions */
     int cx = GRID_SIZE / 2;
     int cy = GRID_SIZE / 2;
     int sx = cx + (int)(nx * (GRID_SIZE / 2 - 1));
     int sy = cy + (int)(ny * (GRID_SIZE / 2 - 1));
+
+    /* Create grid and mark line points using Bresenham */
+    char grid[GRID_SIZE][GRID_SIZE];
+    memset(grid, ' ', sizeof(grid));
+
+    /* Draw axes first */
+    for (int i = 0; i < GRID_SIZE; i++) {
+        grid[cy][i] = '-';  /* Horizontal axis */
+        grid[i][cx] = '|';  /* Vertical axis */
+    }
+    grid[cy][cx] = '+';  /* Center */
+
+    /* Draw radial line if stick is moved */
+    if (sx != cx || sy != cy) {
+        int x0 = cx, y0 = cy;
+        int x1 = sx, y1 = sy;
+        int dx = abs(x1 - x0);
+        int dy = abs(y1 - y0);
+        int sx_step = x0 < x1 ? 1 : -1;
+        int sy_step = y0 < y1 ? 1 : -1;
+        int err = dx - dy;
+
+        while (1) {
+            /* Mark line point (but don't overwrite center or stick) */
+            if (!(x0 == cx && y0 == cy) && !(x0 == sx && y0 == sy)) {
+                grid[y0][x0] = '*';
+            }
+
+            if (x0 == x1 && y0 == y1) break;
+
+            int e2 = 2 * err;
+            if (e2 > -dy) {
+                err -= dy;
+                x0 += sx_step;
+            }
+            if (e2 < dx) {
+                err += dx;
+                y0 += sy_step;
+            }
+        }
+    }
+
+    /* Place stick marker */
+    grid[sy][sx] = '@';
 
     /* Draw grid */
     printf("\n  LEFT STICK:\n");
     for (int y = 0; y < GRID_SIZE; y++) {
         printf("  ");
         for (int x = 0; x < GRID_SIZE; x++) {
-            /* Calculate if this point is on the radial line */
-            bool on_line = false;
-            if (fabs(nx) > 0.0 || fabs(ny) > 0.0) {
-                /* Check if point is on line from center to stick */
-                double line_t = 0.0;
-                if (fabs(nx) > fabs(ny)) {
-                    /* Line more horizontal */
-                    int line_x_range = sx - cx;
-                    if (line_x_range != 0) {
-                        line_t = (double)(x - cx) / line_x_range;
-                    }
-                } else {
-                    /* Line more vertical */
-                    int line_y_range = sy - cy;
-                    if (line_y_range != 0) {
-                        line_t = (double)(y - cy) / line_y_range;
-                    }
-                }
-
-                if (line_t >= 0.0 && line_t <= 1.0) {
-                    int line_x = cx + (int)(line_t * (sx - cx));
-                    int line_y = cy + (int)(line_t * (sy - cy));
-                    if (abs(x - line_x) <= 1 && abs(y - line_y) <= 1) {
-                        on_line = true;
-                    }
-                }
-            }
-
-            /* Draw character */
-            if (x == sx && y == sy) {
-                printf("◉");  /* Stick position */
-            } else if (x == cx && y == cy) {
-                printf("+");  /* Center */
-            } else if (on_line) {
-                printf("·");  /* Radial line */
-            } else if (x == cx) {
-                printf("│");  /* Y-axis */
-            } else if (y == cy) {
-                printf("─");  /* X-axis */
-            } else {
-                printf(" ");
-            }
+            printf("%c", grid[y][x]);
         }
         printf("\n");
     }
 
-    /* Axis info */
+    /* Info */
     printf("\n  X: %6d (% .2f)  Y: %6d (% .2f)\n", axis_x, nx, axis_y, ny);
 
     /* Direction */
@@ -104,18 +107,18 @@ void draw_stick_grid(int axis_x, int axis_y, const int *buttons) {
             else printf("DOWN");
         } else {
             if (nx < -0.3) printf("LEFT");
-            else printf("RIGHT");
+            else if (nx > 0.3) printf("RIGHT");
+            else printf("CENTER");
         }
     }
     printf("\n\n");
 
-    /* Buttons - Hyperkin layout */
-    printf("  BUTTONS:\n");
-    printf("  Fire: L");
+    /* Buttons */
+    printf("  BUTTONS: Fire L");
     printf(buttons[4] || buttons[6] ? "[●]" : "[○]");
-    printf("  R");
+    printf(" R");
     printf(buttons[5] || buttons[7] ? "[●]" : "[○]");
-    printf("  |  Face: A");
+    printf(" | Face A");
     printf(buttons[0] ? "[●]" : "[○]");
     printf(" B");
     printf(buttons[1] ? "[●]" : "[○]");
@@ -123,11 +126,12 @@ void draw_stick_grid(int axis_x, int axis_y, const int *buttons) {
     printf(buttons[3] ? "[●]" : "[○]");
     printf(" Y");
     printf(buttons[2] ? "[●]" : "[○]");
-    printf("  |  Sys: SEL");
+    printf(" | SEL");
     printf(buttons[8] ? "[●]" : "[○]");
     printf(" START");
     printf(buttons[9] ? "[●]" : "[○]");
-    printf("\n\n");
+    printf("\n");
+    printf("  Legend: @ = Stick, + = Center, * = Direction line\n\n");
 }
 
 int main(int argc, char *argv[]) {
@@ -137,15 +141,13 @@ int main(int argc, char *argv[]) {
     int fd = open(device, O_RDONLY | O_NONBLOCK);
     if (fd < 0) {
         fprintf(stderr, "Cannot open %s: %s\n", device, strerror(errno));
-        fprintf(stderr, "Run: ./scripts/joystick-diagnostic.sh\n");
         return 1;
     }
 
-    printf("\033[2J\033[H");  /* Clear screen once */
-    printf("Joystick Test - %s\n", device);
-    printf("Press Ctrl+C to quit\n");
+    printf("\033[2J\033[H");
+    printf("Joystick Test - Press Ctrl+C to quit\n\n");
 
-    int axis[MAX_BUTTONS] = {0};
+    int axis[2] = {0, 0};
     int buttons[MAX_BUTTONS] = {0};
     int frame = 0;
 
@@ -155,14 +157,11 @@ int main(int argc, char *argv[]) {
 
         if (n < 0) {
             if (errno == EAGAIN) {
-                /* Redraw only every 15 frames (~250ms) to reduce flashing */
-                if (frame++ % 15 == 0) {
-                    printf("\033[H");  /* Home cursor, don't clear screen */
-                    printf("Joystick Test - %s                    \n", device);
-                    printf("Press Ctrl+C to quit                  \n");
+                /* Slow redraw to prevent flashing */
+                if (frame++ % 30 == 0) {
+                    printf("\033[3;1H");  /* Move to line 3 */
                     draw_stick_grid(axis[0], axis[1], buttons);
                 }
-
                 struct timespec ts = {0, 16666667};
                 nanosleep(&ts, NULL);
                 continue;
@@ -172,16 +171,11 @@ int main(int argc, char *argv[]) {
 
         if (n != sizeof(ev)) continue;
 
-        /* Update state */
-        if (ev.type == EV_ABS) {
-            if (ev.code == ABS_X) axis[0] = ev.value;
-            else if (ev.code == ABS_Y) axis[1] = ev.value;
+        bool updated = false;
 
-            /* Immediate redraw on movement */
-            printf("\033[H");
-            printf("Joystick Test - %s                    \n", device);
-            printf("Press Ctrl+C to quit                  \n");
-            draw_stick_grid(axis[0], axis[1], buttons);
+        if (ev.type == EV_ABS) {
+            if (ev.code == ABS_X) { axis[0] = ev.value; updated = true; }
+            else if (ev.code == ABS_Y) { axis[1] = ev.value; updated = true; }
         } else if (ev.type == EV_KEY) {
             int btn = -1;
             if (ev.code >= BTN_JOYSTICK) btn = ev.code - BTN_JOYSTICK;
@@ -189,18 +183,18 @@ int main(int argc, char *argv[]) {
 
             if (btn >= 0 && btn < MAX_BUTTONS) {
                 buttons[btn] = ev.value;
-
-                /* Immediate redraw on button press */
-                printf("\033[H");
-                printf("Joystick Test - %s                    \n", device);
-                printf("Press Ctrl+C to quit                  \n");
-                draw_stick_grid(axis[0], axis[1], buttons);
+                updated = true;
             }
+        }
+
+        /* Immediate update on input */
+        if (updated) {
+            printf("\033[3;1H");
+            draw_stick_grid(axis[0], axis[1], buttons);
         }
     }
 
     printf("\033[2J\033[H");
-    printf("Test complete\n");
     close(fd);
     return 0;
 }
