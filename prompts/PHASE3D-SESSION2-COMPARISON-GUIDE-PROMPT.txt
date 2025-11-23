@@ -1,0 +1,159 @@
+You are working on Phase 3d Session 2 of the jcaldwell-labs organization improvement project.
+
+CONTEXT:
+- Organization: jcaldwell-labs (9 terminal-based open source projects)
+- Phase 2: Complete (8/9 repos improved)
+- Phase 3a: Complete (unified build system)
+- Phase 3b: Complete (integration examples)
+- Current Phase: Phase 3d Session 2 - Project Comparison + Contributor Guide
+- Your Role: Create project comparison matrix and comprehensive contributor guide
+
+PHASE 2 LESSONS:
+1. Incremental PRs: 2 focused PRs instead of comprehensive docs
+2. Test documentation: Validate guides are complete and accurate
+3. Make it actionable: Readers should know exactly what to do next
+
+PROTOCOLS (MUST READ):
+All in jcaldwell-labs coordination repo:
+1. docs/PR-FAILURE-PROTOCOL.md
+2. docs/DONE-DEFINITION.md
+3. docs/INCREMENTAL-MERGE-STRATEGY.md
+
+YOUR ASSIGNMENT:
+Create project comparison matrix and expanded contributor guide for jcaldwell-labs organization.
+
+TASK BREAKDOWN (from ROADMAP-2025.md Phase 3d Session 2):
+
+PR 1: Project comparison matrix (~300 lines)
+  - Create: docs/PROJECT-COMPARISON.md
+  - Content:
+    * All 9 projects compared side-by-side
+    * Categories: Language, Status, Complexity, Use Case, Dependencies
+    * Features: What each project does uniquely
+    * Maturity: Production vs Active Dev vs Prototype
+    * Contribution opportunities: Where help is needed
+    * Table format for easy scanning
+  - Success: Clear comparison helps users choose project
+  - Time: ~8h base + buffers = 16h
+
+PR 2: Comprehensive contributor guide (~400 lines)
+  - Create: docs/CONTRIBUTOR-GUIDE.md
+  - Content:
+    * How to contribute (beyond basic getting started)
+    * Code review process
+    * Testing standards by language
+    * Documentation standards
+    * Commit message conventions
+    * PR best practices
+    * Release process
+    * Community guidelines
+    * Communication channels
+  - Success: Contributors know expectations and processes
+  - Depends on: PR 1 provides project context
+  - Time: ~8h base + buffers = 16h
+
+TOTAL: 2 PRs, ~700 lines, ~32h estimated
+
+CRITICAL GUIDELINES:
+
+FOR PROJECT COMPARISON:
+1. **Objective assessment**: Rate each project honestly
+2. **Consistent criteria**: Use same comparison dimensions for all
+3. **Help users choose**: Make it obvious which project fits their interests
+4. **Contribution signals**: Show where help is most needed
+5. **Keep updated**: Design for easy maintenance
+
+COMPARISON TABLE FORMAT:
+```markdown
+| Project | Language | Status | Use Case | Complexity | Contrib Opportunity |
+|---------|----------|--------|----------|------------|-------------------|
+| boxes-live | C | Active | Terminal canvas (Miro alt) | High | Protocol development |
+| my-context | Go | Production | Context tracking | Medium | Feature requests |
+[etc. for all 9 projects]
+```
+
+FOR CONTRIBUTOR GUIDE:
+1. **Expand on GETTING-STARTED**: Assume reader followed that first
+2. **Deeper process details**: What happens after first PR?
+3. **Quality standards**: What makes a good contribution?
+4. **Language-specific**: C conventions vs Go conventions
+5. **Review process**: What to expect when PR is reviewed
+6. **Community**: How to communicate, ask questions
+
+MANDATORY WORKFLOW:
+
+For EACH PR:
+1. RESEARCH: Review all 9 project READMEs, CONTRIBUTING.md files
+2. DRAFT: Write documentation
+3. CROSS-CHECK: Ensure consistency with existing docs
+4. VALIDATE: Ask "Is this complete? Actionable? Clear?"
+5. CREATE PR: In jcaldwell-labs repo
+6. REQUEST REVIEW: Get feedback
+7. REVISE: Address feedback
+8. MERGE: After approval
+9. DELETE BRANCH: Clean up
+
+CRITICAL RULES:
+
+1. COMPREHENSIVE: Cover all important topics
+2. ACCURATE: Verify all information is current
+3. ACTIONABLE: Readers know what to do
+4. CONSISTENT: Align with existing documentation
+5. SEQUENTIAL: PR 2 after PR 1 merged
+6. TIME-BOX: 38h total budget (32h base + 6h buffer)
+
+CROSS-REFERENCES:
+
+Your docs should reference:
+- GETTING-STARTED.md (from Phase 3d Session 1)
+- Workflow examples (from Phase 3b Session 3)
+- Individual project CONTRIBUTING.md files
+- BUILD-SYSTEM.md (from Phase 3a)
+
+"DONE DONE" CRITERIA:
+
+✓ Both docs written and complete
+✓ Both PRs merged
+✓ Project comparison matrix accurate
+✓ Contributor guide comprehensive
+✓ Cross-references correct
+✓ Improvement report written
+✓ my-context session exported
+
+SUCCESS METRICS:
+
+- 2 PRs created and merged
+- Comparison matrix helps users choose projects
+- Contributor guide answers common questions
+- Documentation professional and complete
+
+START HERE:
+
+1. Clone jcaldwell-labs coordination repo
+2. Read existing organization docs for context
+3. Set up my-context:
+   export MY_CONTEXT_HOME=db:jcaldwell_labs
+   my-context start "phase3d-session2-$(date +%Y-%m-%d)"
+4. Review all 9 project repos (understand each thoroughly)
+5. Start with PR 1 (comparison matrix)
+
+COORDINATION:
+
+You are Session 2 of 2 parallel Phase 3d sessions:
+- Session 1: Getting started + showcase (can reference their work)
+- Session 2 (you): Comparison + contributor guide (independent)
+
+Minimal dependencies. Both sessions can run simultaneously.
+
+QUALITY STANDARDS:
+
+- Comparison must be fair and objective
+- Guide must be comprehensive (answer common questions)
+- Writing must be clear and professional
+- Information must be current and accurate
+- Links must all work
+
+REMEMBER:
+These docs represent the organization to the world. Make them excellent.
+
+Your success: Clear comparison + comprehensive guide = easier contribution path.

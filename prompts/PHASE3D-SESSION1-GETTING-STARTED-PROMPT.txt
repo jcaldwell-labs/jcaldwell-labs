@@ -1,0 +1,145 @@
+You are working on Phase 3d Session 1 of the jcaldwell-labs organization improvement project.
+
+CONTEXT:
+- Organization: jcaldwell-labs (9 terminal-based open source projects)
+- Phase 2: Complete (8/9 repos improved)
+- Phase 3a: Complete (unified build system)
+- Phase 3b: Complete (integration examples)
+- Current Phase: Phase 3d Session 1 - Getting Started + Showcase
+- Your Role: Create onboarding documentation and showcase best projects
+
+PHASE 2 LESSONS:
+1. Documentation must be tested (not assumed to work)
+2. Examples must be executable (copy/paste commands work)
+3. Incremental PRs (2 focused PRs, not 1 comprehensive doc)
+
+PROTOCOLS (MUST READ):
+All in jcaldwell-labs coordination repo:
+1. docs/PR-FAILURE-PROTOCOL.md
+2. docs/DONE-DEFINITION.md
+3. docs/INCREMENTAL-MERGE-STRATEGY.md
+
+YOUR ASSIGNMENT:
+Create getting started guide for new contributors and showcase section for organization profile.
+
+TASK BREAKDOWN (from ROADMAP-2025.md Phase 3d Session 1):
+
+PR 1: Getting started guide (~400 lines)
+  - Create: docs/GETTING-STARTED.md
+  - Content:
+    * Welcome to jcaldwell-labs
+    * Philosophy (Unix terminal tools philosophy)
+    * How to choose a project to contribute to
+    * Development environment setup
+    * Your first contribution (step-by-step)
+    * Using the build system
+    * Running tests
+    * Creating your first PR
+    * Getting help
+  - Format: Beginner-friendly, tested with real setup
+  - Success: Guide is complete, tested with fresh environment
+  - Time: ~10h base + buffers = 20h
+
+PR 2: Showcase section (~250 lines)
+  - Update: .github/profile/README.md
+  - Content:
+    * Highlighted projects (choose 3-4 best)
+    * Screenshots/demos where applicable
+    * Key features per project
+    * Links to repos
+    * Contribution opportunities
+  - Format: Engaging, visual, clear value proposition
+  - Success: Organization profile compelling and informative
+  - Depends on: PR 1 provides project understanding
+  - Time: ~6h base + buffers = 12h
+
+TOTAL: 2 PRs, ~650 lines, ~32h estimated
+
+CRITICAL GUIDELINES:
+
+FOR GETTING STARTED GUIDE:
+1. **Assume zero knowledge**: Reader may be new to terminal development
+2. **Step-by-step**: Every step explicit, no assumptions
+3. **Test in fresh environment**: Spin up clean VM/container and follow guide
+4. **Include troubleshooting**: Common issues and solutions
+5. **Show success states**: What does success look like at each step?
+6. **Link to examples**: Reference Phase 3b workflow docs
+
+FOR SHOWCASE:
+1. **Highlight best projects**: Choose 3-4 flagship projects
+   - Suggested: boxes-live (Miro alternative), my-context (production tool), fintrack (full-featured)
+2. **Show value clearly**: Why would someone use this?
+3. **Visual where possible**: ASCII art, example output, screenshots
+4. **Call to action**: How to get started, contribute
+5. **Professional tone**: This represents entire organization
+
+MANDATORY WORKFLOW:
+
+For EACH PR:
+1. DRAFT: Write documentation
+2. TEST: Follow your own guide in fresh environment
+3. REVISE: Fix any issues discovered during testing
+4. VALIDATE: Ensure all commands work, all links valid
+5. CREATE PR: In jcaldwell-labs repo (coordination repo)
+6. GET FEEDBACK: Request review from project owner
+7. ADDRESS REVIEW: Update based on feedback
+8. MERGE: After approval
+9. NEXT PR: Move to PR 2
+
+CRITICAL RULES:
+
+1. TEST YOUR DOCS: Follow every step yourself in fresh environment
+2. NO BROKEN LINKS: Verify all URLs work
+3. NO PLACEHOLDERS: Use real commands and examples
+4. BEGINNER-FRIENDLY: Write for someone who's never contributed to open source
+5. SEQUENTIAL: PR 2 after PR 1 merged (showcase builds on getting started understanding)
+6. TIME-BOX: 38h total budget (32h base + 6h buffer)
+
+"DONE DONE" CRITERIA:
+
+✓ Both docs written and tested
+✓ Both PRs merged
+✓ Getting started guide validated with fresh environment test
+✓ Showcase section published and visible
+✓ All links working
+✓ Improvement report written
+✓ my-context session exported
+
+SUCCESS METRICS:
+
+- 2 PRs created and merged
+- Getting started guide tested and working
+- Showcase section compelling
+- New contributor can follow guide successfully
+- Organization profile improved
+
+START HERE:
+
+1. Clone jcaldwell-labs coordination repo
+2. Read existing README.md, CLAUDE.md for voice/tone
+3. Set up my-context:
+   export MY_CONTEXT_HOME=db:jcaldwell_labs
+   my-context start "phase3d-session1-$(date +%Y-%m-%d)"
+4. Review all 9 project READMEs (understand what each does)
+5. Start with PR 1 (getting started guide)
+
+COORDINATION:
+
+You are Session 1 of 2 parallel Phase 3d sessions:
+- Session 1 (you): Getting started + showcase (independent)
+- Session 2: Comparison matrix + contributor guide (independent)
+
+Work independently. Minimal dependencies.
+
+TONE & STYLE:
+
+- Welcoming but professional
+- Clear and concise
+- Unix philosophy aligned
+- Beginner-friendly without being condescending
+- Action-oriented (show, don't just tell)
+
+REMEMBER:
+You're writing the first thing new contributors see. Make it count.
+
+Your success: New contributors feel welcome and know exactly how to start.

@@ -1,0 +1,142 @@
+You are working on Phase 3c of the jcaldwell-labs organization improvement project.
+
+CONTEXT:
+- Organization: jcaldwell-labs (9 terminal-based open source projects)
+- Phase 2: Complete (8/9 repos improved)
+- Phase 3a: Complete (unified build system)
+- Phase 3b: Complete (integration examples)
+- Current Phase: Phase 3c - Organization Infrastructure
+- Your Role: Standardize organization-wide settings and templates
+
+PHASE 2 LESSONS:
+1. Small PRs merge faster: 3 focused PRs instead of comprehensive changes
+2. Test carefully: Org changes affect ALL repos
+3. Incremental: One category at a time (settings, then standardization, then templates)
+
+PROTOCOLS (MUST READ):
+All in jcaldwell-labs coordination repo:
+1. docs/PR-FAILURE-PROTOCOL.md
+2. docs/ESCALATION-PROTOCOL.md
+3. docs/INCREMENTAL-MERGE-STRATEGY.md
+4. docs/DONE-DEFINITION.md
+
+YOUR ASSIGNMENT:
+Audit and standardize GitHub organization infrastructure across all 9 repositories.
+
+TASK BREAKDOWN (from ROADMAP-2025.md Phase 3c):
+
+PR 1: Organization settings audit (~200 lines)
+  - Create: docs/ORG-SETTINGS-AUDIT.md
+  - Audit: GitHub org settings, permissions, security settings
+  - Document: Current state, recommended changes, rationale
+  - Apply: Standardize settings across organization
+  - Success: Settings documented and applied
+  - Time: ~6h base + buffers = 12h
+
+PR 2: Repository standardization (~150 lines)
+  - Review: All 9 repo topics, labels, descriptions
+  - Standardize: Common labels across repos, consistent topics
+  - Update: Each repo's GitHub settings via gh CLI or web
+  - Document: Standard label set, topic guidelines
+  - Success: All repos have consistent metadata
+  - Depends on: PR 1 merged
+  - Time: ~5h base + buffers = 10h
+
+PR 3: Organization-wide templates (~200 lines)
+  - Create/Update: .github repo templates (issue, PR, discussions)
+  - Files: .github/ISSUE_TEMPLATE/, .github/PULL_REQUEST_TEMPLATE/
+  - Ensure: Available for all repos in organization
+  - Success: Templates work for new issues/PRs in any repo
+  - Depends on: PR 2 provides context
+  - Time: ~6h base + buffers = 12h
+
+TOTAL: 3 PRs, ~550 lines, ~34h estimated
+
+CRITICAL NOTES:
+
+1. **Organization-wide impact**: Changes affect all 9 repos
+2. **Test carefully**: Verify changes don't break existing workflows
+3. **Document rationale**: Explain WHY each standardization choice
+4. **Backwards compatible**: Don't break existing issues/PRs/workflows
+5. **Coordinate with owner**: Org settings may need approval
+
+MANDATORY WORKFLOW:
+
+For EACH PR:
+1. RESEARCH: Understand current state across all 9 repos
+2. DOCUMENT: Propose changes in markdown doc first
+3. REVIEW: Get approval for proposed changes (especially org settings)
+4. IMPLEMENT: Apply changes carefully
+5. VALIDATE: Test that changes work as expected
+6. CREATE PR: In appropriate repo (jcaldwell-labs for docs, .github for templates)
+7. MONITOR: Verify no negative impacts
+8. MERGE: After approval
+9. DELETE BRANCH: Clean up
+
+CRITICAL RULES:
+
+1. AUDIT FIRST: Don't change without understanding current state
+2. DOCUMENT CHANGES: Every change must have rationale
+3. TEST IMPACT: Verify changes work across multiple repos
+4. SEQUENTIAL ONLY: PR 2 after PR 1 merged, PR 3 after PR 2 merged
+5. GET APPROVAL: Org-level changes may need owner sign-off
+6. ROLLBACK PLAN: Document how to undo changes if needed
+7. TIME-BOX: 40h total budget (34h base + 6h buffer)
+
+ORGANIZATION SETTINGS TO AUDIT:
+
+- Member permissions
+- Repository creation rules
+- Default repository settings
+- Security settings (dependabot, code scanning, secret scanning)
+- Actions permissions
+- Package permissions
+- Discussion settings
+- Project settings
+- Team structures
+
+REPOSITORY STANDARDIZATION:
+
+Common labels to add across repos:
+- `bug`, `enhancement`, `documentation`
+- `good first issue`, `help wanted`
+- `priority: high/medium/low`
+- `status: blocked/in-progress`
+
+Common topics to add:
+- `terminal`, `cli`, `c`, `go`, `python` (language-specific)
+- Project-specific topics
+
+"DONE DONE" CRITERIA:
+
+✓ All 3 PRs merged
+✓ Organization settings audited and standardized
+✓ All 9 repos have consistent labels/topics
+✓ Templates available organization-wide
+✓ Changes tested and verified working
+✓ Improvement report with audit findings
+✓ my-context session exported
+
+SUCCESS METRICS:
+
+- 3 PRs created and merged
+- Organization settings audit complete
+- All repos standardized
+- Templates work correctly
+- No broken workflows from changes
+
+START HERE:
+
+1. Clone jcaldwell-labs coordination repo
+2. Read docs/PR-FAILURE-PROTOCOL.md
+3. Set up my-context:
+   export MY_CONTEXT_HOME=db:jcaldwell_labs
+   my-context start "phase3c-org-infrastructure-$(date +%Y-%m-%d)"
+4. Start audit (PR 1): Review org settings, document findings
+5. Use gh CLI for GitHub API interactions
+
+CAUTION:
+
+Organization-wide changes can have unexpected impacts. Be conservative. Test thoroughly. Document everything. Get approval for major changes.
+
+Your goal: Consistent, professional organization infrastructure that scales.

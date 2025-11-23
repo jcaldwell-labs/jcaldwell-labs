@@ -1,0 +1,129 @@
+You are working on Phase 3b Session 2 of the jcaldwell-labs organization improvement project.
+
+CONTEXT:
+- Organization: jcaldwell-labs (9 terminal-based open source projects)
+- Phase 2: Complete (8/9 repos improved)
+- Phase 3a: Complete (unified build system exists)
+- Current Phase: Phase 3b Session 2 - Terminal UI Component Extraction
+- Your Role: Extract shared terminal UI components into reusable library
+
+PHASE 2 LESSONS APPLIED:
+1. Incremental PRs: 3 small PRs instead of 1 large refactoring
+2. Pre-PR validation: scripts/pre-pr-check.sh before every PR
+3. Fix in place: No new PRs to fix old PRs
+4. Proof of concept first: Validate with one project before extracting
+
+PROTOCOLS (MUST READ):
+All in jcaldwell-labs coordination repo:
+1. docs/PR-FAILURE-PROTOCOL.md
+2. scripts/pre-pr-check.sh
+3. docs/ESCALATION-PROTOCOL.md
+4. docs/INCREMENTAL-MERGE-STRATEGY.md
+5. docs/DONE-DEFINITION.md
+
+YOUR ASSIGNMENT:
+Extract common terminal UI patterns from projects and create shared library, then prove it works with one project.
+
+TASK BREAKDOWN (from ROADMAP-2025.md Phase 3b Session 2):
+
+PR 1: Identify common UI patterns (~150 lines)
+  - Create: docs/TERMINAL-UI-PATTERNS.md
+  - Analyze: terminal-stars, tario, adventure-engine-v2, boxes-live
+  - Document: Common patterns (input handling, output buffering, status bars, etc.)
+  - Success: Patterns documented with code examples
+  - Time: ~4h base + buffers = 8h
+
+PR 2: Extract shared components to library (~250 lines)
+  - Create: libs/termui/ (new directory)
+  - Files: include/termui.h, src/termui.c, Makefile
+  - Components: Based on patterns from PR 1
+  - Success: Library compiles, basic API functional
+  - Depends on: PR 1 merged
+  - Time: ~8h base + buffers = 16h
+
+PR 3: Update one project to use library (~200 lines)
+  - Choose: terminal-stars OR tario (whichever simpler)
+  - Update: Project Makefile to link termui, update code to use library
+  - Success: Project builds, runs, no regressions in functionality
+  - Depends on: PR 2 merged
+  - Time: ~6h base + buffers = 12h
+
+TOTAL: 3 PRs, ~600 lines, ~36h estimated
+
+CRITICAL NOTES:
+
+1. **Start with analysis** (PR 1): Don't code before understanding patterns
+2. **Keep library minimal** (PR 2): Only extract what's truly common
+3. **Proof with one project** (PR 3): Validate approach works before scaling
+4. **No regressions**: Project using library must work exactly as before
+5. **Document API**: Library needs clear API documentation
+
+MANDATORY WORKFLOW:
+
+For EACH PR:
+1. IMPLEMENT: Code for this specific PR
+2. TEST LOCALLY: Build + test in affected repo
+3. VALIDATE: Run scripts/pre-pr-check.sh (MUST PASS)
+4. CREATE PR: In appropriate repo (jcaldwell-labs for PR 1-2, project repo for PR 3)
+5. MONITOR CI: Wait for green
+6. IF CI FAILS: Fix in place (PR-FAILURE-PROTOCOL.md)
+7. MERGE: After approval
+8. DELETE BRANCH: Immediately
+9. NEXT PR: Proceed to next
+
+CRITICAL RULES:
+
+1. WAIT FOR MERGE: PR 2 only after PR 1 merged, PR 3 only after PR 2 merged
+2. ONE REPO AT A TIME: Don't split work across repos within single PR
+3. NO SCOPE CREEP: Extract components only, don't add features
+4. BACKWARD COMPATIBLE: Project using library must work identically
+5. TEST REGRESSIONS: Thoroughly test that project behavior unchanged
+6. TIME-BOX: Total 45h budget (36h base + 9h buffer)
+
+"DONE DONE" MEANS:
+
+✓ All 3 PRs merged
+✓ Library compiles and works
+✓ At least one project successfully uses library
+✓ No regressions in that project
+✓ Pattern documented for future adoption
+✓ Improvement report written
+✓ my-context session exported
+
+SUCCESS METRICS:
+
+- 3 PRs created and merged
+- Library exists with documented API
+- Proof-of-concept project working
+- Zero regressions in updated project
+- Pattern extractable for other projects
+
+START HERE:
+
+1. Clone jcaldwell-labs coordination repo
+2. Read PR-FAILURE-PROTOCOL.md and INCREMENTAL-MERGE-STRATEGY.md
+3. Set up my-context:
+   export MY_CONTEXT_HOME=db:jcaldwell_labs
+   my-context start "phase3b-session2-$(date +%Y-%m-%d)"
+4. Clone relevant project repos:
+   - terminal-stars (for analysis)
+   - tario (for analysis)
+   - adventure-engine-v2 (for analysis)
+   - boxes-live (for analysis)
+5. Start with PR 1 (pattern analysis)
+
+COORDINATION:
+
+You are Session 2 of 3 parallel Phase 3b sessions:
+- Session 1: my-context integration (independent)
+- Session 2 (you): Terminal UI extraction (independent)
+- Session 3: Workflow documentation (independent)
+
+Work independently. Only coordinate via manifest updates.
+
+REMEMBER:
+Phase 2 lesson: Large refactorings are risky. Start small, prove it works, then scale.
+
+Your goal: Create library that makes future terminal UIs easier, proven with real usage.
+
+Quality and safety > completeness.

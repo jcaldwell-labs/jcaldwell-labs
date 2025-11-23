@@ -1,0 +1,143 @@
+You are working on Phase 3b Session 3 of the jcaldwell-labs organization improvement project.
+
+CONTEXT:
+- Organization: jcaldwell-labs (9 terminal-based open source projects)
+- Phase 2: Complete (8/9 repos improved)
+- Phase 3a: Complete (unified build system)
+- Current Phase: Phase 3b Session 3 - Example Workflow Documentation
+- Your Role: Create executable workflow examples showing tool integration
+
+PHASE 2 LESSONS:
+1. Small focused PRs (not comprehensive docs)
+2. Examples must be EXECUTABLE (copy/paste works)
+3. Pre-PR validation catches issues early
+4. Documentation is code - must be tested
+
+PROTOCOLS (MUST READ):
+All in jcaldwell-labs coordination repo:
+1. docs/PR-FAILURE-PROTOCOL.md
+2. scripts/pre-pr-check.sh (for code, not docs, but useful mindset)
+3. docs/ESCALATION-PROTOCOL.md
+4. docs/DONE-DEFINITION.md
+
+YOUR ASSIGNMENT:
+Create 2 complete workflow examples demonstrating multi-tool integration patterns.
+
+TASK BREAKDOWN (from ROADMAP-2025.md Phase 3b Session 3):
+
+PR 1: Complete development workflow guide (~300 lines)
+  - Create: docs/workflows/COMPLETE-DEV-WORKFLOW.md
+  - Content: Step-by-step workflow using build system + my-context + git
+  - Includes: Starting work, building, testing, tracking with my-context, creating PR
+  - Format: Executable markdown (all commands copy-pasteable)
+  - Success: Following the guide produces working result
+  - Time: ~6h base + buffers = 12h
+
+PR 2: boxes-live + my-context workflow example (~250 lines)
+  - Create: docs/workflows/BOXES-LIVE-SESSION-EXAMPLE.md
+  - Content: Complete session using boxes-live with context tracking
+  - Includes: Setup, running boxes-live, using connectors, my-context tracking
+  - Format: Executable markdown with expected outputs
+  - Success: Example is complete, copy-paste works
+  - Depends on: PR 1 provides template/pattern
+  - Time: ~6h base + buffers = 12h
+
+TOTAL: 2 PRs, ~550 lines, ~24h estimated
+
+WORKFLOW MUST BE EXECUTABLE:
+
+Each workflow doc MUST include:
+- Complete command sequences (no placeholders like [YOUR_NAME])
+- Expected outputs (show what success looks like)
+- Troubleshooting section (common issues and fixes)
+- Prerequisites clearly listed
+- Success criteria (how to know it worked)
+
+EXAMPLE FORMAT:
+```markdown
+## Workflow: [Name]
+
+### Prerequisites
+- [Tool 1] installed
+- [Tool 2] configured
+- [Environment variable] set
+
+### Step 1: [Action]
+```bash
+# Command with explanation
+$ command-here --with-flags
+
+# Expected output:
+[show expected output]
+```
+
+### Step 2: [Next Action]
+[Continue pattern]
+
+### Success Criteria
+✓ [Outcome 1]
+✓ [Outcome 2]
+
+### Troubleshooting
+Issue: [Common problem]
+Solution: [How to fix]
+```
+
+CRITICAL RULES:
+
+1. TEST EVERYTHING: Every command must be tested by you
+2. NO PLACEHOLDERS: Use real examples (redact secrets only)
+3. SHOW OUTPUTS: Include expected outputs for commands
+4. ONE PR AT A TIME: PR 2 only after PR 1 merged
+5. VALIDATE COMPLETENESS: Can someone follow this blind?
+6. TIME-BOX: 30h total budget (24h base + 6h buffer)
+
+"DONE DONE" CRITERIA:
+
+✓ Both workflow docs created
+✓ Both PRs merged
+✓ All commands tested and working
+✓ Outputs verified accurate
+✓ Troubleshooting sections complete
+✓ Improvement report written
+✓ my-context session exported
+
+SUCCESS METRICS:
+
+- 2 PRs created and merged
+- Workflows are executable (tested)
+- Examples demonstrate tool integration
+- New user can follow and succeed
+- Troubleshooting covers common issues
+
+START HERE:
+
+1. Clone jcaldwell-labs coordination repo
+2. Read protocol docs (esp PR-FAILURE-PROTOCOL.md)
+3. Set up my-context:
+   export MY_CONTEXT_HOME=db:jcaldwell_labs
+   my-context start "phase3b-session3-$(date +%Y-%m-%d)"
+4. Review existing docs for style guide
+5. Start with PR 1 (complete dev workflow)
+
+COORDINATION:
+
+You are Session 3 of 3 parallel Phase 3b sessions:
+- Session 1: my-context integration (independent)
+- Session 2: Terminal UI extraction (independent)
+- Session 3 (you): Workflow documentation (independent)
+
+Work independently. Reference Session 1's work if helpful for examples.
+
+QUALITY STANDARDS:
+
+- Commands must be copy-pasteable
+- Outputs must be accurate
+- Troubleshooting must be helpful
+- Examples must work end-to-end
+- Documentation is tested, not assumed
+
+REMEMBER:
+Good documentation is tested documentation. Run every command. Verify every output.
+
+Your success: Can a new contributor follow your workflows and succeed?

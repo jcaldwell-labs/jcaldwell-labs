@@ -1,0 +1,126 @@
+You are working on Phase 3b Session 1 of the jcaldwell-labs organization improvement project.
+
+CONTEXT:
+- Organization: jcaldwell-labs (9 terminal-based open source projects)
+- Phase 2: Complete (8/9 repos improved)
+- Phase 3a: Complete (unified build system exists)
+- Current Phase: Phase 3b Session 1 - my-context Integration Example
+- Your Role: Demonstrate how projects integrate with my-context tool
+
+PHASE 2 LESSONS APPLIED:
+1. Incremental PRs (4 small PRs, not 1 large PR)
+2. Pre-PR validation mandatory
+3. Fix in place (not new PRs for fixes)
+4. "Done done" enforcement (CI passing, not just created)
+
+PROTOCOLS (MUST READ):
+All in jcaldwell-labs coordination repo:
+1. docs/PR-FAILURE-PROTOCOL.md
+2. scripts/pre-pr-check.sh
+3. docs/ESCALATION-PROTOCOL.md
+4. docs/INCREMENTAL-MERGE-STRATEGY.md
+5. docs/DONE-DEFINITION.md
+
+YOUR ASSIGNMENT:
+Create my-context integration with fintrack as reference implementation, demonstrating pattern for other projects.
+
+TASK BREAKDOWN (from ROADMAP-2025.md Phase 3b Session 1):
+
+PR 1: Design document (~100 lines)
+  - Create: docs/MY-CONTEXT-INTEGRATION-PATTERN.md
+  - Content: How projects integrate with my-context
+  - Success: Pattern documented and reviewed
+  - Time: ~3h base + buffers = 6h
+
+PR 2: fintrack integration code (~200 lines)
+  - Files: fintrack/internal/context/, command updates
+  - Features: fintrack can start/stop my-context sessions
+  - Success: Integration works, tests locally
+  - Depends on: PR 1 merged
+  - Time: ~6h base + buffers = 12h
+
+PR 3: fintrack integration tests (~150 lines)
+  - Files: fintrack/tests/integration/context_test.go
+  - Tests: Session start, stop, note, export
+  - Success: Integration tests passing
+  - Depends on: PR 2 merged
+  - Time: ~4h base + buffers = 8h
+
+PR 4: fintrack integration documentation (~200 lines)
+  - Files: fintrack/docs/MY-CONTEXT-INTEGRATION.md, README updates
+  - Content: User guide, examples, troubleshooting
+  - Success: Users can follow guide
+  - Depends on: PR 2, 3 merged
+  - Time: ~4h base + buffers = 8h
+
+TOTAL: 4 PRs, ~650 lines, ~34h estimated
+
+MANDATORY WORKFLOW:
+
+For EACH PR:
+1. PLAN: Review task requirements
+2. IMPLEMENT: Write code for this PR only
+3. VALIDATE LOCALLY: Run pre-pr-check.sh in fintrack repo (MUST PASS)
+4. CREATE PR: Only after local validation passes
+5. MONITOR CI: Wait for green checkmarks
+6. IF CI FAILS: Follow PR-FAILURE-PROTOCOL decision tree
+7. MERGE: After approval
+8. DELETE BRANCH: Clean up immediately
+9. NEXT PR: Move to next in sequence
+
+CRITICAL RULES:
+
+1. ONE PR AT A TIME: PR 2 only after PR 1 merged
+2. SINGLE REPO FOCUS: All work in fintrack repo
+3. NO SCOPE CREEP: Only integrate my-context, nothing else
+4. INCREMENTAL: Each PR independently valuable
+5. LOCAL VALIDATION: pre-pr-check.sh BEFORE every PR
+6. FIX IN PLACE: Don't create new PRs to fix old ones
+7. TIME-BOX: Total budget 40h (34h base + 6h buffer)
+
+WHAT "DONE DONE" MEANS:
+
+NOT done until:
+✓ All 4 PRs merged (not just created)
+✓ CI passing on all PRs
+✓ Integration works end-to-end
+✓ Documentation complete and tested
+✓ Improvement report written
+✓ my-context session exported
+✓ Manifest updated: "completed"
+
+SUCCESS METRICS:
+
+- 4 PRs created and merged
+- Zero PR closures
+- < 2 fix iterations per PR
+- fintrack can start my-context sessions
+- Integration pattern documented
+- Other projects can follow pattern
+
+START HERE:
+
+1. Clone jcaldwell-labs coordination repo
+2. Read PR-FAILURE-PROTOCOL.md (critical!)
+3. Read INCREMENTAL-MERGE-STRATEGY.md
+4. Set up my-context:
+   export MY_CONTEXT_HOME=db:jcaldwell_labs
+   my-context start "phase3b-session1-$(date +%Y-%m-%d)"
+5. Clone/enter fintrack repo
+6. Start with PR 1 (design document)
+
+COORDINATION:
+
+You are Session 1 of 3 parallel Phase 3b sessions:
+- Session 1 (you): my-context integration
+- Session 2: Terminal UI component extraction
+- Session 3: Example workflow documentation
+
+Sessions run independently. Coordinate via manifest only.
+
+REMEMBER:
+Phase 2 taught us: Large PRs fail more often. Small incremental PRs merge faster and more reliably.
+
+Your goal: Demonstrate my-context integration so well that other projects can follow your pattern.
+
+Quality > speed. Follow protocols strictly.

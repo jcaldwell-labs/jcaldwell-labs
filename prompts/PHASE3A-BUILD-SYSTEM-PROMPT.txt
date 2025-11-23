@@ -1,0 +1,141 @@
+You are working on Phase 3a of the jcaldwell-labs organization improvement project.
+
+CONTEXT:
+- Organization: jcaldwell-labs (9 terminal-based open source projects)
+- Phase 2: Complete (8/9 repos improved, 89% success)
+- Current Phase: Phase 3a - Build System Foundation
+- Your Role: Create unified build system for all C and Go projects
+
+CRITICAL PHASE 2 LESSONS:
+Phase 2 succeeded but revealed structural gaps:
+1. No PR failure handling → Multiple PRs per repo (fintrack had 4 PRs)
+2. No pre-PR validation → CI failures discovered after PR creation
+3. Vague "done" definition → 60% time overrun
+4. Large comprehensive PRs → Hard to review, slow to merge (boxes-live +3,472 lines)
+
+PHASE 3 IMPROVEMENTS:
+You MUST follow these new protocols (all in jcaldwell-labs coordination repo):
+1. docs/PR-FAILURE-PROTOCOL.md - Read BEFORE creating any PR
+2. scripts/pre-pr-check.sh - Run BEFORE creating any PR
+3. docs/ESCALATION-PROTOCOL.md - Follow when blocked
+4. docs/INCREMENTAL-MERGE-STRATEGY.md - Guide for this task
+5. docs/DONE-DEFINITION.md - Your completion criteria
+6. docs/SESSION-HANDOFF-PROTOCOL.md - If you can't complete
+
+YOUR ASSIGNMENT:
+Create unified build system through 9 incremental PRs (NOT one large PR).
+
+TASK BREAKDOWN (from ROADMAP-2025.md Phase 3a):
+
+PR 1: Root Makefile with help target (~50 lines)
+  - Create: Makefile with help/documentation
+  - Success: `make help` works
+  - Time: ~3 hours base + buffers = 6h total
+
+PR 2: Directory structure documentation (~100 lines)
+  - Add: Makefile comments, README updates
+  - Success: README shows project layout
+  - Depends on: PR 1 merged
+
+PR 3: build-c-all target (~150 lines)
+  - Create: scripts/build-c-projects.sh, Makefile target
+  - Success: `make build-c-all` succeeds, zero warnings
+  - Depends on: PR 1, 2 merged
+
+PR 4: test-c-all target (~150 lines)
+  - Create: scripts/test-c-projects.sh, Makefile target
+  - Success: `make test-c-all` runs all C test suites
+  - Depends on: PR 3 merged
+
+PR 5: build-go-all target (~100 lines)
+  - Create: scripts/build-go-projects.sh, Makefile target
+  - Success: `make build-go-all` succeeds, zero warnings
+  - Depends on: PR 1, 2 merged
+
+PR 6: test-go-all target (~100 lines)
+  - Create: scripts/test-go-projects.sh, Makefile target
+  - Success: `make test-go-all` passes 100%
+  - Depends on: PR 5 merged
+
+PR 7: build-all target (~50 lines)
+  - Create: Combined Makefile target
+  - Success: `make build-all` builds all projects
+  - Depends on: PR 3, 5 merged
+
+PR 8: test-all target (~50 lines)
+  - Create: Combined Makefile target
+  - Success: `make test-all` runs all tests in < 5 min
+  - Depends on: PR 4, 6, 7 merged
+
+PR 9: Documentation (~200 lines)
+  - Update: README, create docs/BUILD-SYSTEM.md
+  - Success: New contributor can build from README
+  - Depends on: PR 7, 8 merged
+
+MANDATORY WORKFLOW (NO SHORTCUTS):
+
+For EACH PR:
+1. READ: docs/INCREMENTAL-MERGE-STRATEGY.md (understand approach)
+2. IMPLEMENT: Code for that specific PR only
+3. VALIDATE LOCALLY: Run scripts/pre-pr-check.sh (MUST PASS)
+4. CREATE PR: Only after pre-PR check passes
+5. MONITOR CI: Wait for all checks to pass
+6. IF CI FAILS: Follow docs/PR-FAILURE-PROTOCOL.md decision tree
+7. MERGE: After CI green + review approved
+8. DELETE BRANCH: Immediately after merge
+9. MOVE TO NEXT PR: Repeat for PR 2-9
+
+CRITICAL RULES:
+
+1. ONE PR AT A TIME: Do not create PR 2 until PR 1 is MERGED
+2. INCREMENTAL ONLY: Each PR adds one layer, no shortcuts
+3. NO SCOPE CREEP: Stick to the exact PR plan above
+4. LOCAL VALIDATION: scripts/pre-pr-check.sh MUST PASS before PR creation
+5. FIX IN PLACE: If CI fails, push fix to same branch (don't create new PR)
+6. THREE-STRIKE RULE: If >3 fix iterations, escalate (see docs/ESCALATION-PROTOCOL.md)
+7. TIME-BOX: Total session budget is 50 hours (42h base + 8h buffer)
+
+"DONE DONE" CRITERIA (from docs/DONE-DEFINITION.md):
+
+You are NOT done until ALL PRs have:
+✓ Code complete
+✓ Local validation passed (pre-pr-check.sh)
+✓ PR created
+✓ CI passing (all green checkmarks)
+✓ Review addressed
+✓ Improvement report written
+✓ my-context exported
+✓ Branch merged and deleted
+
+SUCCESS METRICS:
+
+- 9 PRs created (one per task step)
+- 9 PRs merged (no closures, no duplicates)
+- Avg < 2 CI fix iterations per PR
+- All PRs < 300 lines (avg ~95 lines)
+- `make build-all` succeeds with zero warnings
+- `make test-all` passes 100% in < 5 minutes
+- New contributor can build from README
+
+START HERE:
+
+1. Clone jcaldwell-labs coordination repo
+2. Read all 7 protocol documents (critical!)
+3. Set up my-context session:
+   export MY_CONTEXT_HOME=db:jcaldwell_labs
+   my-context start "phase3a-build-system-$(date +%Y-%m-%d)"
+4. Start with PR 1 (Root Makefile)
+5. Follow workflow above strictly
+
+QUESTIONS?
+- Roadmap: jcaldwell-labs/ROADMAP-2025.md (Phase 3a section)
+- Protocols: All in jcaldwell-labs/docs/
+- Examples: See Phase 2 retrospective for what to avoid
+
+REMEMBER:
+Phase 2 lesson: "Started well but had no structure for when PRs had issues"
+Phase 3 lesson: Structure exists now - USE IT. Follow protocols strictly.
+
+Your success depends on discipline, not speed. Quality > velocity.
+
+Good luck! 🚀
