@@ -10,7 +10,10 @@
 # Quick Start:
 #   make help          - Show this help message
 #
-# Coming Soon (Phase 3a):
+# Directory Structure:
+#   See README.md "Repository Structure" section for complete layout
+#
+# Coming Soon (Phase 3a in progress):
 #   make build-all     - Build all C and Go projects
 #   make test-all      - Run all tests across all projects
 #   make clean-all     - Clean all build artifacts
@@ -31,6 +34,8 @@ help: ## Show this help message
 	@echo "  Go Projects (2):    fintrack, my-context"
 	@echo "  Meta Projects (1):  .github"
 	@echo ""
-	@echo "Phase 3a Status: PR 1/9 (Help target only)"
-	@echo "Next: PR 2 will add directory structure documentation"
+	@echo "Phase 3a Status: PR 2/9 (Directory structure documented)"
+	@echo "Next: PR 3 will add build-c-all target"
+	@echo ""
+	@echo "For complete directory layout, see: README.md (Repository Structure)"
 	@echo ""

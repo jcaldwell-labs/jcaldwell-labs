@@ -22,6 +22,57 @@
 
 ---
 
+## Repository Structure
+
+This coordination workspace is organized as follows:
+
+```
+jcaldwell-labs/
+├── docs/              # Protocol documents and guides
+│   ├── PR-FAILURE-PROTOCOL.md
+│   ├── ESCALATION-PROTOCOL.md
+│   ├── INCREMENTAL-MERGE-STRATEGY.md
+│   ├── DONE-DEFINITION.md
+│   ├── SESSION-HANDOFF-PROTOCOL.md
+│   └── GITHUB-PROJECT-SETUP.md
+├── scripts/           # Automation and management scripts
+│   ├── action-dashboard.sh
+│   ├── check-prs.sh
+│   ├── pre-pr-check.sh
+│   └── generate-improvement-report.sh
+├── prompts/           # Session prompts for Phase 3 work
+│   ├── PHASE3A-BUILD-SYSTEM-PROMPT.txt
+│   ├── PHASE3B-SESSION1-MYCONTEXT-INTEGRATION-PROMPT.txt
+│   └── ...
+├── reports/           # Auto-generated improvement reports
+├── sessions/          # Session handoff documentation
+├── repos/             # Cloned project repositories (gitignored)
+├── templates/         # Templates for various workflows
+├── tools/             # Development and diagnostic tools
+├── archive/           # Historical documents
+├── Makefile           # Unified build system (Phase 3a)
+├── ROADMAP-2025.md    # Complete improvement plan
+├── PARALLEL-SESSION-MANIFEST.md  # Session tracking
+└── README.md          # This file
+```
+
+### Key Directories
+
+- **`docs/`**: Phase 2 and Phase 3 protocol documents - read these before starting work
+- **`scripts/`**: Management scripts for PR checks, health monitoring, report generation
+- **`prompts/`**: Pre-written session prompts for Phase 3 tasks
+- **`reports/`**: Generated improvement reports (one per repository per phase)
+- **`sessions/`**: Handoff documentation when work needs to be transferred
+- **`repos/`**: Local clones of all 9 organization projects (not tracked in git)
+
+### Important Files
+
+- **`Makefile`**: Unified build system - run `make help` to see available targets
+- **`ROADMAP-2025.md`**: Master plan with all phases, tasks, and timelines
+- **`PARALLEL-SESSION-MANIFEST.md`**: Tracks which sessions are working on which repos
+
+---
+
 ## Projects Under Management
 
 | Repository | Language | Status | Description |
