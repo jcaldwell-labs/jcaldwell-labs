@@ -27,7 +27,9 @@
 - **not_started**: No session claimed yet
 - **in_progress**: Session actively working
 - **completed**: Session finished, PR submitted
-- **blocked**: Issue preventing completion
+- **needs_handoff**: Work paused, needs transfer to another session
+- **blocked**: Issue preventing completion (use ESCALATION-PROTOCOL.md)
+- **escalated**: Critical blocker, needs owner intervention (Level 3/4)
 
 ---
 
@@ -57,19 +59,35 @@ When starting work on a repository:
 4. **If blocked**:
    - Change status to `blocked`
    - Add blocker description
-   - Create GitHub issue
+   - Follow ESCALATION-PROTOCOL.md (Level 1-2)
+   - Create GitHub issue if needed
+   - Commit and push this file
+
+5. **If needs handoff**:
+   - Change status to `needs_handoff`
+   - Create handoff document in `sessions/` (use SESSION-HANDOFF-PROTOCOL.md)
+   - Document current state, decisions, next steps
+   - Commit and push both files
+
+6. **If escalated**:
+   - Change status to `escalated`
+   - Critical blocker encountered (Level 3-4 in ESCALATION-PROTOCOL.md)
+   - Document in blocker column
+   - Owner intervention required
    - Commit and push this file
 
 ---
 
 ## Progress Summary
 
-**Last Updated**: 2025-11-22
+**Last Updated**: 2025-11-23
 
 - Completed: 1 / 9
 - In Progress: 0 / 9
 - Not Started: 8 / 9
+- Needs Handoff: 0 / 9
 - Blocked: 0 / 9
+- Escalated: 0 / 9
 
 ---
 
