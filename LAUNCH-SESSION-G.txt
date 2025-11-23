@@ -1,0 +1,7 @@
+Please read and execute the instructions in this file:
+
+https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/SESSION-G-COMBINED-REPOS-PROMPT.txt
+
+This is your Phase 2 improvement assignment for smartterm-prototype, atari-style, and .github repositories.
+
+IMPORTANT: This session handles THREE repositories. The atari-style repository includes a CRITICAL USB fix that must be applied.

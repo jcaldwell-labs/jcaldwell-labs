@@ -1,0 +1,5 @@
+Please read and execute the instructions in this file:
+
+https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/SESSION-B-BOXES-LIVE-PROMPT.txt
+
+This is your Phase 2 improvement assignment for the boxes-live repository.
