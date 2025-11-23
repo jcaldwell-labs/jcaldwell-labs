@@ -121,20 +121,52 @@ This is your Phase 2 improvement assignment for the adventure-engine-v2 reposito
 
 ---
 
-## Session G: Combined (smartterm-prototype, atari-style, .github)
+## Session G1: smartterm-prototype
 
-**Repository**: Start with https://github.com/jcaldwell-labs/smartterm-prototype
+**Repository**: https://github.com/jcaldwell-labs/smartterm-prototype
 
 **Copy and paste this:**
 
 ```
 Please read and execute the instructions in this file:
 
-https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/SESSION-G-COMBINED-REPOS-PROMPT.txt
+https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/SESSION-G1-SMARTTERM-PROTOTYPE-PROMPT.txt
 
-This is your Phase 2 improvement assignment for smartterm-prototype, atari-style, and .github repositories.
+This is your Phase 2 improvement assignment for the smartterm-prototype repository.
+```
 
-IMPORTANT: This session handles THREE repositories. The atari-style repository includes a CRITICAL USB fix that must be applied.
+---
+
+## Session G2: atari-style (⚠️ CRITICAL USB FIX)
+
+**Repository**: https://github.com/jcaldwell-labs/atari-style
+
+**Copy and paste this:**
+
+```
+Please read and execute the instructions in this file:
+
+https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/SESSION-G2-ATARI-STYLE-PROMPT.txt
+
+This is your Phase 2 improvement assignment for the atari-style repository.
+
+CRITICAL: This repository requires a USB fix to prevent system lockup.
+```
+
+---
+
+## Session G3: .github
+
+**Repository**: https://github.com/jcaldwell-labs/.github
+
+**Copy and paste this:**
+
+```
+Please read and execute the instructions in this file:
+
+https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/SESSION-G3-DOTGITHUB-PROMPT.txt
+
+This is your Phase 2 improvement assignment for the .github repository (organization-wide files).
 ```
 
 ---
@@ -171,11 +203,11 @@ Each session will:
 5. **Export its my-context session**
 6. **Mark itself complete** in the manifest
 
-When all 7 sessions complete, you'll have:
-- 9 improved repositories (Session G handles 3)
+When all 9 sessions complete, you'll have:
+- 9 improved repositories
 - 9 pull requests
 - 9 improvement reports
-- 7 context exports
+- 9 context exports
 - Complete manifest showing all work done
 
 ---
@@ -191,7 +223,9 @@ Individual session durations:
 - Session D (my-context): 6-8 hours
 - Session E (tario): 4-6 hours
 - Session F (adventure-engine-v2): 4-6 hours
-- Session G (combined): 6-10 hours
+- Session G1 (smartterm-prototype): 3-4 hours
+- Session G2 (atari-style): 4-6 hours
+- Session G3 (.github): 2-3 hours
 
 ---
 

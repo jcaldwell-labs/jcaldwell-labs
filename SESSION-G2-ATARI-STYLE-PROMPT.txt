@@ -1,0 +1,317 @@
+# Session G2: atari-style Repository Improvement
+
+## Your Assignment
+
+**Repository**: atari-style (Python terminal arcade games with USB joystick support)
+**Session ID**: session-G2
+**Phase**: 2 - Repository Improvements
+**Estimated Duration**: 4-6 hours
+**Complexity**: Medium
+**⚠️ CRITICAL**: USB stuck process fix required
+
+## Context
+
+You are working on the jcaldwell-labs organization improvement project. This is one of 9 parallel sessions improving all repositories simultaneously. Your focus is the atari-style repository - terminal arcade games with USB joystick support.
+
+**CRITICAL BUG**: This repository has a USB device handling bug that can cause system lockup. You MUST fix this in this session.
+
+## Getting Started
+
+1. **First Actions**:
+   - You are already in the atari-style repository
+   - **CRITICAL**: Read the USB diagnostic: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/USB-STUCK-PROCESS-DIAGNOSTIC.md
+   - Read the coordination roadmap: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/ROADMAP-2025.md
+   - Read the parallel session guide: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/PARALLEL-SESSION-GUIDE.md
+   - Understand the Phase 2 objectives
+
+2. **Claim Your Repository**:
+   - Clone the coordination repo: `git clone https://github.com/jcaldwell-labs/jcaldwell-labs.git ~/jcaldwell-labs-coordination`
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md`
+   - Change atari-style status from "not_started" to "in_progress"
+   - Add your session ID (session-G2) and start date
+   - Commit and push from coordination repo:
+     ```bash
+     cd ~/jcaldwell-labs-coordination
+     git add PARALLEL-SESSION-MANIFEST.md
+     git commit -m "Session G2: Claiming atari-style"
+     git push
+     ```
+
+3. **Start Context Tracking**:
+   ```bash
+   export MY_CONTEXT_HOME=db:atari_style_improvement
+   my-context start "phase2-improvement-$(date +%Y-%m-%d)"
+   my-context note "Starting Phase 2 improvements for atari-style"
+   my-context note "Session ID: session-G2"
+   my-context note "CRITICAL: USB fix required"
+   ```
+
+## CRITICAL: USB Stuck Process Fix
+
+**⚠️ MANDATORY READING**: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/USB-STUCK-PROCESS-DIAGNOSTIC.md
+
+This repository has a critical USB handling bug that can lock up the system. You MUST apply all recommended fixes:
+
+1. **Signal handlers** - Proper cleanup on Ctrl+C (SIGINT, SIGTERM)
+2. **Timeout protection** - Device access timeouts
+3. **Joystick health checks** - Verify device exists before access
+4. **WSL USB documentation** - Document limitations
+
+**This is the highest priority task in this session.**
+
+## Your Tasks
+
+### Standard Checklist
+
+#### Documentation
+- [ ] Verify CLAUDE.md exists and is comprehensive
+- [ ] Verify README.md has clear getting started, build, test instructions
+- [ ] Add CONTRIBUTING.md if missing
+- [ ] **Document USB/joystick requirements**
+- [ ] **Document WSL USB limitations**
+- [ ] Document all dependencies (Python version, packages)
+- [ ] Add troubleshooting section to README
+
+#### Code Quality
+- [ ] Run Python formatter (black, or autopep8)
+- [ ] Add or improve code comments
+- [ ] Run linter (pylint, flake8, or ruff)
+- [ ] Review TODO/FIXME comments
+- [ ] **Review USB device handling for safety**
+- [ ] Remove dead code
+
+#### Testing
+- [ ] Verify test suite exists (create if missing)
+- [ ] **Add tests for USB device handling**
+- [ ] **Add tests for timeout handling**
+- [ ] **Add tests for signal handlers**
+- [ ] Run all tests and fix failures
+- [ ] Document how to run tests
+
+#### Build System
+- [ ] Verify requirements.txt or pyproject.toml exists
+- [ ] Ensure all dependencies listed
+- [ ] Document how to install
+- [ ] Test install in clean virtual environment
+
+#### CI/CD
+- [ ] Add GitHub Actions workflow (.github/workflows/python.yml)
+- [ ] Ensure CI runs tests on PR
+- [ ] Add linter to CI
+- [ ] Add CI status badge to README
+
+#### Project Health
+- [ ] Review open issues and close stale ones
+- [ ] Add issue templates
+- [ ] Add PR template
+- [ ] Review description and topics (arcade, games, terminal, joystick, python)
+- [ ] Verify license
+- [ ] Add CHANGELOG.md
+
+### Repository-Specific Tasks (CRITICAL)
+
+- [ ] **Fix USB stuck process issue** (MANDATORY)
+  - Add signal handlers (SIGINT, SIGTERM) for clean shutdown
+  - Add timeout protection for device.read() operations
+  - Add joystick health checks before device access
+  - Test with USB devices (if available)
+  - Document the fix in commit message
+  - Reference USB-STUCK-PROCESS-DIAGNOSTIC.md in commit
+
+- [ ] **Add signal handlers**
+  - Import signal module
+  - Implement cleanup function
+  - Register SIGINT and SIGTERM handlers
+  - Test Ctrl+C handling
+  - Ensure USB device is released properly
+  - Ensure terminal state is restored
+
+- [ ] **Add timeout protection**
+  - Add timeouts to device.read() calls
+  - Add timeouts to device discovery
+  - Handle timeout exceptions gracefully
+  - Log timeout events
+  - Document timeout configuration
+
+- [ ] **Add joystick health checks**
+  - Verify device path exists before access
+  - Check device is still connected during operation
+  - Handle device disconnection gracefully
+  - Add reconnection logic if appropriate
+  - Log device status changes
+
+- [ ] **Document WSL USB limitations**
+  - Document that native WSL USB support is limited
+  - Document usbipd requirements if applicable
+  - Add troubleshooting for common USB issues
+  - Document alternative testing methods
+  - Add warning about USB access risks
+
+## Deliverables
+
+1. **Pull Request** with all improvements
+   - Branch name: `improve/phase2-usb-fix-and-improvements`
+   - Title: "Phase 2: Critical USB fix and repository improvements"
+   - Description: Emphasize USB fix, link to improvement report
+
+2. **Improvement Report** (`reports/ATARI-STYLE-IMPROVEMENT-REPORT.md` in coordination repo)
+   - Use template from: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/templates/IMPROVEMENT-REPORT-TEMPLATE.md
+   - Save to: `~/jcaldwell-labs-coordination/reports/ATARI-STYLE-IMPROVEMENT-REPORT.md`
+   - **Prominently document the USB fix**
+   - Document all checklist items completed
+   - Note any items marked as "future work"
+   - Include metrics (before/after)
+   - List all files modified/added
+
+3. **Manifest Update** (in coordination repo)
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md`
+   - Set status to "completed"
+   - Add completion date, PR link, report link
+   - Note that critical USB fix was applied
+
+4. **Context Export**
+   - Export my-context session to `~/jcaldwell-labs-coordination/sessions/session-G2-atari-style.md`
+
+## Quality Gates
+
+Before marking complete, verify:
+
+- [ ] **USB fix applied and tested** (CRITICAL)
+- [ ] Signal handlers working correctly
+- [ ] Timeout protection added
+- [ ] Health checks implemented
+- [ ] All tests passing
+- [ ] Linter passing
+- [ ] USB handling documented
+- [ ] WSL limitations documented
+- [ ] Documentation updated
+- [ ] PR created and ready for review
+- [ ] Improvement report written (with USB fix prominently noted)
+- [ ] Manifest updated
+
+## Time Management
+
+- **Time Budget**: 4-6 hours
+- **USB Fix Priority**: Allocate 2-3 hours for USB fix
+- **Time-Boxing**: If other items take too long, document for future work
+- **USB fix is non-negotiable** - complete it before moving to other tasks
+
+## Python Project Checks
+
+- Use virtual environment for testing
+- Check Python version compatibility (3.8+, 3.10+, etc.)
+- Verify all imports are in requirements.txt
+- Check for proper exception handling
+- Verify logging is configured
+- Check for proper resource cleanup
+- Test in isolated environment
+
+## USB Device Handling Best Practices
+
+- Always use try/except around device access
+- Always clean up device in finally block or context manager
+- Always set timeouts on blocking operations
+- Always register signal handlers for cleanup
+- Never block indefinitely on device operations
+- Always check device exists before opening
+- Document device requirements clearly
+
+## Important Notes
+
+- **The USB fix is CRITICAL** - it prevents system lockup
+- **Read the diagnostic document** before starting
+- **Test thoroughly** if USB device available
+- **Document testing limitations** if no USB device available
+- **Work independently** - other sessions work on other repos
+- **Document blockers** in the improvement report
+- **Create issues** for work that can't be completed in time budget
+- **Commit frequently** with clear commit messages
+
+## Communication
+
+- **Updates**: Via PARALLEL-SESSION-MANIFEST.md
+- **Blockers**: Note in manifest and improvement report
+- **Completion**: Update manifest, create PR, write report
+- **Questions**: Create issue in jcaldwell-labs/jcaldwell-labs repo
+
+## Workflow Summary
+
+```
+1. Claim repository (update manifest) ✓
+2. Start my-context session ✓
+3. READ USB-STUCK-PROCESS-DIAGNOSTIC.md ✓
+4. APPLY USB FIX (PRIORITY #1)
+   - Add signal handlers
+   - Add timeout protection
+   - Add health checks
+   - Test thoroughly
+5. Work through remaining standard checklist
+6. Run tests and verify fix
+7. Create PR with improvements
+8. Write improvement report (emphasize USB fix)
+9. Export my-context session
+10. Update manifest to "completed"
+```
+
+## Example USB Fix Pattern
+
+```python
+import signal
+import sys
+
+# Global device handle
+device = None
+
+def cleanup_handler(signum, frame):
+    """Clean up USB device on signal."""
+    global device
+    if device:
+        try:
+            device.close()
+        except:
+            pass
+    sys.exit(0)
+
+# Register handlers
+signal.signal(signal.SIGINT, cleanup_handler)
+signal.signal(signal.SIGTERM, cleanup_handler)
+
+try:
+    # Open device with timeout
+    device = open_device(timeout=5.0)
+
+    while True:
+        # Read with timeout
+        try:
+            data = device.read(timeout=1.0)
+        except TimeoutError:
+            # Check if device still exists
+            if not device_exists():
+                raise DeviceDisconnected()
+            continue
+
+        # Process data...
+
+finally:
+    if device:
+        device.close()
+```
+
+## Ready to Start?
+
+Confirm you understand:
+1. Your assignment (atari-style repository - USB joystick games)
+2. The **CRITICAL** nature of the USB fix
+3. The USB fix requirements (signals, timeouts, health checks, docs)
+4. The standard checklist
+5. Your deliverables (PR with USB fix, report, manifest update, context export)
+6. The quality gates (USB fix tested, handlers working, docs updated)
+
+Once confirmed, begin by:
+1. Claiming the repository in the manifest
+2. Reading the USB diagnostic document
+3. Applying the USB fix
+
+Good luck! 🚀
+
+**Remember**: The USB fix prevents system lockup. This is CRITICAL!

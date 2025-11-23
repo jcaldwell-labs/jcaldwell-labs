@@ -1,0 +1,277 @@
+# Session G3: .github Repository Improvement
+
+## Your Assignment
+
+**Repository**: .github (Organization profile and community health files)
+**Session ID**: session-G3
+**Phase**: 2 - Repository Improvements
+**Estimated Duration**: 2-3 hours
+**Complexity**: Low
+
+## Context
+
+You are working on the jcaldwell-labs organization improvement project. This is one of 9 parallel sessions improving all repositories simultaneously. Your focus is the .github repository - organization-wide community health files, profile README, and templates.
+
+**IMPORTANT**: Changes to this repository affect the **entire jcaldwell-labs organization**. Review carefully before committing.
+
+## Getting Started
+
+1. **First Actions**:
+   - You are already in the .github repository
+   - Read the coordination roadmap: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/ROADMAP-2025.md
+   - Read the parallel session guide: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/PARALLEL-SESSION-GUIDE.md
+   - Understand the Phase 2 objectives
+
+2. **Claim Your Repository**:
+   - Clone the coordination repo: `git clone https://github.com/jcaldwell-labs/jcaldwell-labs.git ~/jcaldwell-labs-coordination`
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md`
+   - Change .github status from "not_started" to "in_progress"
+   - Add your session ID (session-G3) and start date
+   - Commit and push from coordination repo:
+     ```bash
+     cd ~/jcaldwell-labs-coordination
+     git add PARALLEL-SESSION-MANIFEST.md
+     git commit -m "Session G3: Claiming .github"
+     git push
+     ```
+
+3. **Start Context Tracking**:
+   ```bash
+   export MY_CONTEXT_HOME=db:dotgithub_improvement
+   my-context start "phase2-improvement-$(date +%Y-%m-%d)"
+   my-context note "Starting Phase 2 improvements for .github"
+   my-context note "Session ID: session-G3"
+   ```
+
+## Your Tasks
+
+### Organization Profile README
+
+- [ ] **Review and enhance profile README**
+  - Update project descriptions to be current and accurate
+  - Add project status indicators (Active, Production, Prototype)
+  - Add getting started guide for new contributors
+  - Add links to all 9 repositories
+  - Make it compelling and welcoming
+  - Add organization mission statement
+  - Add contribution opportunities
+
+### Community Health Files
+
+- [ ] **CODE_OF_CONDUCT.md**
+  - Add if missing (use Contributor Covenant 2.1 or similar)
+  - Customize for jcaldwell-labs organization
+  - Include contact information for reporting
+  - Review if exists
+
+- [ ] **SECURITY.md**
+  - Add security policy if missing
+  - Document how to report security vulnerabilities
+  - Document security response process
+  - Add security contact information
+  - Note any special security considerations
+
+- [ ] **CONTRIBUTING.md**
+  - Review and update contributing guidelines
+  - Document development workflow
+  - Document PR process and expectations
+  - Document code style guidelines
+  - Document testing requirements
+  - Add examples of good contributions
+  - Link to individual project CONTRIBUTING.md files if they exist
+
+### Issue and PR Templates
+
+- [ ] **Issue Templates**
+  - Create or review .github/ISSUE_TEMPLATE/ directory
+  - Add bug report template
+  - Add feature request template
+  - Add question/help template
+  - Configure issue template chooser (config.yml)
+
+- [ ] **Pull Request Template**
+  - Create or review .github/pull_request_template.md
+  - Include checklist items
+  - Include testing instructions
+  - Include related issues section
+
+### Discussion Templates (if using Discussions)
+
+- [ ] **Discussion Templates**
+  - Check if organization uses GitHub Discussions
+  - If yes, create discussion templates
+  - Create categories.yml if appropriate
+  - Document common discussion topics
+
+### Organization Settings Documentation
+
+- [ ] **Document Organization Standards**
+  - Document repository naming conventions
+  - Document topic/label standards
+  - Document branch protection requirements
+  - Document CI/CD expectations
+
+## Repository-Specific Tasks
+
+- [ ] **Create Organization Overview**
+  - Add visual project comparison matrix
+  - Add technology stack overview (C, Go, Python)
+  - Add use case examples
+  - Add "getting started" paths for different user types
+
+- [ ] **Add Showcase Section**
+  - Highlight flagship projects (boxes-live, my-context)
+  - Add screenshots or examples
+  - Link to demos or documentation
+
+- [ ] **Improve Navigation**
+  - Add clear links to all projects
+  - Group projects by category (games, tools, libraries)
+  - Add quick links to important resources
+
+## Deliverables
+
+1. **Pull Request** with all improvements
+   - Branch name: `improve/phase2-improvements`
+   - Title: "Phase 2: Organization profile and community health improvements"
+   - Description: Link to improvement report, summarize changes
+
+2. **Improvement Report** (`reports/DOTGITHUB-IMPROVEMENT-REPORT.md` in coordination repo)
+   - Use template from: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/templates/IMPROVEMENT-REPORT-TEMPLATE.md
+   - Save to: `~/jcaldwell-labs-coordination/reports/DOTGITHUB-IMPROVEMENT-REPORT.md`
+   - Document all checklist items completed
+   - Note any items marked as "future work"
+   - Include before/after comparisons
+   - List all files modified/added
+
+3. **Manifest Update** (in coordination repo)
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md`
+   - Set status to "completed"
+   - Add completion date, PR link, report link
+
+4. **Context Export**
+   - Export my-context session to `~/jcaldwell-labs-coordination/sessions/session-G3-dotgithub.md`
+
+## Quality Gates
+
+Before marking complete, verify:
+
+- [ ] Profile README is compelling and current
+- [ ] All community health files present (CODE_OF_CONDUCT, SECURITY, CONTRIBUTING)
+- [ ] Issue and PR templates exist
+- [ ] All 9 repositories linked correctly
+- [ ] No broken links
+- [ ] Formatting correct
+- [ ] Spelling/grammar checked
+- [ ] Organization-wide standards documented
+- [ ] PR created and ready for review
+- [ ] Improvement report written
+- [ ] Manifest updated
+
+## Time Management
+
+- **Time Budget**: 2-3 hours
+- **Time-Boxing**: If an item takes too long, document it for future work and move on
+- **Focus on essentials first**: CODE_OF_CONDUCT, SECURITY, profile README
+
+## Important Notes - Organization-Wide Impact
+
+**⚠️ CRITICAL**: Changes here affect ALL repositories in the organization:
+
+- Review all changes carefully
+- Check that links work
+- Ensure policies are appropriate for all projects
+- Test templates before committing
+- Get owner approval if changing significant policies
+
+## Documentation Best Practices
+
+- Use clear, welcoming language
+- Be concise but comprehensive
+- Include examples where helpful
+- Link to additional resources
+- Keep formatting consistent
+- Use proper markdown syntax
+- Check all links work
+
+## Community Health Check
+
+For each file, ask:
+- Is it welcoming to new contributors?
+- Is it clear and easy to understand?
+- Does it reflect our values?
+- Is it up-to-date?
+- Does it link to relevant resources?
+
+## Communication
+
+- **Updates**: Via PARALLEL-SESSION-MANIFEST.md
+- **Blockers**: Note in manifest and improvement report
+- **Completion**: Update manifest, create PR, write report
+- **Questions**: Create issue in jcaldwell-labs/jcaldwell-labs repo
+- **Major policy changes**: Consider asking owner for review before committing
+
+## Workflow Summary
+
+```
+1. Claim repository (update manifest) ✓
+2. Start my-context session ✓
+3. Review existing .github content
+4. Add/update community health files
+5. Create/update templates
+6. Enhance profile README
+7. Check all links work
+8. Create PR with improvements
+9. Write improvement report
+10. Export my-context session
+11. Update manifest to "completed"
+```
+
+## Example Profile README Structure
+
+```markdown
+# jcaldwell-labs
+
+> Terminal-first open source tools competing with enterprise software
+
+## Projects
+
+### Production Tools
+- **my-context** - Agent journal and context management
+- ...
+
+### Active Development
+- **boxes-live** - Terminal canvas (Miro alternative)
+- **fintrack** - Financial tracking CLI
+- ...
+
+### Games
+- **tario** - ASCII platformer
+- **adventure-engine-v2** - Text adventure engine
+- ...
+
+## Getting Started
+[Guide for new contributors...]
+
+## Philosophy
+[Unix philosophy, terminal-first approach...]
+
+## Contributing
+[Link to CONTRIBUTING.md...]
+```
+
+## Ready to Start?
+
+Confirm you understand:
+1. Your assignment (.github repository - organization-wide files)
+2. The organization-wide impact of your changes
+3. The tasks (profile README, community health files, templates)
+4. Your deliverables (PR, report, manifest update, context export)
+5. The quality gates (all files present, links work, welcoming tone)
+6. The importance of careful review before committing
+
+Once confirmed, begin by claiming the repository in the manifest.
+
+Good luck! 🚀
+
+**Remember**: Your changes affect the entire organization!

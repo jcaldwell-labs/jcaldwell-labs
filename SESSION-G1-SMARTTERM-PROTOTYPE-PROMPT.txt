@@ -1,0 +1,213 @@
+# Session G1: smartterm-prototype Repository Improvement
+
+## Your Assignment
+
+**Repository**: smartterm-prototype (C terminal UI library proof-of-concept)
+**Session ID**: session-G1
+**Phase**: 2 - Repository Improvements
+**Estimated Duration**: 3-4 hours
+**Complexity**: Low
+
+## Context
+
+You are working on the jcaldwell-labs organization improvement project. This is one of 9 parallel sessions improving all repositories simultaneously. Your focus is the smartterm-prototype repository - a terminal UI library proof-of-concept that may be used by other projects.
+
+## Getting Started
+
+1. **First Actions**:
+   - You are already in the smartterm-prototype repository
+   - Read the coordination roadmap: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/ROADMAP-2025.md
+   - Read the parallel session guide: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/PARALLEL-SESSION-GUIDE.md
+   - Understand the Phase 2 objectives
+
+2. **Claim Your Repository**:
+   - Clone the coordination repo: `git clone https://github.com/jcaldwell-labs/jcaldwell-labs.git ~/jcaldwell-labs-coordination`
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md`
+   - Change smartterm-prototype status from "not_started" to "in_progress"
+   - Add your session ID (session-G1) and start date
+   - Commit and push from coordination repo:
+     ```bash
+     cd ~/jcaldwell-labs-coordination
+     git add PARALLEL-SESSION-MANIFEST.md
+     git commit -m "Session G1: Claiming smartterm-prototype"
+     git push
+     ```
+
+3. **Start Context Tracking**:
+   ```bash
+   export MY_CONTEXT_HOME=db:smartterm_improvement
+   my-context start "phase2-improvement-$(date +%Y-%m-%d)"
+   my-context note "Starting Phase 2 improvements for smartterm-prototype"
+   my-context note "Session ID: session-G1"
+   ```
+
+## Your Tasks
+
+### Standard Checklist
+
+#### Documentation
+- [ ] Verify CLAUDE.md exists and is comprehensive
+- [ ] Verify README.md has clear getting started, build, test instructions
+- [ ] Add CONTRIBUTING.md if missing
+- [ ] Document library API
+- [ ] Document all dependencies
+- [ ] Add troubleshooting section to README
+
+#### Code Quality
+- [ ] Run formatter (clang-format) on all .c and .h files
+- [ ] Add or improve code comments for API functions
+- [ ] Compile with `-Wall -Wextra` and fix warnings
+- [ ] Review TODO/FIXME comments
+- [ ] Review for security issues
+- [ ] Remove dead code
+
+#### Testing
+- [ ] Verify test suite exists (create if missing)
+- [ ] Add tests for terminal UI functions
+- [ ] Run all tests and fix failures
+- [ ] Document test coverage
+- [ ] Document how to run tests
+
+#### Build System
+- [ ] Verify Makefile with proper targets
+- [ ] Add/verify targets: build, test, clean, install
+- [ ] Document build dependencies
+- [ ] Test build on clean checkout
+
+#### CI/CD
+- [ ] Add GitHub Actions workflow (.github/workflows/c.yml)
+- [ ] Ensure CI runs tests on PR
+- [ ] Add build verification to CI
+- [ ] Add CI status badge to README
+
+#### Project Health
+- [ ] Review open issues and close stale ones
+- [ ] Add issue templates
+- [ ] Add PR template
+- [ ] Review description and topics (terminal, ui, library, ncurses)
+- [ ] Verify license
+- [ ] Add CHANGELOG.md
+
+### Repository-Specific Tasks
+
+- [ ] **Extract reusable terminal UI library**
+  - Identify reusable components
+  - Create clean API surface
+  - Document public vs private functions
+  - Consider creating smartterm.h header file
+
+- [ ] **Document API**
+  - Document all public functions
+  - Add usage examples
+  - Document initialization/cleanup sequences
+  - Add API reference documentation
+
+- [ ] **Add example applications**
+  - Create examples/ directory
+  - Add simple example programs demonstrating the library
+  - Document each example
+  - Make examples easy to build and run
+
+- [ ] **Consider graduating from "prototype" status**
+  - Evaluate if library is ready for production use
+  - If yes, rename/rebrand repository
+  - If no, document what's needed for production readiness
+  - Update repository description accordingly
+
+## Deliverables
+
+1. **Pull Request** with all improvements
+   - Branch name: `improve/phase2-improvements`
+   - Title: "Phase 2: Repository improvements for smartterm-prototype"
+   - Description: Link to improvement report, summarize changes
+
+2. **Improvement Report** (`reports/SMARTTERM-PROTOTYPE-IMPROVEMENT-REPORT.md` in coordination repo)
+   - Use template from: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/templates/IMPROVEMENT-REPORT-TEMPLATE.md
+   - Save to: `~/jcaldwell-labs-coordination/reports/SMARTTERM-PROTOTYPE-IMPROVEMENT-REPORT.md`
+   - Document all checklist items completed
+   - Note any items marked as "future work"
+   - Include metrics (before/after)
+   - List all files modified/added
+
+3. **Manifest Update** (in coordination repo)
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md`
+   - Set status to "completed"
+   - Add completion date, PR link, report link
+
+4. **Context Export**
+   - Export my-context session to `~/jcaldwell-labs-coordination/sessions/session-G1-smartterm-prototype.md`
+
+## Quality Gates
+
+Before marking complete, verify:
+
+- [ ] All tests passing
+- [ ] Build succeeds with `-Wall -Wextra`
+- [ ] No memory leaks (check with valgrind if applicable)
+- [ ] No compiler warnings
+- [ ] API documented
+- [ ] Examples added and working
+- [ ] Documentation updated
+- [ ] PR created and ready for review
+- [ ] Improvement report written
+- [ ] Manifest updated
+
+## Time Management
+
+- **Time Budget**: 3-4 hours
+- **Time-Boxing**: If an item takes too long, document it for future work and move on
+- **Don't let one item block completion** - note blockers in the report
+
+## Common C Library Checks
+
+- Check for buffer overflow vulnerabilities
+- Verify all memory allocations have corresponding frees
+- Check for null pointer dereferences
+- Verify error handling for system calls
+- Check ncurses initialization/cleanup if used
+- Document thread-safety properties
+- Check for memory leaks in library code
+
+## Important Notes
+
+- **Work independently** - other sessions work on other repos
+- **Document blockers** in the improvement report
+- **Create issues** for work that can't be completed in time budget
+- **Focus on quality, documentation, and testing** - not extensive new features
+- **Commit frequently** with clear commit messages
+- **Make the library usable** - good API docs and examples are key
+
+## Communication
+
+- **Updates**: Via PARALLEL-SESSION-MANIFEST.md
+- **Blockers**: Note in manifest and improvement report
+- **Completion**: Update manifest, create PR, write report
+- **Questions**: Create issue in jcaldwell-labs/jcaldwell-labs repo
+
+## Workflow Summary
+
+```
+1. Claim repository (update manifest) ✓
+2. Start my-context session ✓
+3. Work through standard checklist
+4. Work through smartterm-specific tasks
+5. Run tests and verify build
+6. Test examples
+7. Create PR with improvements
+8. Write improvement report
+9. Export my-context session
+10. Update manifest to "completed"
+```
+
+## Ready to Start?
+
+Confirm you understand:
+1. Your assignment (smartterm-prototype repository - terminal UI library)
+2. The standard checklist
+3. The smartterm-specific tasks (extract library, document API, add examples, evaluate status)
+4. Your deliverables (PR, report, manifest update, context export)
+5. The quality gates (tests pass, API documented, examples working)
+
+Once confirmed, begin by claiming the repository in the manifest.
+
+Good luck! 🚀
