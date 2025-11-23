@@ -1,4 +1,4 @@
-.PHONY: help
+.PHONY: help build-c-all
 .DEFAULT_GOAL := help
 
 # jcaldwell-labs Unified Build System
@@ -34,8 +34,12 @@ help: ## Show this help message
 	@echo "  Go Projects (2):    fintrack, my-context"
 	@echo "  Meta Projects (1):  .github"
 	@echo ""
-	@echo "Phase 3a Status: PR 2/9 (Directory structure documented)"
-	@echo "Next: PR 3 will add build-c-all target"
+	@echo "Phase 3a Status: PR 3/9 (C build system ready)"
+	@echo "Next: PR 4 will add test-c-all target"
 	@echo ""
 	@echo "For complete directory layout, see: README.md (Repository Structure)"
 	@echo ""
+
+build-c-all: ## Build all C projects with zero warnings
+	@echo "Building all C projects..."
+	@./scripts/build-c-projects.sh
