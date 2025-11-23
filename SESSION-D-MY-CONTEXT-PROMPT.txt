@@ -1,0 +1,253 @@
+# Session D: my-context Repository Improvement
+
+## Your Assignment
+
+**Repository**: my-context (Go agent journal and context management CLI)
+**Session ID**: session-D
+**Phase**: 2 - Repository Improvements
+**Estimated Duration**: 6-8 hours
+**Complexity**: High (Go, PostgreSQL, production-ready critical tool)
+
+## Context
+
+You are working on the jcaldwell-labs organization improvement project. This is one of 7 parallel sessions improving all repositories simultaneously. Your focus is the my-context repository - an agent journal and context management CLI tool written in Go with PostgreSQL backend.
+
+**IMPORTANT**: my-context is a **production-ready tool** actively used for tracking work sessions across all projects. Changes must be carefully tested and backward compatible.
+
+## Getting Started
+
+1. **First Actions**:
+   - You are already in the my-context repository
+   - Read the coordination roadmap: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/ROADMAP-2025.md
+   - Read the parallel session guide: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/PARALLEL-SESSION-GUIDE.md
+   - Understand the Phase 2 objectives
+
+2. **Claim Your Repository**:
+   - Clone the coordination repo: `git clone https://github.com/jcaldwell-labs/jcaldwell-labs.git ~/jcaldwell-labs-coordination`
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md`
+   - Change my-context status from "not_started" to "in_progress"
+   - Add your session ID (session-D) and start date
+   - Commit and push from coordination repo:
+     ```bash
+     cd ~/jcaldwell-labs-coordination
+     git add PARALLEL-SESSION-MANIFEST.md
+     git commit -m "Session D: Claiming my-context"
+     git push
+     ```
+
+3. **Start Context Tracking**:
+   ```bash
+   export MY_CONTEXT_HOME=db:my_context_improvement
+   my-context start "phase2-improvement-$(date +%Y-%m-%d)"
+   my-context note "Starting Phase 2 improvements for my-context"
+   my-context note "Session ID: session-D"
+   ```
+
+## Your Tasks
+
+### Standard Checklist (Required for All Repos)
+
+#### Documentation
+- [ ] Verify CLAUDE.md exists and is comprehensive
+- [ ] Verify README.md has clear getting started, build, test instructions
+- [ ] Add CONTRIBUTING.md if missing
+- [ ] Document architecture (CLI, database backend, file backend)
+- [ ] Document all dependencies (PostgreSQL, Go version, etc.)
+- [ ] Add troubleshooting section to README (database connection issues, etc.)
+
+#### Code Quality
+- [ ] Run `go fmt ./...` and `go vet ./...`
+- [ ] Add or improve code comments for complex logic
+- [ ] Check for compiler warnings
+- [ ] Review TODO/FIXME comments and address or document
+- [ ] Review for security issues (SQL injection prevention, connection security)
+- [ ] Remove dead code
+
+#### Testing
+- [ ] Verify test suite exists
+- [ ] Add tests for database operations
+- [ ] Add tests for file operations
+- [ ] Add tests for export functionality
+- [ ] Run `go test ./...` and fix failures
+- [ ] Document test coverage: `go test -cover ./...`
+- [ ] Add integration tests for database mode
+- [ ] Document how to run tests in README
+
+#### Build System
+- [ ] Verify build instructions work: `go build`
+- [ ] Add Makefile with targets: build, test, clean, install
+- [ ] Document PostgreSQL setup requirements
+- [ ] Test build on clean checkout
+
+#### CI/CD
+- [ ] Add GitHub Actions workflow (.github/workflows/go.yml)
+- [ ] Ensure CI runs tests on PR (with PostgreSQL service)
+- [ ] Add build verification to CI
+- [ ] Consider adding linter (golangci-lint) to CI
+- [ ] Add CI status badge to README
+
+#### Project Health
+- [ ] Review open issues and close stale ones
+- [ ] Add issue templates
+- [ ] Add PR template
+- [ ] Review project description and topics
+- [ ] Verify license
+- [ ] Add CHANGELOG.md
+
+### Repository-Specific Tasks (my-context)
+
+- [ ] **Complete Sprint 3 features**
+  - Check if PR #3 was merged or needs completion
+  - Verify all Sprint 3 features are implemented
+  - Test Sprint 3 functionality
+
+- [ ] **Add backup/restore functionality**
+  - Implement database backup command
+  - Implement database restore command
+  - Document backup/restore workflow
+  - Add examples
+
+- [ ] **Improve PostgreSQL connection handling**
+  - Review connection pool management
+  - Add connection retry logic
+  - Add better error messages for connection failures
+  - Document connection configuration options
+  - Test connection failure scenarios
+
+- [ ] **Add export format options**
+  - Support JSON export format
+  - Support CSV export format (for notes)
+  - Support Markdown export (existing, verify it works)
+  - Document export format options
+  - Add examples of each format
+
+## Deliverables
+
+You must produce:
+
+1. **Pull Request** with all improvements
+   - Branch name: `improve/phase2-improvements`
+   - Title: "Phase 2: Repository improvements for my-context"
+   - Description: Link to improvement report, summarize changes
+
+2. **Improvement Report** (`reports/MY-CONTEXT-IMPROVEMENT-REPORT.md` in coordination repo)
+   - Use template from: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/templates/IMPROVEMENT-REPORT-TEMPLATE.md
+   - Save to: `~/jcaldwell-labs-coordination/reports/MY-CONTEXT-IMPROVEMENT-REPORT.md`
+   - Document all checklist items completed
+   - Note any items marked as "future work"
+   - Include metrics (before/after)
+   - List all files modified/added
+
+3. **Manifest Update** (in coordination repo)
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md`
+   - Set status to "completed"
+   - Add completion date, PR link, report link
+
+4. **Context Export**
+   - Export my-context session to `~/jcaldwell-labs-coordination/sessions/session-D-my-context.md`
+
+## Quality Gates
+
+Before marking complete, verify:
+
+- [ ] All tests passing (`go test ./...`)
+- [ ] Build succeeds (`go build`)
+- [ ] Database tests passing (require PostgreSQL)
+- [ ] File-based mode still works
+- [ ] No critical compiler warnings
+- [ ] Backward compatibility maintained
+- [ ] Documentation updated
+- [ ] PR created and ready for review
+- [ ] Improvement report written
+- [ ] Manifest updated
+
+## Time Management
+
+- **Time Budget**: 6-8 hours
+- **Time-Boxing**: If an item takes too long, document it for future work and move on
+- **Don't let one item block completion** - note blockers in the report
+- **CRITICAL**: Don't break existing functionality - this is a production tool
+
+## Common Go Project Checks
+
+- Run `go mod tidy` to clean dependencies
+- Check for outdated dependencies: `go list -u -m all`
+- Run `go vet ./...` for potential issues
+- Consider running `staticcheck` for deeper analysis
+- Check for missing error handling
+- Verify proper resource cleanup (database connections, file handles)
+
+## Database-Specific Checks
+
+- Verify SQL injection prevention (use parameterized queries)
+- Test connection pool exhaustion scenarios
+- Test database connection failures
+- Verify transaction handling
+- Check for connection leaks
+- Test with PostgreSQL restart scenarios
+
+## Backward Compatibility Requirements
+
+**CRITICAL**: my-context is used in production. Ensure:
+
+- Existing contexts can still be read
+- File-based mode still works
+- Database schema changes are backward compatible
+- Export format changes don't break existing scripts
+- Configuration changes have sensible defaults
+
+## Important Notes
+
+- **Work independently** - other sessions work on other repos
+- **Document blockers** in the improvement report
+- **Create issues** for work that can't be completed in time budget
+- **Focus on quality, documentation, and testing** - not new features
+- **Commit frequently** with clear commit messages
+- **Test thoroughly** - this is a critical production tool
+
+## Communication
+
+- **Updates**: Via PARALLEL-SESSION-MANIFEST.md
+- **Blockers**: Note in manifest and improvement report
+- **Completion**: Update manifest, create PR, write report
+- **Questions**: Create issue in jcaldwell-labs/jcaldwell-labs repo
+
+## Workflow Summary
+
+```
+1. Claim repository (update manifest) ✓
+2. Start my-context session ✓
+3. Work through standard checklist
+4. Work through my-context-specific tasks
+5. Run tests (both database and file modes)
+6. Test backward compatibility
+7. Create PR with improvements
+8. Write improvement report
+9. Export my-context session
+10. Update manifest to "completed"
+```
+
+## Testing Recommendations
+
+For my-context specifically:
+- Test database mode with PostgreSQL
+- Test file-based mode
+- Test export to markdown, JSON, CSV
+- Test backup/restore if implemented
+- Test connection failure scenarios
+- Test with existing contexts (backward compatibility)
+- Test CLI commands: start, stop, list, note, file, export
+
+## Ready to Start?
+
+Confirm you understand:
+1. Your assignment (my-context repository - production tool)
+2. The standard checklist
+3. The my-context-specific tasks (Sprint 3, backup/restore, connection handling, export formats)
+4. Your deliverables (PR, report, manifest update, context export)
+5. The quality gates (tests pass, backward compatible, database tests pass)
+6. The **critical importance** of maintaining backward compatibility
+
+Once confirmed, begin by claiming the repository in the manifest.
+
+Good luck! 🚀

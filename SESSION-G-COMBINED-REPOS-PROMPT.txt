@@ -1,0 +1,426 @@
+# Session G: Combined Repositories Improvement
+
+## Your Assignment
+
+**Repositories**: smartterm-prototype, atari-style, .github
+**Session ID**: session-G
+**Phase**: 2 - Repository Improvements
+**Estimated Duration**: 6-10 hours (3-4 hours each + 2-3 hours for .github)
+**Complexity**: Low-Medium (C library, Python USB project, Markdown docs)
+
+## Context
+
+You are working on the jcaldwell-labs organization improvement project. This is one of 7 parallel sessions improving all repositories simultaneously. Your focus is on **three smaller repositories** that can be handled sequentially in a single session:
+
+1. **smartterm-prototype** (C) - Terminal UI library proof-of-concept
+2. **atari-style** (Python) - Terminal arcade games with USB joystick support (**CRITICAL USB FIX REQUIRED**)
+3. **.github** (Markdown) - Organization profile and community health files
+
+## Getting Started
+
+1. **First Actions**:
+   - You will work on these three repos sequentially
+   - Read the coordination roadmap: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/ROADMAP-2025.md
+   - Read the parallel session guide: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/PARALLEL-SESSION-GUIDE.md
+   - Read the USB diagnostic: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/USB-STUCK-PROCESS-DIAGNOSTIC.md
+   - Understand the Phase 2 objectives
+
+2. **Claim Your Repositories**:
+   - Clone the coordination repo: `git clone https://github.com/jcaldwell-labs/jcaldwell-labs.git ~/jcaldwell-labs-coordination`
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md` for all three repos
+   - Change status from "not_started" to "in_progress" for:
+     - smartterm-prototype
+     - atari-style
+     - .github
+   - Add your session ID (session-G) and start date
+   - Commit and push from coordination repo:
+     ```bash
+     cd ~/jcaldwell-labs-coordination
+     git add PARALLEL-SESSION-MANIFEST.md
+     git commit -m "Session G: Claiming smartterm-prototype, atari-style, .github"
+     git push
+     ```
+
+3. **Start Context Tracking**:
+   ```bash
+   export MY_CONTEXT_HOME=db:session_g_improvements
+   my-context start "phase2-combined-$(date +%Y-%m-%d)"
+   my-context note "Starting Phase 2 improvements for Session G"
+   my-context note "Session ID: session-G"
+   my-context note "Repositories: smartterm-prototype, atari-style, .github"
+   ```
+
+## Work Strategy
+
+Work on repositories in this order:
+
+1. **smartterm-prototype** (3-4 hours)
+2. **atari-style** (4-6 hours) - **CRITICAL FIX REQUIRED**
+3. **.github** (2-3 hours)
+
+Update the manifest after completing each repository.
+
+---
+
+# Part 1: smartterm-prototype
+
+**Repository**: smartterm-prototype (C terminal UI library)
+**Estimated Duration**: 3-4 hours
+**Complexity**: Low
+
+## Context
+
+A proof-of-concept terminal UI library that may be used by other projects. Needs extraction as reusable library.
+
+## Tasks for smartterm-prototype
+
+### Standard Checklist
+
+#### Documentation
+- [ ] Verify CLAUDE.md exists and is comprehensive
+- [ ] Verify README.md has clear getting started, build, test instructions
+- [ ] Add CONTRIBUTING.md if missing
+- [ ] Document library API
+- [ ] Document all dependencies
+- [ ] Add troubleshooting section to README
+
+#### Code Quality
+- [ ] Run formatter on all .c and .h files
+- [ ] Add or improve code comments for API functions
+- [ ] Compile with `-Wall -Wextra` and fix warnings
+- [ ] Review TODO/FIXME comments
+- [ ] Review for security issues
+- [ ] Remove dead code
+
+#### Testing
+- [ ] Verify test suite exists (create if missing)
+- [ ] Add tests for terminal UI functions
+- [ ] Run all tests and fix failures
+- [ ] Document how to run tests
+
+#### Build System
+- [ ] Verify Makefile with proper targets
+- [ ] Add/verify targets: build, test, clean, install
+- [ ] Test build on clean checkout
+
+#### CI/CD
+- [ ] Add GitHub Actions workflow
+- [ ] Add CI status badge to README
+
+#### Project Health
+- [ ] Review open issues
+- [ ] Add templates
+- [ ] Review description and topics
+- [ ] Verify license
+- [ ] Add CHANGELOG.md
+
+### Repository-Specific Tasks (smartterm-prototype)
+
+- [ ] **Extract reusable terminal UI library**
+  - Identify reusable components
+  - Create clean API surface
+  - Document public vs private functions
+  - Consider creating smartterm.h header
+
+- [ ] **Document API**
+  - Document all public functions
+  - Add usage examples
+  - Document initialization/cleanup
+  - Add API reference
+
+- [ ] **Add example applications**
+  - Create examples/ directory
+  - Add simple example programs
+  - Document each example
+
+- [ ] **Consider graduating from "prototype" status**
+  - Evaluate if ready for production use
+  - If yes, rename/rebrand
+  - If no, document what's needed
+  - Update repository description
+
+---
+
+# Part 2: atari-style
+
+**Repository**: atari-style (Python terminal arcade games with USB joystick)
+**Estimated Duration**: 4-6 hours
+**Complexity**: Medium
+**CRITICAL**: USB stuck process fix required
+
+## Context
+
+Terminal arcade games with USB joystick support. **CRITICAL BUG**: USB device handling can cause system lockup. This MUST be fixed in this session.
+
+## CRITICAL: USB Stuck Process Fix
+
+**MANDATORY READING**: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/USB-STUCK-PROCESS-DIAGNOSTIC.md
+
+This repository has a critical USB handling bug that can lock up the system. You MUST apply all recommended fixes:
+
+1. **Signal handlers** - Proper cleanup on Ctrl+C
+2. **Timeout protection** - Device access timeouts
+3. **Joystick health checks** - Verify device before access
+4. **WSL USB documentation** - Document limitations
+
+## Tasks for atari-style
+
+### Standard Checklist
+
+#### Documentation
+- [ ] Verify CLAUDE.md exists and is comprehensive
+- [ ] Verify README.md has clear getting started, build, test instructions
+- [ ] Add CONTRIBUTING.md if missing
+- [ ] **Document USB/joystick requirements**
+- [ ] **Document WSL USB limitations**
+- [ ] Document all dependencies (Python version, libraries)
+- [ ] Add troubleshooting section to README
+
+#### Code Quality
+- [ ] Run Python formatter (black, or similar)
+- [ ] Add or improve code comments
+- [ ] Run linter (pylint, flake8)
+- [ ] Review TODO/FIXME comments
+- [ ] **Review USB device handling for safety**
+- [ ] Remove dead code
+
+#### Testing
+- [ ] Verify test suite exists
+- [ ] **Add tests for USB device handling**
+- [ ] **Add tests for timeout handling**
+- [ ] Run all tests and fix failures
+- [ ] Document how to run tests
+
+#### Build System
+- [ ] Verify requirements.txt or setup.py exists
+- [ ] Document how to install
+- [ ] Test install on clean environment
+
+#### CI/CD
+- [ ] Add GitHub Actions workflow
+- [ ] Add CI status badge to README
+
+#### Project Health
+- [ ] Review open issues
+- [ ] Add templates
+- [ ] Review description and topics
+- [ ] Verify license
+- [ ] Add CHANGELOG.md
+
+### Repository-Specific Tasks (atari-style) - CRITICAL
+
+- [ ] **Fix USB stuck process issue** (MANDATORY)
+  - Add signal handlers (SIGINT, SIGTERM)
+  - Add timeout protection for device access
+  - Add joystick health checks
+  - Test with USB devices (if available)
+  - Document the fix in commit message
+  - Reference USB-STUCK-PROCESS-DIAGNOSTIC.md
+
+- [ ] **Add signal handlers**
+  - Implement proper cleanup on interrupt
+  - Test Ctrl+C handling
+  - Ensure USB device is released
+
+- [ ] **Add timeout protection**
+  - Add timeouts to device.read()
+  - Add timeouts to device discovery
+  - Handle timeout exceptions gracefully
+
+- [ ] **Add joystick health checks**
+  - Verify device exists before access
+  - Check device is still connected
+  - Handle device disconnection gracefully
+
+- [ ] **Document WSL USB limitations**
+  - Document that WSL USB support is limited
+  - Document usbipd requirements if needed
+  - Add troubleshooting for USB issues
+
+---
+
+# Part 3: .github
+
+**Repository**: .github (Organization profile and community files)
+**Estimated Duration**: 2-3 hours
+**Complexity**: Low
+
+## Context
+
+Organization-wide repository for community health files, profile README, and templates. Changes here affect the entire organization.
+
+## Tasks for .github
+
+### Standard Checklist (Modified for Documentation Repo)
+
+#### Documentation
+- [ ] Review organization profile README
+- [ ] Ensure README is up-to-date and compelling
+- [ ] Add description of all projects
+- [ ] Add links to all repositories
+
+#### Community Health Files
+- [ ] Add CODE_OF_CONDUCT.md if missing
+- [ ] Add SECURITY.md policy if missing
+- [ ] Review CONTRIBUTING.md
+- [ ] Add or improve issue templates
+- [ ] Add or improve PR template
+- [ ] Add discussion templates if using discussions
+
+### Repository-Specific Tasks (.github)
+
+- [ ] **Review organization profile README**
+  - Update project descriptions
+  - Add project status (active, production, prototype)
+  - Add getting started guide
+  - Add contribution guide
+  - Make it compelling for new contributors
+
+- [ ] **Add code of conduct**
+  - Use standard Contributor Covenant or similar
+  - Customize for organization
+
+- [ ] **Add security policy**
+  - Document how to report security issues
+  - Document security response process
+  - Consider adding security contact
+
+- [ ] **Update contributing guidelines**
+  - Document development workflow
+  - Document PR process
+  - Document code style guidelines
+  - Document testing requirements
+
+- [ ] **Add discussion templates**
+  - If using GitHub Discussions
+  - Create templates for common topics
+  - Document discussion categories
+
+---
+
+# Deliverables
+
+You must produce deliverables for each of the three repositories:
+
+## For smartterm-prototype:
+
+1. **Pull Request** in smartterm-prototype repo
+2. **Improvement Report**: `~/jcaldwell-labs-coordination/reports/SMARTTERM-PROTOTYPE-IMPROVEMENT-REPORT.md`
+3. **Manifest Update**: Mark smartterm-prototype as "completed"
+
+## For atari-style:
+
+1. **Pull Request** in atari-style repo
+2. **Improvement Report**: `~/jcaldwell-labs-coordination/reports/ATARI-STYLE-IMPROVEMENT-REPORT.md`
+3. **Manifest Update**: Mark atari-style as "completed"
+
+## For .github:
+
+1. **Pull Request** in .github repo
+2. **Improvement Report**: `~/jcaldwell-labs-coordination/reports/DOTGITHUB-IMPROVEMENT-REPORT.md`
+3. **Manifest Update**: Mark .github as "completed"
+
+## Overall Session:
+
+4. **Context Export**: `~/jcaldwell-labs-coordination/sessions/session-G-combined.md`
+
+Use improvement report template: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/templates/IMPROVEMENT-REPORT-TEMPLATE.md
+
+## Quality Gates
+
+Before marking complete, verify for EACH repository:
+
+### smartterm-prototype:
+- [ ] Tests passing
+- [ ] Build succeeds
+- [ ] API documented
+- [ ] Examples added
+
+### atari-style (CRITICAL):
+- [ ] USB fix applied and tested
+- [ ] Signal handlers working
+- [ ] Timeout protection added
+- [ ] Tests passing
+- [ ] USB handling documented
+
+### .github:
+- [ ] Profile README reviewed
+- [ ] Community health files present
+- [ ] All templates updated
+- [ ] Security policy added
+
+## Time Management
+
+- **Total Time Budget**: 6-10 hours
+- **Per-Repository Time-Boxing**:
+  - smartterm-prototype: 3-4 hours max
+  - atari-style: 4-6 hours max (USB fix is critical)
+  - .github: 2-3 hours max
+
+**If you exceed time budget on one repo**, document remaining work and move to next repo. Don't let one repo block completion of others.
+
+## Critical Notes for atari-style
+
+⚠️ **WARNING**: The atari-style USB bug can cause system lockup. This is a CRITICAL fix.
+
+- Read USB-STUCK-PROCESS-DIAGNOSTIC.md BEFORE starting
+- Apply ALL recommended fixes
+- Test thoroughly (if USB device available)
+- If you cannot test with USB, document testing limitations
+- This fix prevents system-level failures
+
+## Communication
+
+- **Updates**: Via PARALLEL-SESSION-MANIFEST.md (update after EACH repo)
+- **Blockers**: Note in manifest and improvement reports
+- **Completion**: Update manifest after EACH repo, final update when all three done
+- **Questions**: Create issue in jcaldwell-labs/jcaldwell-labs repo
+
+## Workflow Summary
+
+```
+1. Claim all three repositories (update manifest) ✓
+2. Start my-context session ✓
+
+3. Work on smartterm-prototype:
+   - Complete checklist
+   - Create PR
+   - Write report
+   - Update manifest (mark smartterm-prototype "completed")
+
+4. Work on atari-style:
+   - READ USB-STUCK-PROCESS-DIAGNOSTIC.md
+   - Apply USB fix (CRITICAL)
+   - Complete checklist
+   - Create PR
+   - Write report
+   - Update manifest (mark atari-style "completed")
+
+5. Work on .github:
+   - Complete checklist
+   - Create PR
+   - Write report
+   - Update manifest (mark .github "completed")
+
+6. Export my-context session
+7. Final manifest update (all three "completed")
+```
+
+## Ready to Start?
+
+Confirm you understand:
+1. Your assignment (THREE repositories: smartterm-prototype, atari-style, .github)
+2. The work order (smartterm → atari-style → .github)
+3. The CRITICAL nature of the atari-style USB fix
+4. The standard checklist for each repo
+5. The repository-specific tasks for each repo
+6. Your deliverables (3 PRs, 3 reports, manifest updates, context export)
+7. The quality gates for each repository
+
+Once confirmed, begin by:
+1. Claiming all three repositories in the manifest
+2. Starting with smartterm-prototype
+
+Good luck! 🚀
+
+**Remember**: The atari-style USB fix is CRITICAL for system stability!

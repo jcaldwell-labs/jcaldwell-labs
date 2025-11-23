@@ -1,0 +1,239 @@
+# Session B: boxes-live Repository Improvement
+
+## Your Assignment
+
+**Repository**: boxes-live (C terminal-based interactive canvas)
+**Session ID**: session-B
+**Phase**: 2 - Repository Improvements
+**Estimated Duration**: 6-8 hours
+**Complexity**: High (C, ncurses, networking, Miro alternative)
+
+## Context
+
+You are working on the jcaldwell-labs organization improvement project. This is one of 7 parallel sessions improving all repositories simultaneously. Your focus is the boxes-live repository - a terminal-based interactive canvas that serves as a Miro alternative using only terminal interfaces.
+
+This is a **flagship project** for the organization - a practical demonstration of competing with modern enterprise tools using Unix philosophy.
+
+## Getting Started
+
+1. **First Actions**:
+   - You are already in the boxes-live repository
+   - Read the coordination roadmap: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/ROADMAP-2025.md
+   - Read the parallel session guide: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/PARALLEL-SESSION-GUIDE.md
+   - Understand the Phase 2 objectives
+
+2. **Claim Your Repository**:
+   - Clone the coordination repo: `git clone https://github.com/jcaldwell-labs/jcaldwell-labs.git ~/jcaldwell-labs-coordination`
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md`
+   - Change boxes-live status from "not_started" to "in_progress"
+   - Add your session ID (session-B) and start date
+   - Commit and push from coordination repo:
+     ```bash
+     cd ~/jcaldwell-labs-coordination
+     git add PARALLEL-SESSION-MANIFEST.md
+     git commit -m "Session B: Claiming boxes-live"
+     git push
+     ```
+
+3. **Start Context Tracking**:
+   ```bash
+   export MY_CONTEXT_HOME=db:boxes_live_improvement
+   my-context start "phase2-improvement-$(date +%Y-%m-%d)"
+   my-context note "Starting Phase 2 improvements for boxes-live"
+   my-context note "Session ID: session-B"
+   ```
+
+## Your Tasks
+
+### Standard Checklist (Required for All Repos)
+
+#### Documentation
+- [ ] Verify CLAUDE.md exists and is comprehensive
+- [ ] Verify README.md has clear getting started, build, test instructions
+- [ ] Add CONTRIBUTING.md if missing
+- [ ] Add architecture diagram or explanation (IMPORTANT for boxes-live complexity)
+- [ ] Document all dependencies (ncurses, network libraries, etc.)
+- [ ] Add troubleshooting section to README
+
+#### Code Quality
+- [ ] Run formatter (clang-format or similar) on all .c and .h files
+- [ ] Add or improve code comments for complex logic
+- [ ] Compile with `-Wall -Wextra` and fix warnings
+- [ ] Review TODO/FIXME comments and address or document
+- [ ] Review for security issues (buffer overflows, network vulnerabilities)
+- [ ] Remove dead code
+
+#### Testing
+- [ ] Verify test suite exists (if not, create basic tests)
+- [ ] Add tests for core rendering functions
+- [ ] Add tests for canvas state management
+- [ ] Run all tests and fix failures
+- [ ] Document test coverage
+- [ ] Add integration tests for canvas interactions
+- [ ] Document how to run tests in README
+
+#### Build System
+- [ ] Verify Makefile exists with proper targets
+- [ ] Add/verify targets: build, test, clean, install
+- [ ] Document ncurses and other library dependencies
+- [ ] Test build on clean checkout
+- [ ] Add debug and release build configurations
+
+#### CI/CD
+- [ ] Add GitHub Actions workflow (.github/workflows/c.yml)
+- [ ] Ensure CI runs tests on PR
+- [ ] Add build verification with different compilers (gcc, clang)
+- [ ] Consider adding valgrind memory checks to CI
+- [ ] Add CI status badge to README
+
+#### Project Health
+- [ ] Review open issues and close stale ones
+- [ ] Add issue templates
+- [ ] Add PR template
+- [ ] Review project description: "Terminal-based interactive canvas (Miro alternative)"
+- [ ] Add appropriate topics: terminal, ncurses, canvas, collaboration
+- [ ] Verify license
+- [ ] Add CHANGELOG.md
+
+### Repository-Specific Tasks (boxes-live)
+
+- [ ] **Complete canvas rendering engine**
+  - Review current rendering implementation
+  - Identify any incomplete rendering features
+  - Document rendering architecture
+  - Add performance notes
+
+- [ ] **Add protocol documentation**
+  - Document the network protocol for multi-user collaboration
+  - Add protocol specification (message formats, state sync)
+  - Document client-server architecture
+  - Add sequence diagrams if helpful
+
+- [ ] **Add example use cases**
+  - Create examples/ directory with sample scenarios
+  - Document common workflows
+  - Add screenshots or ASCII art examples of canvas in use
+  - Create tutorial for first-time users
+
+- [ ] **Performance profiling and optimization**
+  - Profile rendering performance (use gprof or similar)
+  - Document performance characteristics
+  - Identify bottlenecks
+  - Add performance benchmarks
+  - Document optimization decisions
+
+## Deliverables
+
+You must produce:
+
+1. **Pull Request** with all improvements
+   - Branch name: `improve/phase2-improvements`
+   - Title: "Phase 2: Repository improvements for boxes-live"
+   - Description: Link to improvement report, summarize changes
+
+2. **Improvement Report** (`reports/BOXES-LIVE-IMPROVEMENT-REPORT.md` in coordination repo)
+   - Use template from: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/templates/IMPROVEMENT-REPORT-TEMPLATE.md
+   - Save to: `~/jcaldwell-labs-coordination/reports/BOXES-LIVE-IMPROVEMENT-REPORT.md`
+   - Document all checklist items completed
+   - Note any items marked as "future work"
+   - Include metrics (before/after)
+   - List all files modified/added
+
+3. **Manifest Update** (in coordination repo)
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md`
+   - Set status to "completed"
+   - Add completion date, PR link, report link
+
+4. **Context Export**
+   - Export my-context session to `~/jcaldwell-labs-coordination/sessions/session-B-boxes-live.md`
+
+## Quality Gates
+
+Before marking complete, verify:
+
+- [ ] All tests passing
+- [ ] Build succeeds with `-Wall -Wextra`
+- [ ] No memory leaks (run with valgrind)
+- [ ] No compiler warnings
+- [ ] Documentation updated
+- [ ] PR created and ready for review
+- [ ] Improvement report written
+- [ ] Manifest updated
+
+## Time Management
+
+- **Time Budget**: 6-8 hours
+- **Time-Boxing**: If an item takes too long, document it for future work and move on
+- **Priority**: Focus on documentation and testing, as boxes-live is a flagship project
+- **Don't let one item block completion** - note blockers in the report
+
+## Common C Project Checks
+
+- Check for buffer overflow vulnerabilities
+- Verify all memory allocations have corresponding frees
+- Check for null pointer dereferences
+- Verify error handling for system calls
+- Check ncurses initialization/cleanup
+- Verify signal handling (SIGWINCH for terminal resize, etc.)
+- Check for race conditions in network code
+
+## Important Notes - boxes-live Specific
+
+- **This is a flagship project** - documentation quality matters
+- **Multi-user coordination** - ensure thread safety is documented
+- **Network protocol** - security review is important
+- **Terminal compatibility** - test with different TERM values
+- **Performance** - this should feel responsive despite being terminal-based
+
+## Important Notes - General
+
+- **Work independently** - other sessions work on other repos
+- **Document blockers** in the improvement report
+- **Create issues** for work that can't be completed in time budget
+- **Focus on quality, documentation, and testing** - not new features
+- **Commit frequently** with clear commit messages
+
+## Communication
+
+- **Updates**: Via PARALLEL-SESSION-MANIFEST.md
+- **Blockers**: Note in manifest and improvement report
+- **Completion**: Update manifest, create PR, write report
+- **Questions**: Create issue in jcaldwell-labs/jcaldwell-labs repo
+
+## Workflow Summary
+
+```
+1. Claim repository (update manifest) ✓
+2. Start my-context session ✓
+3. Work through standard checklist
+4. Work through boxes-live-specific tasks
+5. Run tests and verify build
+6. Run valgrind to check for memory issues
+7. Create PR with improvements
+8. Write improvement report
+9. Export my-context session
+10. Update manifest to "completed"
+```
+
+## Testing Recommendations
+
+For boxes-live specifically:
+- Test in different terminal emulators (xterm, gnome-terminal, etc.)
+- Test with different screen sizes
+- Test network protocol with multiple clients
+- Test canvas state persistence
+- Test terminal resize handling
+
+## Ready to Start?
+
+Confirm you understand:
+1. Your assignment (boxes-live repository - flagship terminal canvas)
+2. The standard checklist
+3. The boxes-live-specific tasks (rendering, protocol docs, examples, performance)
+4. Your deliverables (PR, report, manifest update, context export)
+5. The quality gates (tests pass, no memory leaks, docs updated)
+6. The importance of this project to the organization
+
+Once confirmed, begin by claiming the repository in the manifest.
+
+Good luck! 🚀

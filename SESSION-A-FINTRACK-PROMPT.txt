@@ -1,0 +1,206 @@
+# Session A: fintrack Repository Improvement
+
+## Your Assignment
+
+**Repository**: fintrack (Go financial tracking CLI)
+**Session ID**: session-A
+**Phase**: 2 - Repository Improvements
+**Estimated Duration**: 6-8 hours
+**Complexity**: High (Go, database, CLI)
+
+## Context
+
+You are working on the jcaldwell-labs organization improvement project. This is one of 7 parallel sessions improving all repositories simultaneously. Your focus is the fintrack repository - a financial tracking and analysis CLI tool written in Go.
+
+## Getting Started
+
+1. **First Actions**:
+   - You are already in the fintrack repository
+   - Read the coordination roadmap: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/ROADMAP-2025.md
+   - Read the parallel session guide: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/PARALLEL-SESSION-GUIDE.md
+   - Understand the Phase 2 objectives
+
+2. **Claim Your Repository**:
+   - Clone the coordination repo: `git clone https://github.com/jcaldwell-labs/jcaldwell-labs.git ~/jcaldwell-labs-coordination`
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md`
+   - Change fintrack status from "not_started" to "in_progress"
+   - Add your session ID (session-A) and start date
+   - Commit and push from coordination repo:
+     ```bash
+     cd ~/jcaldwell-labs-coordination
+     git add PARALLEL-SESSION-MANIFEST.md
+     git commit -m "Session A: Claiming fintrack"
+     git push
+     ```
+
+3. **Start Context Tracking**:
+   ```bash
+   export MY_CONTEXT_HOME=db:fintrack_improvement
+   my-context start "phase2-improvement-$(date +%Y-%m-%d)"
+   my-context note "Starting Phase 2 improvements for fintrack"
+   my-context note "Session ID: session-A"
+   ```
+
+## Your Tasks
+
+### Standard Checklist (Required for All Repos)
+
+#### Documentation
+- [ ] Verify CLAUDE.md exists and is comprehensive
+- [ ] Verify README.md has clear getting started, build, test instructions
+- [ ] Add CONTRIBUTING.md if missing
+- [ ] Add architecture diagram or explanation if complex
+- [ ] Document all dependencies and system requirements
+- [ ] Add troubleshooting section to README
+
+#### Code Quality
+- [ ] Run `go fmt ./...` and `go vet ./...`
+- [ ] Add or improve code comments for complex logic
+- [ ] Check for compiler warnings
+- [ ] Review TODO/FIXME comments and address or document
+- [ ] Review for security issues (SQL injection, command injection, etc.)
+- [ ] Remove dead code
+
+#### Testing
+- [ ] Verify test suite exists
+- [ ] Add tests for any untested critical paths
+- [ ] Run `go test ./...` and fix failures
+- [ ] Document test coverage: `go test -cover ./...`
+- [ ] Add integration tests if missing
+- [ ] Document how to run tests in README
+
+#### Build System
+- [ ] Verify build instructions work: `go build`
+- [ ] Add Makefile with targets: build, test, clean, install
+- [ ] Document build dependencies clearly
+- [ ] Test build on clean checkout
+
+#### CI/CD
+- [ ] Add GitHub Actions workflow if missing (.github/workflows/go.yml)
+- [ ] Ensure CI runs tests on PR
+- [ ] Add build verification to CI
+- [ ] Consider adding linter (golangci-lint) to CI
+- [ ] Add CI status badge to README
+
+#### Project Health
+- [ ] Review open issues and close stale ones
+- [ ] Add issue templates (.github/ISSUE_TEMPLATE/)
+- [ ] Add PR template (.github/pull_request_template.md)
+- [ ] Review project description and topics on GitHub
+- [ ] Verify license is present and clear
+- [ ] Add CHANGELOG.md or release notes
+
+### Repository-Specific Tasks (fintrack)
+
+- [ ] **Complete transaction management features**
+  - Check if PR #4 was merged or needs completion
+  - Implement any remaining transaction management functionality
+
+- [ ] **Add database migration strategy**
+  - Document how database schema changes are handled
+  - Consider adding migration tooling (golang-migrate, goose, etc.)
+  - Create example migrations
+
+- [ ] **Add CLI documentation**
+  - Document all available commands
+  - Add examples for common workflows
+  - Consider adding `--help` text improvements
+
+- [ ] **Consider adding config file support**
+  - Evaluate need for ~/.fintrackrc or similar
+  - Document configuration options
+  - Add config file example
+
+## Deliverables
+
+You must produce:
+
+1. **Pull Request** with all improvements
+   - Branch name: `improve/phase2-improvements`
+   - Title: "Phase 2: Repository improvements for fintrack"
+   - Description: Link to improvement report, summarize changes
+
+2. **Improvement Report** (`reports/FINTRACK-IMPROVEMENT-REPORT.md` in coordination repo)
+   - Use template from: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/templates/IMPROVEMENT-REPORT-TEMPLATE.md
+   - Save to: `~/jcaldwell-labs-coordination/reports/FINTRACK-IMPROVEMENT-REPORT.md`
+   - Document all checklist items completed
+   - Note any items marked as "future work"
+   - Include metrics (before/after)
+   - List all files modified/added
+
+3. **Manifest Update** (in coordination repo)
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md`
+   - Set status to "completed"
+   - Add completion date, PR link, report link
+
+4. **Context Export**
+   - Export my-context session to `~/jcaldwell-labs-coordination/sessions/session-A-fintrack.md`
+
+## Quality Gates
+
+Before marking complete, verify:
+
+- [ ] All tests passing (`go test ./...`)
+- [ ] Build succeeds (`go build`)
+- [ ] No critical compiler warnings
+- [ ] Documentation updated
+- [ ] PR created and ready for review
+- [ ] Improvement report written
+- [ ] Manifest updated
+
+## Time Management
+
+- **Time Budget**: 6-8 hours
+- **Time-Boxing**: If an item takes too long, document it for future work and move on
+- **Don't let one item block completion** - note blockers in the report
+
+## Common Go Project Checks
+
+- Run `go mod tidy` to clean dependencies
+- Check for outdated dependencies: `go list -u -m all`
+- Run `go vet ./...` for potential issues
+- Consider running `staticcheck` for deeper analysis
+- Check for missing error handling
+- Verify panic handling in CLI code
+
+## Important Notes
+
+- **Work independently** - other sessions work on other repos
+- **Document blockers** in the improvement report
+- **Create issues** for work that can't be completed in time budget
+- **Focus on quality, documentation, and testing** - not new features
+- **Commit frequently** with clear commit messages
+
+## Communication
+
+- **Updates**: Via PARALLEL-SESSION-MANIFEST.md
+- **Blockers**: Note in manifest and improvement report
+- **Completion**: Update manifest, create PR, write report
+- **Questions**: Create issue in jcaldwell-labs/jcaldwell-labs repo
+
+## Workflow Summary
+
+```
+1. Claim repository (update manifest) ✓
+2. Start my-context session ✓
+3. Work through standard checklist
+4. Work through fintrack-specific tasks
+5. Run tests and verify build
+6. Create PR with improvements
+7. Write improvement report
+8. Export my-context session
+9. Update manifest to "completed"
+```
+
+## Ready to Start?
+
+Confirm you understand:
+1. Your assignment (fintrack repository)
+2. The standard checklist (documentation, code quality, testing, build, CI, project health)
+3. The fintrack-specific tasks (transaction management, migrations, CLI docs, config)
+4. Your deliverables (PR, report, manifest update, context export)
+5. The quality gates (tests pass, build succeeds, docs updated)
+
+Once confirmed, begin by claiming the repository in the manifest.
+
+Good luck! 🚀

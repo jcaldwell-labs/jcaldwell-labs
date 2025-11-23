@@ -1,0 +1,235 @@
+# Session C: terminal-stars Repository Improvement
+
+## Your Assignment
+
+**Repository**: terminal-stars (C starfield visualization with frame buffering)
+**Session ID**: session-C
+**Phase**: 2 - Repository Improvements
+**Estimated Duration**: 4-6 hours
+**Complexity**: Medium (C, graphics, animation modes)
+
+## Context
+
+You are working on the jcaldwell-labs organization improvement project. This is one of 7 parallel sessions improving all repositories simultaneously. Your focus is the terminal-stars repository - a starfield visualization engine with multiple modes including space combat.
+
+## Getting Started
+
+1. **First Actions**:
+   - You are already in the terminal-stars repository
+   - Read the coordination roadmap: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/ROADMAP-2025.md
+   - Read the parallel session guide: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/PARALLEL-SESSION-GUIDE.md
+   - Understand the Phase 2 objectives
+
+2. **Claim Your Repository**:
+   - Clone the coordination repo: `git clone https://github.com/jcaldwell-labs/jcaldwell-labs.git ~/jcaldwell-labs-coordination`
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md`
+   - Change terminal-stars status from "not_started" to "in_progress"
+   - Add your session ID (session-C) and start date
+   - Commit and push from coordination repo:
+     ```bash
+     cd ~/jcaldwell-labs-coordination
+     git add PARALLEL-SESSION-MANIFEST.md
+     git commit -m "Session C: Claiming terminal-stars"
+     git push
+     ```
+
+3. **Start Context Tracking**:
+   ```bash
+   export MY_CONTEXT_HOME=db:terminal_stars_improvement
+   my-context start "phase2-improvement-$(date +%Y-%m-%d)"
+   my-context note "Starting Phase 2 improvements for terminal-stars"
+   my-context note "Session ID: session-C"
+   ```
+
+## Your Tasks
+
+### Standard Checklist (Required for All Repos)
+
+#### Documentation
+- [ ] Verify CLAUDE.md exists and is comprehensive
+- [ ] Verify README.md has clear getting started, build, test instructions
+- [ ] Add CONTRIBUTING.md if missing
+- [ ] Document visualization modes and how they work
+- [ ] Document all dependencies and system requirements
+- [ ] Add troubleshooting section to README
+
+#### Code Quality
+- [ ] Run formatter (clang-format or similar) on all .c and .h files
+- [ ] Add or improve code comments for complex rendering logic
+- [ ] Compile with `-Wall -Wextra` and fix warnings
+- [ ] Review TODO/FIXME comments and address or document
+- [ ] Review for security issues (buffer overflows)
+- [ ] Remove dead code
+
+#### Testing
+- [ ] Verify test suite exists (if not, create basic tests)
+- [ ] Add tests for rendering calculations
+- [ ] Add tests for frame buffering logic
+- [ ] Run all tests and fix failures
+- [ ] Document test coverage
+- [ ] Document how to run tests in README
+
+#### Build System
+- [ ] Verify Makefile exists with proper targets
+- [ ] Add/verify targets: build, test, clean, install
+- [ ] Document build dependencies
+- [ ] Test build on clean checkout
+
+#### CI/CD
+- [ ] Add GitHub Actions workflow (.github/workflows/c.yml)
+- [ ] Ensure CI runs tests on PR
+- [ ] Add build verification to CI
+- [ ] Consider adding memory checks (valgrind)
+- [ ] Add CI status badge to README
+
+#### Project Health
+- [ ] Review open issues and close stale ones
+- [ ] Add issue templates
+- [ ] Add PR template
+- [ ] Review project description and topics (starfield, terminal, animation, graphics)
+- [ ] Verify license
+- [ ] Add CHANGELOG.md
+
+### Repository-Specific Tasks (terminal-stars)
+
+- [ ] **Complete space combat mode**
+  - Check if PR #6 was merged or needs completion
+  - Verify space combat mode functionality
+  - Document combat mode controls and features
+  - Add examples or demos
+
+- [ ] **Fix any encoding issues**
+  - Check if PR #7 (draft - encoding fix) needs attention
+  - Test with different terminal encodings (UTF-8, etc.)
+  - Document character set requirements
+  - Ensure proper handling of special characters
+
+- [ ] **Add more visual modes**
+  - Document existing visualization modes
+  - Identify opportunities for new modes
+  - Consider: warp speed, particle effects, etc.
+  - Add mode switching documentation
+
+- [ ] **Performance testing**
+  - Profile rendering performance
+  - Test at different frame rates
+  - Document FPS targets and achieved performance
+  - Identify optimization opportunities
+  - Add performance benchmarks
+
+## Deliverables
+
+You must produce:
+
+1. **Pull Request** with all improvements
+   - Branch name: `improve/phase2-improvements`
+   - Title: "Phase 2: Repository improvements for terminal-stars"
+   - Description: Link to improvement report, summarize changes
+
+2. **Improvement Report** (`reports/TERMINAL-STARS-IMPROVEMENT-REPORT.md` in coordination repo)
+   - Use template from: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/templates/IMPROVEMENT-REPORT-TEMPLATE.md
+   - Save to: `~/jcaldwell-labs-coordination/reports/TERMINAL-STARS-IMPROVEMENT-REPORT.md`
+   - Document all checklist items completed
+   - Note any items marked as "future work"
+   - Include metrics (before/after)
+   - List all files modified/added
+
+3. **Manifest Update** (in coordination repo)
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md`
+   - Set status to "completed"
+   - Add completion date, PR link, report link
+
+4. **Context Export**
+   - Export my-context session to `~/jcaldwell-labs-coordination/sessions/session-C-terminal-stars.md`
+
+## Quality Gates
+
+Before marking complete, verify:
+
+- [ ] All tests passing
+- [ ] Build succeeds with `-Wall -Wextra`
+- [ ] No memory leaks (check with valgrind)
+- [ ] No compiler warnings
+- [ ] Starfield renders correctly in multiple terminals
+- [ ] Documentation updated
+- [ ] PR created and ready for review
+- [ ] Improvement report written
+- [ ] Manifest updated
+
+## Time Management
+
+- **Time Budget**: 4-6 hours
+- **Time-Boxing**: If an item takes too long, document it for future work and move on
+- **Don't let one item block completion** - note blockers in the report
+
+## Common C Project Checks
+
+- Check for buffer overflow vulnerabilities
+- Verify all memory allocations have corresponding frees
+- Check for null pointer dereferences
+- Verify error handling for system calls
+- Check terminal initialization/cleanup
+- Verify signal handling (SIGWINCH for resize, SIGINT for cleanup)
+- Check for arithmetic overflow in rendering calculations
+
+## Terminal-Specific Checks
+
+- Test with different TERM values (xterm, xterm-256color, screen, tmux)
+- Test terminal resize handling
+- Verify color support detection
+- Test performance with large terminal sizes
+- Verify cursor is hidden during rendering
+- Ensure terminal state is restored on exit
+
+## Important Notes
+
+- **Work independently** - other sessions work on other repos
+- **Document blockers** in the improvement report
+- **Create issues** for work that can't be completed in time budget
+- **Focus on quality, documentation, and testing** - not new features
+- **Commit frequently** with clear commit messages
+
+## Communication
+
+- **Updates**: Via PARALLEL-SESSION-MANIFEST.md
+- **Blockers**: Note in manifest and improvement report
+- **Completion**: Update manifest, create PR, write report
+- **Questions**: Create issue in jcaldwell-labs/jcaldwell-labs repo
+
+## Workflow Summary
+
+```
+1. Claim repository (update manifest) ✓
+2. Start my-context session ✓
+3. Work through standard checklist
+4. Work through terminal-stars-specific tasks
+5. Run tests and verify build
+6. Test rendering in multiple terminals
+7. Create PR with improvements
+8. Write improvement report
+9. Export my-context session
+10. Update manifest to "completed"
+```
+
+## Testing Recommendations
+
+For terminal-stars specifically:
+- Test starfield animation smoothness
+- Test all visualization modes
+- Test mode switching
+- Test at different terminal sizes
+- Test performance (FPS) measurement
+- Test graceful exit (Ctrl+C handling)
+
+## Ready to Start?
+
+Confirm you understand:
+1. Your assignment (terminal-stars repository)
+2. The standard checklist
+3. The terminal-stars-specific tasks (combat mode, encoding, visual modes, performance)
+4. Your deliverables (PR, report, manifest update, context export)
+5. The quality gates (tests pass, renders correctly, docs updated)
+
+Once confirmed, begin by claiming the repository in the manifest.
+
+Good luck! 🚀

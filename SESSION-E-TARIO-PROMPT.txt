@@ -1,0 +1,243 @@
+# Session E: tario Repository Improvement
+
+## Your Assignment
+
+**Repository**: tario (C ASCII side-scrolling platformer game)
+**Session ID**: session-E
+**Phase**: 2 - Repository Improvements
+**Estimated Duration**: 4-6 hours
+**Complexity**: Medium (C, game engine, physics simulation)
+
+## Context
+
+You are working on the jcaldwell-labs organization improvement project. This is one of 7 parallel sessions improving all repositories simultaneously. Your focus is the tario repository - an ASCII side-scrolling platformer game inspired by classic Mario games, implemented in C for the terminal.
+
+## Getting Started
+
+1. **First Actions**:
+   - You are already in the tario repository
+   - Read the coordination roadmap: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/ROADMAP-2025.md
+   - Read the parallel session guide: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/PARALLEL-SESSION-GUIDE.md
+   - Understand the Phase 2 objectives
+
+2. **Claim Your Repository**:
+   - Clone the coordination repo: `git clone https://github.com/jcaldwell-labs/jcaldwell-labs.git ~/jcaldwell-labs-coordination`
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md`
+   - Change tario status from "not_started" to "in_progress"
+   - Add your session ID (session-E) and start date
+   - Commit and push from coordination repo:
+     ```bash
+     cd ~/jcaldwell-labs-coordination
+     git add PARALLEL-SESSION-MANIFEST.md
+     git commit -m "Session E: Claiming tario"
+     git push
+     ```
+
+3. **Start Context Tracking**:
+   ```bash
+   export MY_CONTEXT_HOME=db:tario_improvement
+   my-context start "phase2-improvement-$(date +%Y-%m-%d)"
+   my-context note "Starting Phase 2 improvements for tario"
+   my-context note "Session ID: session-E"
+   ```
+
+## Your Tasks
+
+### Standard Checklist (Required for All Repos)
+
+#### Documentation
+- [ ] Verify CLAUDE.md exists and is comprehensive
+- [ ] Verify README.md has clear getting started, build, test instructions
+- [ ] Add CONTRIBUTING.md if missing
+- [ ] Document game architecture (game loop, physics, rendering)
+- [ ] Document all dependencies (ncurses, etc.)
+- [ ] Add troubleshooting section to README
+- [ ] Document game controls
+
+#### Code Quality
+- [ ] Run formatter (clang-format or similar) on all .c and .h files
+- [ ] Add or improve code comments for game logic
+- [ ] Compile with `-Wall -Wextra` and fix warnings
+- [ ] Review TODO/FIXME comments and address or document
+- [ ] Review for security issues (buffer overflows)
+- [ ] Remove dead code
+
+#### Testing
+- [ ] Verify test suite exists (if not, create basic tests)
+- [ ] Add tests for physics calculations
+- [ ] Add tests for collision detection
+- [ ] Run all tests and fix failures
+- [ ] Document test coverage
+- [ ] Document how to run tests in README
+
+#### Build System
+- [ ] Verify Makefile exists with proper targets
+- [ ] Add/verify targets: build, test, clean, install, run
+- [ ] Document build dependencies
+- [ ] Test build on clean checkout
+
+#### CI/CD
+- [ ] Add GitHub Actions workflow (.github/workflows/c.yml)
+- [ ] Ensure CI runs tests on PR
+- [ ] Add build verification to CI
+- [ ] Consider adding memory checks (valgrind)
+- [ ] Add CI status badge to README
+
+#### Project Health
+- [ ] Review open issues and close stale ones
+- [ ] Add issue templates
+- [ ] Add PR template
+- [ ] Review project description and topics (game, platformer, ascii, terminal)
+- [ ] Verify license
+- [ ] Add CHANGELOG.md
+
+### Repository-Specific Tasks (tario)
+
+- [ ] **Complete platformer physics**
+  - Check if PR #1 was merged or needs completion
+  - Verify jump mechanics work correctly
+  - Verify gravity simulation
+  - Test collision detection
+  - Document physics parameters (gravity, jump velocity, etc.)
+
+- [ ] **Add first playable level**
+  - Create a simple first level
+  - Add platforms, obstacles
+  - Add start and end points
+  - Test level playability
+  - Document level format
+
+- [ ] **Add sound effects framework**
+  - Design framework for terminal "sound" (visual/beep effects)
+  - Implement basic sound system
+  - Add sound for jump, collision, etc.
+  - Document sound system architecture
+  - Note: Terminal beep capabilities may be limited
+
+- [ ] **Create level editor or level format docs**
+  - Document level data format
+  - Create example level files
+  - Consider simple level editor (or document manual level creation)
+  - Add level loading/parsing code if missing
+
+## Deliverables
+
+You must produce:
+
+1. **Pull Request** with all improvements
+   - Branch name: `improve/phase2-improvements`
+   - Title: "Phase 2: Repository improvements for tario"
+   - Description: Link to improvement report, summarize changes
+
+2. **Improvement Report** (`reports/TARIO-IMPROVEMENT-REPORT.md` in coordination repo)
+   - Use template from: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/templates/IMPROVEMENT-REPORT-TEMPLATE.md
+   - Save to: `~/jcaldwell-labs-coordination/reports/TARIO-IMPROVEMENT-REPORT.md`
+   - Document all checklist items completed
+   - Note any items marked as "future work"
+   - Include metrics (before/after)
+   - List all files modified/added
+
+3. **Manifest Update** (in coordination repo)
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md`
+   - Set status to "completed"
+   - Add completion date, PR link, report link
+
+4. **Context Export**
+   - Export my-context session to `~/jcaldwell-labs-coordination/sessions/session-E-tario.md`
+
+## Quality Gates
+
+Before marking complete, verify:
+
+- [ ] All tests passing
+- [ ] Build succeeds with `-Wall -Wextra`
+- [ ] No memory leaks (check with valgrind)
+- [ ] No compiler warnings
+- [ ] Game is playable
+- [ ] Controls work correctly
+- [ ] Documentation updated
+- [ ] PR created and ready for review
+- [ ] Improvement report written
+- [ ] Manifest updated
+
+## Time Management
+
+- **Time Budget**: 4-6 hours
+- **Time-Boxing**: If an item takes too long, document it for future work and move on
+- **Don't let one item block completion** - note blockers in the report
+
+## Common C Project Checks
+
+- Check for buffer overflow vulnerabilities
+- Verify all memory allocations have corresponding frees
+- Check for null pointer dereferences
+- Verify error handling for system calls
+- Check ncurses initialization/cleanup
+- Verify signal handling (SIGINT for clean exit)
+- Check for race conditions if using threads
+
+## Game-Specific Checks
+
+- Test game loop timing (frame rate)
+- Test input handling (keyboard controls)
+- Test collision detection edge cases
+- Test boundary conditions (screen edges)
+- Verify game state management
+- Test pause/resume functionality if present
+- Verify terminal resize handling
+
+## Important Notes
+
+- **Work independently** - other sessions work on other repos
+- **Document blockers** in the improvement report
+- **Create issues** for work that can't be completed in time budget
+- **Focus on quality, documentation, and testing** - not extensive new features
+- **Commit frequently** with clear commit messages
+- **Keep it fun** - this is a game project!
+
+## Communication
+
+- **Updates**: Via PARALLEL-SESSION-MANIFEST.md
+- **Blockers**: Note in manifest and improvement report
+- **Completion**: Update manifest, create PR, write report
+- **Questions**: Create issue in jcaldwell-labs/jcaldwell-labs repo
+
+## Workflow Summary
+
+```
+1. Claim repository (update manifest) ✓
+2. Start my-context session ✓
+3. Work through standard checklist
+4. Work through tario-specific tasks
+5. Run tests and verify build
+6. Play-test the game
+7. Create PR with improvements
+8. Write improvement report
+9. Export my-context session
+10. Update manifest to "completed"
+```
+
+## Testing Recommendations
+
+For tario specifically:
+- Play the game to verify it's fun
+- Test all game controls
+- Test physics (jumping, falling, collision)
+- Test level completion
+- Test game over scenarios
+- Test in different terminal sizes
+- Verify performance is smooth
+
+## Ready to Start?
+
+Confirm you understand:
+1. Your assignment (tario repository - ASCII platformer game)
+2. The standard checklist
+3. The tario-specific tasks (physics, first level, sound framework, level format)
+4. Your deliverables (PR, report, manifest update, context export)
+5. The quality gates (tests pass, game playable, docs updated)
+6. The importance of making the game actually playable and fun
+
+Once confirmed, begin by claiming the repository in the manifest.
+
+Good luck! 🚀

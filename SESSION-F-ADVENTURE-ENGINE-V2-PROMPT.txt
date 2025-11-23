@@ -1,0 +1,259 @@
+# Session F: adventure-engine-v2 Repository Improvement
+
+## Your Assignment
+
+**Repository**: adventure-engine-v2 (C text adventure engine with smart terminal UI)
+**Session ID**: session-F
+**Phase**: 2 - Repository Improvements
+**Estimated Duration**: 4-6 hours
+**Complexity**: Medium (C, parser, terminal UI, game engine)
+
+## Context
+
+You are working on the jcaldwell-labs organization improvement project. This is one of 7 parallel sessions improving all repositories simultaneously. Your focus is the adventure-engine-v2 repository - a text adventure game engine with smart terminal UI, parser, and game scripting capabilities.
+
+## Getting Started
+
+1. **First Actions**:
+   - You are already in the adventure-engine-v2 repository
+   - Read the coordination roadmap: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/ROADMAP-2025.md
+   - Read the parallel session guide: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/PARALLEL-SESSION-GUIDE.md
+   - Understand the Phase 2 objectives
+
+2. **Claim Your Repository**:
+   - Clone the coordination repo: `git clone https://github.com/jcaldwell-labs/jcaldwell-labs.git ~/jcaldwell-labs-coordination`
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md`
+   - Change adventure-engine-v2 status from "not_started" to "in_progress"
+   - Add your session ID (session-F) and start date
+   - Commit and push from coordination repo:
+     ```bash
+     cd ~/jcaldwell-labs-coordination
+     git add PARALLEL-SESSION-MANIFEST.md
+     git commit -m "Session F: Claiming adventure-engine-v2"
+     git push
+     ```
+
+3. **Start Context Tracking**:
+   ```bash
+   export MY_CONTEXT_HOME=db:adventure_engine_improvement
+   my-context start "phase2-improvement-$(date +%Y-%m-%d)"
+   my-context note "Starting Phase 2 improvements for adventure-engine-v2"
+   my-context note "Session ID: session-F"
+   ```
+
+## Your Tasks
+
+### Standard Checklist (Required for All Repos)
+
+#### Documentation
+- [ ] Verify CLAUDE.md exists and is comprehensive
+- [ ] Verify README.md has clear getting started, build, test instructions
+- [ ] Add CONTRIBUTING.md if missing
+- [ ] Document engine architecture (parser, game state, UI)
+- [ ] Document all dependencies
+- [ ] Add troubleshooting section to README
+- [ ] Document game commands and syntax
+
+#### Code Quality
+- [ ] Run formatter (clang-format or similar) on all .c and .h files
+- [ ] Add or improve code comments for parser logic
+- [ ] Compile with `-Wall -Wextra` and fix warnings
+- [ ] Review TODO/FIXME comments and address or document
+- [ ] Review for security issues (buffer overflows, command injection)
+- [ ] Remove dead code
+
+#### Testing
+- [ ] Verify test suite exists (if not, create basic tests)
+- [ ] Add tests for parser
+- [ ] Add tests for game state management
+- [ ] Run all tests and fix failures
+- [ ] Document test coverage
+- [ ] Document how to run tests in README
+
+#### Build System
+- [ ] Verify Makefile exists with proper targets
+- [ ] Add/verify targets: build, test, clean, install
+- [ ] Document build dependencies
+- [ ] Test build on clean checkout
+
+#### CI/CD
+- [ ] Add GitHub Actions workflow (.github/workflows/c.yml)
+- [ ] Ensure CI runs tests on PR
+- [ ] Add build verification to CI
+- [ ] Consider adding memory checks (valgrind)
+- [ ] Add CI status badge to README
+
+#### Project Health
+- [ ] Review open issues and close stale ones
+- [ ] Add issue templates
+- [ ] Add PR template
+- [ ] Review project description and topics (adventure, text-adventure, parser, engine)
+- [ ] Verify license
+- [ ] Add CHANGELOG.md
+
+### Repository-Specific Tasks (adventure-engine-v2)
+
+- [ ] **Complete smart terminal UI**
+  - Review current UI implementation
+  - Ensure terminal UI is polished and functional
+  - Test UI responsiveness
+  - Document UI features
+  - Add screenshots or examples to README
+
+- [ ] **Add save/load game functionality**
+  - Implement game state serialization
+  - Implement save command
+  - Implement load command
+  - Document save file format
+  - Test save/load functionality
+  - Handle save file corruption gracefully
+
+- [ ] **Add example adventure game**
+  - Create a complete example game
+  - Include multiple rooms/locations
+  - Include puzzles and items
+  - Include win/lose conditions
+  - Document the example game
+  - Place in examples/ directory
+
+- [ ] **Document scripting format**
+  - Document game definition format
+  - Provide scripting guide for game creators
+  - Document all available commands
+  - Document room/item/character definition syntax
+  - Add scripting examples
+  - Consider creating a scripting tutorial
+
+## Deliverables
+
+You must produce:
+
+1. **Pull Request** with all improvements
+   - Branch name: `improve/phase2-improvements`
+   - Title: "Phase 2: Repository improvements for adventure-engine-v2"
+   - Description: Link to improvement report, summarize changes
+
+2. **Improvement Report** (`reports/ADVENTURE-ENGINE-V2-IMPROVEMENT-REPORT.md` in coordination repo)
+   - Use template from: https://raw.githubusercontent.com/jcaldwell-labs/jcaldwell-labs/master/templates/IMPROVEMENT-REPORT-TEMPLATE.md
+   - Save to: `~/jcaldwell-labs-coordination/reports/ADVENTURE-ENGINE-V2-IMPROVEMENT-REPORT.md`
+   - Document all checklist items completed
+   - Note any items marked as "future work"
+   - Include metrics (before/after)
+   - List all files modified/added
+
+3. **Manifest Update** (in coordination repo)
+   - Update `~/jcaldwell-labs-coordination/PARALLEL-SESSION-MANIFEST.md`
+   - Set status to "completed"
+   - Add completion date, PR link, report link
+
+4. **Context Export**
+   - Export my-context session to `~/jcaldwell-labs-coordination/sessions/session-F-adventure-engine-v2.md`
+
+## Quality Gates
+
+Before marking complete, verify:
+
+- [ ] All tests passing
+- [ ] Build succeeds with `-Wall -Wextra`
+- [ ] No memory leaks (check with valgrind)
+- [ ] No compiler warnings
+- [ ] Parser works correctly with valid and invalid input
+- [ ] Save/load works if implemented
+- [ ] Example game is playable and completable
+- [ ] Documentation updated
+- [ ] PR created and ready for review
+- [ ] Improvement report written
+- [ ] Manifest updated
+
+## Time Management
+
+- **Time Budget**: 4-6 hours
+- **Time-Boxing**: If an item takes too long, document it for future work and move on
+- **Don't let one item block completion** - note blockers in the report
+
+## Common C Project Checks
+
+- Check for buffer overflow vulnerabilities (especially in parser)
+- Verify all memory allocations have corresponding frees
+- Check for null pointer dereferences
+- Verify error handling for system calls
+- Check ncurses initialization/cleanup if used
+- Verify signal handling
+- Check for memory leaks in parser (strings, parsed commands)
+
+## Parser-Specific Checks
+
+- Test parser with valid commands
+- Test parser with invalid commands
+- Test parser with edge cases (empty input, very long input)
+- Test parser with special characters
+- Verify command tokenization
+- Test case sensitivity handling
+- Test whitespace handling
+
+## Game Engine Checks
+
+- Test game state transitions
+- Test inventory management
+- Test room navigation
+- Test object interactions
+- Test win/lose conditions
+- Verify game is completable
+- Test edge cases (invalid actions, etc.)
+
+## Important Notes
+
+- **Work independently** - other sessions work on other repos
+- **Document blockers** in the improvement report
+- **Create issues** for work that can't be completed in time budget
+- **Focus on quality, documentation, and testing** - not extensive new features
+- **Commit frequently** with clear commit messages
+- **Make it playable** - the example game should be fun!
+
+## Communication
+
+- **Updates**: Via PARALLEL-SESSION-MANIFEST.md
+- **Blockers**: Note in manifest and improvement report
+- **Completion**: Update manifest, create PR, write report
+- **Questions**: Create issue in jcaldwell-labs/jcaldwell-labs repo
+
+## Workflow Summary
+
+```
+1. Claim repository (update manifest) ✓
+2. Start my-context session ✓
+3. Work through standard checklist
+4. Work through adventure-engine-v2-specific tasks
+5. Run tests and verify build
+6. Play-test the example game
+7. Test parser with various inputs
+8. Create PR with improvements
+9. Write improvement report
+10. Export my-context session
+11. Update manifest to "completed"
+```
+
+## Testing Recommendations
+
+For adventure-engine-v2 specifically:
+- Play through the example game
+- Test all documented commands
+- Test parser error handling
+- Test save/load functionality
+- Test in different terminal sizes
+- Test memory usage (valgrind)
+- Verify clean exit
+
+## Ready to Start?
+
+Confirm you understand:
+1. Your assignment (adventure-engine-v2 repository - text adventure engine)
+2. The standard checklist
+3. The adventure-engine-v2-specific tasks (UI, save/load, example game, scripting docs)
+4. Your deliverables (PR, report, manifest update, context export)
+5. The quality gates (tests pass, example game playable, parser robust, docs updated)
+6. The importance of creating a complete, playable example game
+
+Once confirmed, begin by claiming the repository in the manifest.
+
+Good luck! 🚀
