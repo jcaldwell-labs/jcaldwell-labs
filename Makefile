@@ -1,4 +1,4 @@
-.PHONY: help build-c-all test-c-all build-go-all test-go-all
+.PHONY: help build-c-all test-c-all build-go-all test-go-all build-all test-all
 .DEFAULT_GOAL := help
 
 # jcaldwell-labs Unified Build System
@@ -55,3 +55,9 @@ build-go-all: ## Build all Go projects with zero warnings
 test-go-all: ## Run all Go project test suites
 	@echo "Testing all Go projects..."
 	@./scripts/test-go-projects.sh
+
+build-all: build-c-all build-go-all ## Build all C and Go projects
+	@echo "All projects built successfully\!"
+
+test-all: test-c-all test-go-all ## Run all test suites
+	@echo "All tests passed successfully\!"
