@@ -1,0 +1,266 @@
+You are working on Phase 3b Session 1: fintrack my-context integration documentation.
+
+EXPERIMENT CONTEXT:
+This is a test of Phase 3 infrastructure vs Phase 2. Phase 2 sessions had no structure for handling failures. Phase 3 has 7 structural artifacts and clear protocols. Your owner wants to see if you can complete this task successfully using the new infrastructure.
+
+PROJECT: fintrack
+REPOSITORY: ~/projects/fintrack (work ONLY in this repository)
+TASK: Create my-context integration pattern documentation
+
+OBJECTIVE:
+Document HOW fintrack could integrate with my-context for automatic context tracking. This is a design document (NOT implementation) that will live in the fintrack repository.
+
+CRITICAL PROTOCOLS (in ~/projects/jcaldwell-labs/docs/):
+Before starting, read these 7 protocol documents:
+1. PR-FAILURE-PROTOCOL.md - Read BEFORE creating any PR
+2. INCREMENTAL-MERGE-STRATEGY.md - Keep PRs small
+3. ESCALATION-PROTOCOL.md - Use if blocked
+4. DONE-DEFINITION.md - Your completion criteria
+5. SESSION-HANDOFF-PROTOCOL.md - Use if you can't complete
+6. Pre-PR validation: ~/projects/jcaldwell-labs/scripts/pre-pr-check.sh
+
+YOUR SPECIFIC DELIVERABLE:
+Create: ~/projects/fintrack/docs/MY-CONTEXT-INTEGRATION.md
+
+This document should contain:
+1. **Overview** (50-100 lines)
+   - Why integrate fintrack with my-context?
+   - What problems does this solve?
+   - Who benefits?
+
+2. **Integration Architecture** (100-150 lines)
+   - How would it work technically?
+   - Where in the codebase would changes go?
+   - What's the call flow?
+
+3. **API Design** (100-150 lines)
+   - What functions/methods would be added?
+   - Show Go code signatures and examples
+   - Error handling approach
+
+4. **Example Usage** (100-150 lines)
+   - At least 3 concrete code examples
+   - Show command-line usage
+   - Show programmatic usage
+
+5. **Implementation Roadmap** (50-100 lines)
+   - Step-by-step implementation plan
+   - What PRs would be needed?
+   - Dependencies and prerequisites
+
+6. **Testing Strategy** (50-100 lines)
+   - How to test the integration?
+   - Unit tests, integration tests
+   - Manual testing scenarios
+
+7. **Future Enhancements** (50-100 lines)
+   - What could come next?
+   - Advanced features
+   - Integration with other tools
+
+**Target: 500-750 lines of markdown total**
+
+SUCCESS CRITERIA (from DONE-DEFINITION.md):
+✓ Document created in ~/projects/fintrack/docs/
+✓ All 7 sections complete and comprehensive
+✓ At least 3 concrete Go code examples
+✓ Pre-PR validation passed (run from jcaldwell-labs)
+✓ PR created in fintrack repository
+✓ CI passing (no code changes, just docs)
+✓ my-context session exported with decisions
+✓ No blockers OR escalation protocol followed
+
+CONSTRAINTS:
+- Work ONLY in ~/projects/fintrack repository
+- This is DOCUMENTATION ONLY - no code implementation
+- Target length: 500-750 lines of markdown
+- Must include at least 3 concrete Go code examples
+- Time budget: 3-4 hours maximum
+- If blocked >30min, use ESCALATION-PROTOCOL.md
+
+MANDATORY WORKFLOW:
+
+1. **Start my-context session** (in jcaldwell-labs partition):
+   ```bash
+   export MY_CONTEXT_HOME=db:jcaldwell_labs
+   my-context start "phase3b-fintrack-mycontext-$(date +%Y-%m-%d)"
+   ```
+
+2. **Read protocols** (from coordination repo):
+   ```bash
+   cd ~/projects/jcaldwell-labs
+   # Read all 7 protocol docs in docs/
+   ```
+
+3. **Research fintrack architecture**:
+   ```bash
+   cd ~/projects/fintrack
+   # Read: README.md, CLAUDE.md, cmd/ directory structure
+   # Read: internal/ package organization
+   my-context note "fintrack architecture: [your findings]"
+   ```
+
+4. **Research my-context capabilities**:
+   ```bash
+   cd ~/projects/my-context
+   # Read: README.md to understand API
+   # Note available commands and functions
+   cd ~/projects/fintrack  # Return to fintrack
+   my-context note "my-context API: [available functions]"
+   ```
+
+5. **Create the document** (in fintrack):
+   ```bash
+   cd ~/projects/fintrack
+   mkdir -p docs
+   # Create: docs/MY-CONTEXT-INTEGRATION.md
+   # Include all 7 required sections
+   # Document each major design decision in my-context
+   ```
+
+6. **Validate locally**:
+   ```bash
+   # From fintrack directory
+   ~/projects/jcaldwell-labs/scripts/pre-pr-check.sh
+   # MUST PASS before creating PR
+   ```
+
+7. **Create PR** (in fintrack repo):
+   ```bash
+   cd ~/projects/fintrack
+   git checkout -b docs/mycontext-integration-pattern
+   git add docs/MY-CONTEXT-INTEGRATION.md
+   git commit -m "docs: Add my-context integration pattern
+
+   Design document for integrating fintrack with my-context for automatic
+   context tracking during financial operations.
+
+   Includes:
+   - Integration architecture
+   - API design with Go examples
+   - Implementation roadmap
+   - Testing strategy
+
+   Phase 3b Session 1 experiment.
+
+   🤖 Generated with Claude Code"
+   git push -u origin docs/mycontext-integration-pattern
+   gh pr create --title "docs: Add my-context integration pattern" --body "[your description]"
+   ```
+
+8. **Document results**:
+   ```bash
+   export MY_CONTEXT_HOME=db:jcaldwell_labs
+   my-context note "PR created: #X in fintrack - my-context integration pattern"
+   my-context note "Key decisions: [list major design choices]"
+   my-context export phase3b-fintrack-mycontext-$(date +%Y-%m-%d) > ~/projects/jcaldwell-labs/sessions/PHASE3B-SESSION1-RESULT.md
+   ```
+
+REFERENCE ARCHITECTURE:
+- fintrack uses Cobra for CLI commands (cmd/ directory)
+- fintrack uses internal/ for business logic
+- my-context has Go API: github.com/jefferycaldwell/my-context-copilot
+- Look at fintrack/cmd/fintrack/main.go for entry points
+
+EXAMPLE INTEGRATION PATTERN:
+
+```go
+// In fintrack's internal/context/tracker.go (hypothetical)
+package context
+
+import (
+    mycontext "github.com/jefferycaldwell/my-context-copilot/pkg/client"
+)
+
+// Tracker wraps my-context operations
+type Tracker struct {
+    client *mycontext.Client
+    sessionID string
+}
+
+// NewTracker creates a new context tracker
+func NewTracker() (*Tracker, error) {
+    client, err := mycontext.NewClient()
+    if err != nil {
+        return nil, err
+    }
+
+    sessionID := fmt.Sprintf("fintrack-%s", time.Now().Format("2006-01-02"))
+    if err := client.Start(sessionID); err != nil {
+        return nil, err
+    }
+
+    return &Tracker{client: client, sessionID: sessionID}, nil
+}
+
+// TrackOperation logs an operation to my-context
+func (t *Tracker) TrackOperation(operation string, details map[string]interface{}) error {
+    note := fmt.Sprintf("Operation: %s - %v", operation, details)
+    return t.client.Note(note)
+}
+```
+
+Your document should expand on this with complete integration design.
+
+TIME-BOX ENFORCEMENT:
+- 0-30min: Read protocols and research architectures
+- 30-60min: Design integration approach, document decisions
+- 60-180min: Write document (all 7 sections with examples)
+- 180-240min: Validate, create PR, export session
+- 240min+: If not done, use SESSION-HANDOFF-PROTOCOL.md
+
+ESCALATION TRIGGERS:
+- Can't understand fintrack architecture after 30min → Level 1 (document what's unclear)
+- Can't understand my-context API after 30min → Level 1 (document what's needed)
+- Can't determine integration approach after 60min → Level 2 (need architectural guidance)
+- Technical blocker prevents completion → Level 3 (critical issue)
+
+"DONE DONE" MEANS:
+✓ Document exists in ~/projects/fintrack/docs/MY-CONTEXT-INTEGRATION.md
+✓ All 7 sections complete and comprehensive
+✓ At least 3 concrete Go code examples included
+✓ Pre-PR check passed (run from jcaldwell-labs)
+✓ PR created in fintrack repository with full description
+✓ No critical gaps in documentation
+✓ my-context session exported to jcaldwell-labs/sessions/
+✓ All design decisions documented in my-context
+
+IMPORTANT NOTES:
+- This is a DESIGN document, not implementation
+- Work ONLY in ~/projects/fintrack repository (one project focus)
+- Reference my-context for research, but all changes in fintrack
+- Quality matters more than speed
+- Use protocols if you get stuck - that's what they're for!
+- The document should be useful for actual implementation later
+
+WHAT MAKES THIS DIFFERENT FROM PHASE 2:
+✓ Clear protocols to follow (7 docs in jcaldwell-labs/docs/)
+✓ Pre-PR validation mandatory (prevents CI failures)
+✓ Explicit escalation path (if stuck, use protocol)
+✓ Handoff protocol (if incomplete, document state)
+✓ my-context tracking (all decisions recorded)
+✓ Single repository focus (fintrack only)
+
+START HERE:
+1. cd ~/projects/jcaldwell-labs && read all docs/*.md protocols
+2. export MY_CONTEXT_HOME=db:jcaldwell_labs
+3. my-context start "phase3b-fintrack-mycontext-$(date +%Y-%m-%d)"
+4. cd ~/projects/fintrack && read architecture docs
+5. Research my-context API (in ~/projects/my-context)
+6. Return to fintrack and create docs/MY-CONTEXT-INTEGRATION.md
+7. Follow mandatory workflow above
+
+QUESTIONS?
+- fintrack architecture: See fintrack/CLAUDE.md and cmd/ directory
+- my-context API: See my-context/README.md
+- Protocol questions: See jcaldwell-labs/docs/
+- Stuck? Use jcaldwell-labs/docs/ESCALATION-PROTOCOL.md
+
+Your success will be measured by:
+1. Did you follow the protocols? (read all 7 docs?)
+2. Did you create a comprehensive document? (all 7 sections?)
+3. Did you handle blockers appropriately? (escalation if stuck?)
+4. Did you complete or properly hand off? (exported my-context?)
+5. Did you stay focused on one repository? (fintrack only?)
+
+Good luck! This tests if Phase 3 infrastructure prevents Phase 2 failures. 🧪
