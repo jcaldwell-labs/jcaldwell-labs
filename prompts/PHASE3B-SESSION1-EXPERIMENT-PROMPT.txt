@@ -1,0 +1,166 @@
+You are working on Phase 3b Session 1 of the jcaldwell-labs organization improvement project.
+
+EXPERIMENT CONTEXT:
+This is a test of Phase 3 infrastructure vs Phase 2. Phase 2 sessions had no structure for handling failures. Phase 3 has 7 structural artifacts and clear protocols. Your owner wants to see if you can complete this task successfully using the new infrastructure.
+
+TASK ASSIGNMENT:
+Create my-context integration pattern documentation for fintrack project.
+
+OBJECTIVE:
+Document HOW fintrack could integrate with my-context for automatic context tracking. This is a design document (NOT implementation), showing other projects the pattern to follow.
+
+CRITICAL PHASE 2 LESSONS - YOU MUST FOLLOW THESE:
+1. Use docs/PR-FAILURE-PROTOCOL.md BEFORE creating any PR
+2. Run scripts/pre-pr-check.sh BEFORE creating any PR (MANDATORY)
+3. Follow docs/INCREMENTAL-MERGE-STRATEGY.md - small PRs only
+4. Use docs/ESCALATION-PROTOCOL.md if you get blocked
+5. Check docs/DONE-DEFINITION.md for completion criteria
+6. Use docs/SESSION-HANDOFF-PROTOCOL.md if you can't complete
+
+YOUR SPECIFIC DELIVERABLE:
+Create: docs/MY-CONTEXT-INTEGRATION-PATTERN.md
+
+This document should contain:
+1. **Overview** - Why integrate fintrack with my-context?
+2. **Integration Pattern** - How would it work technically?
+3. **API Design** - What functions/commands would be added?
+4. **Example Usage** - Show concrete examples
+5. **Implementation Steps** - High-level roadmap
+6. **Benefits** - What problems does this solve?
+7. **Future Enhancements** - What could come next?
+
+SUCCESS CRITERIA (from docs/DONE-DEFINITION.md):
+✓ Document created and committed
+✓ Document is comprehensive (all 7 sections above)
+✓ Examples are concrete and testable
+✓ Pre-PR validation passed (scripts/pre-pr-check.sh)
+✓ PR created with clear description
+✓ CI passing (should auto-pass for docs)
+✓ No blockers encountered OR escalation protocol followed
+✓ my-context session exported with decisions documented
+
+CONSTRAINTS:
+- This is DOCUMENTATION ONLY - no code implementation
+- Target length: 150-300 lines of markdown
+- Must include at least 3 concrete code examples
+- Time budget: 2-3 hours maximum
+- If blocked >30min, use ESCALATION-PROTOCOL.md
+
+MANDATORY WORKFLOW:
+1. Start my-context session:
+   export MY_CONTEXT_HOME=db:jcaldwell_labs
+   my-context start "phase3b-session1-mycontext-pattern-$(date +%Y-%m-%d)"
+
+2. Read existing context:
+   - Read: ~/projects/fintrack/CLAUDE.md (understand fintrack architecture)
+   - Read: ~/projects/my-context/README.md (understand my-context capabilities)
+   - Document decision: Why this integration makes sense
+
+3. Create the document:
+   - Create: docs/MY-CONTEXT-INTEGRATION-PATTERN.md
+   - Include all 7 required sections
+   - Add concrete examples with code snippets
+   - Document each major decision in my-context
+
+4. Validate locally:
+   - Run: scripts/pre-pr-check.sh (MUST PASS)
+   - Check: Document is well-formatted markdown
+   - Verify: All 7 sections are complete
+
+5. Create PR:
+   - Create branch: phase3b/session1-mycontext-pattern
+   - Commit with conventional commit format
+   - Push and create PR with full description
+   - Link to this prompt in PR description
+
+6. Document results:
+   - my-context note: "PR created: #X - my-context integration pattern"
+   - my-context note: "Key decisions: [list major design choices]"
+   - my-context export phase3b-session1-mycontext-pattern-$(date +%Y-%m-%d)
+
+REFERENCE MATERIALS:
+- fintrack location: ~/projects/fintrack
+- my-context location: ~/projects/my-context
+- fintrack commands: fintrack --help (or read cmd/ directory)
+- my-context commands: my-context --help
+- Coordination repo: ~/projects/jcaldwell-labs
+
+ESCALATION TRIGGERS:
+- If fintrack architecture is unclear after 30min → Level 1
+- If my-context API is unclear after 30min → Level 1
+- If you can't determine integration approach → Level 2
+- If technical blocker prevents completion → Level 3
+
+EXAMPLE INTEGRATION PATTERN (to guide your thinking):
+
+```go
+// Example: fintrack command with automatic context tracking
+func ExecuteWithContext(cmd string, args []string) error {
+    // Start my-context session
+    sessionID := fmt.Sprintf("fintrack-%s-%s", cmd, time.Now().Format("2006-01-02"))
+    mycontext.Start(sessionID)
+
+    // Execute command
+    result, err := runCommand(cmd, args)
+
+    // Track result
+    if err != nil {
+        mycontext.Note(fmt.Sprintf("Command %s failed: %v", cmd, err))
+    } else {
+        mycontext.Note(fmt.Sprintf("Command %s succeeded", cmd))
+    }
+
+    return err
+}
+```
+
+Your document should expand on this pattern with:
+- When to start/stop sessions
+- What to track automatically
+- How to handle errors
+- How to query historical context
+- How other projects can follow this pattern
+
+TIME-BOX ENFORCEMENT:
+- 0-30min: Research fintrack and my-context
+- 30-90min: Write document (all 7 sections)
+- 90-120min: Validate and create PR
+- 120min+: If not done, use SESSION-HANDOFF-PROTOCOL.md
+
+"DONE DONE" MEANS:
+✓ Document exists and is comprehensive
+✓ Pre-PR check passed
+✓ PR created and description complete
+✓ No critical gaps in documentation
+✓ my-context session exported
+✓ All decisions documented
+
+IMPORTANT NOTES:
+- This is a DESIGN document, not implementation
+- Focus on HOW, not actual code changes
+- Other projects will use this as a reference
+- Quality matters more than speed
+- Use protocols if you get stuck (that's what they're for!)
+
+START HERE:
+1. Read this prompt carefully
+2. Read all 7 protocol documents in docs/
+3. Start my-context session
+4. Read fintrack and my-context documentation
+5. Create the integration pattern document
+6. Follow mandatory workflow above
+
+QUESTIONS?
+- Architecture questions: See fintrack/docs/ and my-context/README.md
+- Protocol questions: See docs/ in jcaldwell-labs repo
+- Stuck? Use docs/ESCALATION-PROTOCOL.md
+
+Remember: Phase 2 failed because of lack of structure. Phase 3 has structure - USE IT!
+
+Your success will be measured by:
+1. Did you follow the protocols?
+2. Did you create a comprehensive document?
+3. Did you handle blockers appropriately?
+4. Did you complete or properly hand off?
+
+Good luck! This is a test of the Phase 3 infrastructure. 🧪
