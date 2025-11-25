@@ -23,7 +23,7 @@ REPOS=(
     ".github"
 )
 
-# Colors for output (GREEN and YELLOW used in output, BLUE used in fetch function)
+# Colors for output
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
@@ -122,6 +122,8 @@ for repo in "${REPOS[@]}"; do
         echo -e "  ${GREEN}✓${NC} $repo ($lang) - fetched from API"
     else
         # Use fallback data if API fetch fails
+        # Note: If jq exits with error but metadata is not "{}", it means we got
+        # invalid JSON from the API (not empty response), so we log a parse error
         if [ $jq_exit_code -ne 0 ] && [ "$metadata" != "{}" ]; then
             echo -e "  ${YELLOW}  (JSON parse error - using fallback data)${NC}" >&2
         fi
@@ -215,8 +217,8 @@ graph TD
 
 MERMAID_HEADER
 
-# Replace timestamp
-sed -i "s/TIMESTAMP/$TIMESTAMP/" "$MERMAID_FILE"
+# Replace timestamp using | delimiter to avoid conflicts with timestamp characters
+sed -i "s|TIMESTAMP|$TIMESTAMP|" "$MERMAID_FILE"
 
 echo -e "${GREEN}✓${NC} Generated Mermaid diagram: $MERMAID_FILE"
 
@@ -304,7 +306,7 @@ This report analyzes the jcaldwell-labs organization stack, identifying project 
 
 ANALYSIS_HEADER
 
-sed -i "s/TIMESTAMP/$TIMESTAMP/" "$ANALYSIS_FILE"
+sed -i "s|TIMESTAMP|$TIMESTAMP|" "$ANALYSIS_FILE"
 
 # Add repository breakdown
 cat >> "$ANALYSIS_FILE" << 'BREAKDOWN'
