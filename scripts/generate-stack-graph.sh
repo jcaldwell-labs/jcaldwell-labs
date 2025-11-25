@@ -23,8 +23,7 @@ REPOS=(
     ".github"
 )
 
-# Colors for output
-RED='\033[0;31m'
+# Colors for output (GREEN and YELLOW used in output, BLUE used in fetch function)
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
@@ -66,7 +65,6 @@ fetch_repo_metadata() {
 }
 
 # Initialize data structure with known repository information (fallback if API fails)
-declare -A REPO_DATA
 declare -A REPO_LANGUAGE
 declare -A REPO_DESCRIPTION
 
@@ -110,8 +108,8 @@ echo ""
 for repo in "${REPOS[@]}"; do
     metadata=$(fetch_repo_metadata "$repo")
     
-    # Check if it's valid JSON and log any parsing errors
-    jq_output=$(echo "$metadata" | jq -e . 2>&1)
+    # Check if it's valid JSON and capture the exit code
+    echo "$metadata" | jq -e . >/dev/null 2>&1
     jq_exit_code=$?
     
     if [ $jq_exit_code -eq 0 ] && [ "$metadata" != "{}" ]; then
