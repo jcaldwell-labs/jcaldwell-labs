@@ -142,12 +142,12 @@ Depending on which projects you work with, you may need:
 
 ## Next Steps
 
-1. ✅ Create your GitHub account (if needed)
-2. ✅ Star repositories you're interested in
-3. ✅ Pick a project to explore
-4. ✅ Clone it and try it out
-5. ✅ Find an issue to work on or report a bug
-6. ✅ Submit your first contribution!
+1. Create your GitHub account (if needed)
+2. Star repositories you're interested in
+3. Pick a project to explore
+4. Clone it and try it out
+5. Find an issue to work on or report a bug
+6. Submit your first contribution!
 
 ## Resources
 
