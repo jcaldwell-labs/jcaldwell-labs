@@ -10,9 +10,10 @@
 
 ### First Time Here?
 
-1. **Read the roadmap**: [`ROADMAP-2025.md`](ROADMAP-2025.md) - Complete improvement plan
-2. **Check current status**: Run `./scripts/action-dashboard.sh`
-3. **See what needs attention**: Review [`ORGANIZATION-STATUS.md`](ORGANIZATION-STATUS.md)
+1. **New to jcaldwell-labs?**: See [`USER-REGISTRATION.md`](USER-REGISTRATION.md) - How to get started
+2. **Read the roadmap**: [`ROADMAP-2025.md`](ROADMAP-2025.md) - Complete improvement plan
+3. **Check current status**: Run `./scripts/action-dashboard.sh`
+4. **See what needs attention**: Review [`ORGANIZATION-STATUS.md`](ORGANIZATION-STATUS.md)
 
 ### Starting Work?
 
@@ -326,6 +327,7 @@ This workspace follows the Unix philosophy of the projects it manages:
 
 - **Organization**: https://github.com/jcaldwell-labs
 - **Organization Profile**: https://github.com/jcaldwell-labs/.github
+- **User Registration & Contributing**: [USER-REGISTRATION.md](USER-REGISTRATION.md)
 - **Current Phase**: Phase 1 - Foundation
 - **Next Action**: Run `./scripts/action-dashboard.sh`
 
