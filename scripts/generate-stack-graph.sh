@@ -222,7 +222,7 @@ sed -i "s|TIMESTAMP|$TIMESTAMP|" "$MERMAID_FILE"
 
 echo -e "${GREEN}✓${NC} Generated Mermaid diagram: $MERMAID_FILE"
 
-# Generate DOT file for Graphviz (if available)
+# Generate DOT file for Graphviz rendering
 cat > "$DOT_FILE" << 'DOT_HEADER'
 digraph jcaldwell_labs_stack {
     // Graph attributes
