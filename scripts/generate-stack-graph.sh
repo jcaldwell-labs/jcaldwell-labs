@@ -33,10 +33,13 @@ ANALYSIS_FILE="$OUTPUT_DIR/stack-analysis.md"
 # Create output directory
 mkdir -p "$OUTPUT_DIR"
 
+# Generate timestamp once for consistency
+TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+
 echo "================================================================="
 echo "Stack Dependency Visualization Generator"
 echo "jcaldwell-labs Organization"
-echo "Generated: $(date '+%Y-%m-%d %H:%M:%S')"
+echo "Generated: $TIMESTAMP"
 echo "================================================================="
 echo ""
 
@@ -44,35 +47,22 @@ echo ""
 fetch_repo_metadata() {
     local repo=$1
     echo -e "${BLUE}Fetching metadata for $repo...${NC}" >&2
-    gh repo view "jcaldwell-labs/$repo" --json name,description,primaryLanguage,topics,updatedAt,defaultBranchRef 2>/dev/null || echo "{}"
-}
-
-# Function to check for dependency files
-check_dependencies() {
-    local repo=$1
-    local deps=""
+    local result
+    result=$(gh repo view "jcaldwell-labs/$repo" --json name,description,primaryLanguage,updatedAt 2>&1)
+    local exit_code=$?
     
-    # Check for various dependency files via GitHub API
-    local go_mod=$(gh api "/repos/jcaldwell-labs/$repo/contents/go.mod" 2>/dev/null | jq -r '.content // ""' | base64 -d 2>/dev/null || echo "")
-    local makefile=$(gh api "/repos/jcaldwell-labs/$repo/contents/Makefile" 2>/dev/null | jq -r '.content // ""' | base64 -d 2>/dev/null || echo "")
-    local requirements=$(gh api "/repos/jcaldwell-labs/$repo/contents/requirements.txt" 2>/dev/null | jq -r '.content // ""' | base64 -d 2>/dev/null || echo "")
-    
-    # Parse dependencies
-    if [ -n "$go_mod" ]; then
-        deps="${deps}go_modules "
+    if [ $exit_code -ne 0 ]; then
+        echo -e "${YELLOW}  (API call failed - using fallback data)${NC}" >&2
+        echo "{}"
+    else
+        echo "$result"
     fi
-    if [ -n "$requirements" ]; then
-        deps="${deps}python_packages "
-    fi
-    
-    echo "$deps"
 }
 
 # Initialize data structure with known repository information (fallback if API fails)
 declare -A REPO_DATA
 declare -A REPO_LANGUAGE
 declare -A REPO_DESCRIPTION
-declare -A REPO_TOPICS
 
 # Fallback data from organization README
 init_fallback_data() {
@@ -118,11 +108,9 @@ for repo in "${REPOS[@]}"; do
     if echo "$metadata" | jq -e . >/dev/null 2>&1 && [ "$metadata" != "{}" ]; then
         lang=$(echo "$metadata" | jq -r '.primaryLanguage.name // "Unknown"')
         desc=$(echo "$metadata" | jq -r '.description // "No description"')
-        topics=$(echo "$metadata" | jq -r '.topics[]?' 2>/dev/null | tr '\n' ',' | sed 's/,$//')
         
         REPO_LANGUAGE[$repo]="$lang"
         REPO_DESCRIPTION[$repo]="$desc"
-        REPO_TOPICS[$repo]="$topics"
         
         echo -e "  ${GREEN}✓${NC} $repo ($lang) - fetched from API"
     else
@@ -218,7 +206,7 @@ graph TD
 MERMAID_HEADER
 
 # Replace timestamp
-sed -i "s/TIMESTAMP/$(date '+%Y-%m-%d %H:%M:%S')/" "$MERMAID_FILE"
+sed -i "s/TIMESTAMP/$TIMESTAMP/" "$MERMAID_FILE"
 
 echo -e "${GREEN}✓${NC} Generated Mermaid diagram: $MERMAID_FILE"
 
@@ -306,7 +294,7 @@ This report analyzes the jcaldwell-labs organization stack, identifying project 
 
 ANALYSIS_HEADER
 
-sed -i "s/TIMESTAMP/$(date '+%Y-%m-%d %H:%M:%S')/" "$ANALYSIS_FILE"
+sed -i "s/TIMESTAMP/$TIMESTAMP/" "$ANALYSIS_FILE"
 
 # Add repository breakdown
 cat >> "$ANALYSIS_FILE" << 'BREAKDOWN'
