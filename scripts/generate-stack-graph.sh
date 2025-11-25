@@ -1,6 +1,12 @@
 #!/bin/bash
 # Generate stack dependency visualization for jcaldwell-labs organization
 # Analyzes projects, identifies relationships, and generates dependency graphs
+#
+# Design Decisions:
+# - Sequential processing: Simple and reliable, adequate for 9 repos (~10s runtime)
+# - Embedded templates: Keep script portable as single file (no external dependencies)
+# - Fallback data: Works without GitHub API access (useful in restricted environments)
+# - Multiple formats: Mermaid (GitHub), DOT (Graphviz), Markdown (analysis)
 
 set -euo pipefail
 
@@ -104,8 +110,11 @@ echo ""
 for repo in "${REPOS[@]}"; do
     metadata=$(fetch_repo_metadata "$repo")
     
-    # Check if it's valid JSON
-    if echo "$metadata" | jq -e . >/dev/null 2>&1 && [ "$metadata" != "{}" ]; then
+    # Check if it's valid JSON and log any parsing errors
+    jq_output=$(echo "$metadata" | jq -e . 2>&1)
+    jq_exit_code=$?
+    
+    if [ $jq_exit_code -eq 0 ] && [ "$metadata" != "{}" ]; then
         lang=$(echo "$metadata" | jq -r '.primaryLanguage.name // "Unknown"')
         desc=$(echo "$metadata" | jq -r '.description // "No description"')
         
@@ -115,6 +124,9 @@ for repo in "${REPOS[@]}"; do
         echo -e "  ${GREEN}✓${NC} $repo ($lang) - fetched from API"
     else
         # Use fallback data if API fetch fails
+        if [ $jq_exit_code -ne 0 ] && [ "$metadata" != "{}" ]; then
+            echo -e "  ${YELLOW}  (JSON parse error - using fallback data)${NC}" >&2
+        fi
         lang="${REPO_LANGUAGE[$repo]}"
         desc="${REPO_DESCRIPTION[$repo]}"
         echo -e "  ${YELLOW}↻${NC} $repo ($lang) - using fallback data"
