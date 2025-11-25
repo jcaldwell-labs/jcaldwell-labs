@@ -1,3 +1,8 @@
 repos/
 MESSAGE-TO-SESSION-G1.txt
 tools/joystick_viz.py
+
+# Generated stack visualization reports
+reports/stack-graph.mermaid.md
+reports/stack-graph.dot
+reports/stack-analysis.md
