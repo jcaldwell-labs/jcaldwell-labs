@@ -158,6 +158,7 @@ Located in `./scripts/`:
 | `repo-health.sh` | Local and remote repo status | Before starting work |
 | `phase2-rollup.sh` | Validate Phase 2 completion | After all sessions complete |
 | `generate-phase2-summary.sh` | Generate executive summary | Phase 2 sign-off |
+| `generate-stack-graph.sh` | Visualize stack dependencies | Phase 3b planning, onboarding |
 
 **Run any script**:
 ```bash
